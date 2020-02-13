@@ -11,7 +11,7 @@
 ## Tasks:
 
 | Number | Requirement                                      | Marks | Achieved? |
-|:------:|:------------------------------------------------:|:-----:|:---------:|
+|:------:|:-------------------------------------------------|:-----:|:---------:|
 | G1     | Evidense of use of GitLab by group showing incremental development through regular commits and commit messages | REQ |   X   |
 | G2     | Use of D3 hierarchical display to illustrate agglomerative clustering of topicto-topic similarity | REQ |   X   |
 | R1     | Use of three different D3 layouts in a single dashboard | 6 |   X   |
