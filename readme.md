@@ -8,6 +8,12 @@
 
 * Callum M Hayden - CMH1
 
+## CI/CD
+
+Currently this repository is hosted on [f20dv.site](https://www.f20dv.site "Page where public folder is shown to the world"), and is updated with every change to the repository. Meaning that everytime there is anything pushed to this repository, the website will update. This is helpful to ensure we can test on different platforms, and check eachothers work even from our phones, tablets, or other computers without having to clone the repository.
+
+This is done by mirroring the gitlab repository to github (cmhayden/f20dv_coursework). Whenever a commit is made in this repository, it gets copied to the repository on github. Once this happens, and github recieves the updated repository, it then tells a second github account that it has the up to date version. This repository is CMHayden/f20dv_live. When this recieves an update, it triggers a buddy pipeline. The buddy pipeline can be used to create unit tests, a feature we may look to implement, but currently only sends a get request to laravel forge which in turn pulls the new code from the repository and deploys it as a static page on our live URL.
+
 ## Tasks:
 
 | Number | Requirement                                      | Marks | Achieved? |
