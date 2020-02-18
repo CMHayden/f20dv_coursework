@@ -1,42 +1,99 @@
-.graph {
-  padding: 20px;
-  margin: 10px 25px;
-  background-color: #f7f7f7;
+@import url("https://fonts.googleapis.com/css?family=Nunito&display=swap");
+*, body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
 }
 
-.center {
-  text-align: center;
+body {
+  background-color: #7c818c;
 }
 
-button {
-  text-transform: uppercase;
+.left-nav {
+  height: 100%;
+  width: 80px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #383c4a;
+  overflow-x: hidden;
+  padding-top: 60px;
+}
+
+.left-nav .navLinkSmall {
+  padding: 8px 8px 8px 32px;
   text-decoration: none;
-  padding: 20px;
-  border-radius: 5px;
-  border: none;
-  -webkit-transition: all 0.4s ease 0s;
-  transition: all 0.4s ease 0s;
-  color: white;
-  font-weight: bold;
+  font-size: 25px;
+  color: #7c818c;
+  display: block;
 }
 
-button:hover {
-  letter-spacing: 1px;
-  -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
-  box-shadow: 5px 40px -10px rgba(0, 0, 0, 0.57);
-  -webkit-transition: all 0.4s ease 0s;
-  transition: all 0.4s ease 0s;
+.left-nav .navLink {
+  display: none;
 }
 
-.delete {
-  background-color: #d9534f;
+.left-nav:hover {
+  width: 300px;
 }
 
-.create {
-  background-color: #5cb85c;
+.left-nav:hover .navLinkSmall {
+  display: none;
 }
 
-.update {
-  background-color: #0275d8;
+.left-nav:hover .navLink {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #7c818c;
+  display: block;
+}
+
+.top-nav {
+  padding-left: 100px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #383c4a;
+  color: #7c818c;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.left-nav:hover + .top-nav {
+  padding-left: 320px;
+}
+
+.content {
+  padding-left: 100px;
+  padding-top: 10px;
+  background-color: #7c818c;
+  height: 100%;
+}
+
+.left-nav:hover ~ .content {
+  padding-left: 320px;
+}
+
+h2 {
+  padding-left: 50px;
+  padding-top: 25px;
+}
+
+.graph {
+  background-color: #f7f7f7;
+  margin-left: 50px;
+  margin-right: 70px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding: 10px;
+  text-align: center;
 }
 /*# sourceMappingURL=main.css.map */
