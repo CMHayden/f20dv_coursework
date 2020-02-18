@@ -18,59 +18,40 @@
         <![endif]-->
         
         <div class="main">
-            <div class="header">
-                <h1>F20DV Coursework</h1>
+            <div class="left-nav">
+                <a href="javascript:void(0)" class="navLinkSmall" onclick="setGraph(1)">1</a>
+                <a href="javascript:void(0)" class="navLinkSmall" onclick="setGraph(2)">2</a>
+                <a href="javascript:void(0)" class="navLinkSmall" onclick="setGraph(3)">3</a>
+                <a href="javascript:void(0)" class="navLinkSmall" onclick="setGraph(4)">4</a>
+                <a href="javascript:void(0)" class="navLinkSmall" onclick="setGraph(5)">5</a>                
+                <a href="javascript:void(0)" class="navLink" onclick="setGraph(1)">Graph 1</a>
+                <a href="javascript:void(0)" class="navLink" onclick="setGraph(2)">Graph 2</a>
+                <a href="javascript:void(0)" class="navLink" onclick="setGraph(3)">Graph 3</a>
+                <a href="javascript:void(0)" class="navLink" onclick="setGraph(4)">Graph 4</a>
+                <a href="javascript:void(0)" class="navLink" onclick="setGraph(5)">Graph 5</a>
             </div>
 
-            <section>
-                <div class="graph" id="graph1">HEY IM A GRAPH</div>
-                <div class="center">
-                    <button class="update">
-                        Update
-                    </button>
-                    <button class="create">
-                        Create
-                    </button>
-                    <button class="delete">
-                        Delete
-                    </button>                    
+            <div class="top-nav">
+                <div class="branding">
+                    <h1>Dashboard</h1>
                 </div>
-
-            </section>
-
-            <section>
-                <div class="graph" id="graph2">HEY IM A GRAPH</div>
-                <div class="center">
-                    <button class="update">
-                        Update
-                    </button>
-                    <button class="create">
-                        Create
-                    </button>
-                    <button class="delete">
-                        Delete
-                    </button>                    
+                <div class="right">
+                    <h1>Login</h1>
                 </div>
+            </div>
 
-            </section>
-
-            <section>
-                <div class="graph" id="graph3">HEY IM A GRAPH</div>
-                <div class="center">
-                    <button class="update">
-                        Update
-                    </button>
-                    <button class="create">
-                        Create
-                    </button>
-                    <button class="delete">
-                        Delete
-                    </button>                    
-                </div>
-
-            </section>
+            <div class="content">
+               
+                    <h2 id="graphHeading">Graph 1:</h2>
+                    <div id="graph1" class="graph">
+                        I AM A GRAPH
+                    </div>
             
+            </div>
+
         </div>
+
+
 
         <script src="js/app.js" async defer></script>
     </body>
