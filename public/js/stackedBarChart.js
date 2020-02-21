@@ -1,11 +1,12 @@
 
 function stacked()
 {
+   
     var data = [
-        { planet: "Mercury", size: "3", temperature: "200", distance: "4" },
-        { planet: "Venus", size: "5", temperature: "180", distance: "6" },
-        { planet: "Earth", size: "8", temperature: "25", distance: "8" },
-        { planet: "Mars", size: "7", temperature: "9", distance: "10" },
+        { "planet": "Mercury", "size": 3, "temperature": 200, "distance": 4 },
+        { "planet": "Venus", "size": 5, "temperature": 180, "distance": 6 },
+        { "planet": "Earth", "size": 8, "temperature": 25, "distance": 8 },
+        { "planet": "Mars", "size": 7, "temperature": 9, "distance": 10 },
     ];
 
     var margin = { top: 20, right: 160, bottom: 35, left: 30 };
@@ -20,11 +21,48 @@ function stacked()
        // .append("g")
     console.log(data)
 
-    var colours = (["blue", "green", "yellow", "red"]);
+    var colours = d3.scaleOrdinal(d3.schemeCategory10)
+     
 
     var categories = ["size", "temperature", "distance"];
 
-    var keys = data.slice(1);
+    data.sort(function (a, b) { return b.total - a.total; });
+
+    var xScale = d3.scaleOrdinal()
+        .domain(data.map(function (d) { return d.planet; }))
+        .range([0, width]);
+
+
+    var yScale = d3.scaleLinear()
+        .domain([0, d3.max(data, function (d) { return d.total; })]).nice()
+        .range([0, height]);
+
+    
+    //own data made
+    var dataToDisplay = d3.stack()(categories.map(function (planetDets) {
+        return data.map(function (d) {
+            console.log(d)
+            console.log(d.planet)
+            console.log(d[planetDets])
+            return { x: d.planet, y: +d[planetDets] };
+        });
+    }));
+
+    var dataToDisplay = d3.stack().planet()(data)
+ 
+    //used when imported from csv
+    //var dataToDisplay = d3.stack().keys(data.columns.slice(1))(data)
+   
+
+    console.log(data)
+    
+    ///////////////////////////////////////////////
+
+
+
+
+
+    ///////////////////////////////////
     /*
     var dataToDisplay = d3.stack()(categories.map(function (planetDets) {
         return data.map(function (d) {
