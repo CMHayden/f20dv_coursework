@@ -11,6 +11,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/main.css">
         <script src="d3/d3.v4.js"></script>
+        <script src="js/stackedBarChart.js"></script>
+        <script src="d3.legend.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -23,7 +25,7 @@
                 <a href="javascript:void(0)" class="navLinkSmall" onclick="setGraph(2)">2</a>
                 <a href="javascript:void(0)" class="navLinkSmall" onclick="setGraph(3)">3</a>
                 <a href="javascript:void(0)" class="navLinkSmall" onclick="setGraph(4)">4</a>
-                <a href="javascript:void(0)" class="navLinkSmall" onclick="setGraph(5)">5</a>                
+                <a href="javascript:void(0)" class="navLinkSmall" onclick="setGraph(5)">5</a>
                 <a href="javascript:void(0)" class="navLink" onclick="setGraph(1)">Graph 1</a>
                 <a href="javascript:void(0)" class="navLink" onclick="setGraph(2)">Graph 2</a>
                 <a href="javascript:void(0)" class="navLink" onclick="setGraph(3)">Graph 3</a>
@@ -41,16 +43,23 @@
             </div>
 
             <div class="content">
-               
-                    <h2 id="graphHeading">Graph 1:</h2>
-                    <div id="graph1" class="graph">
-                        I AM A GRAPH
-                    </div>
-            
+
+                <h2 id="graphHeading">Graph 1:</h2>
+                <div id="graph1" class="graph">
+                    I AM A GRAPH
+                </div>
+
             </div>
 
-        </div>
+            <div id="stackedChart">
+               
+            </div>
 
+            <div id="pieChart" >
+                <script>pie();</script>
+            </div>
+        </div>
+        
 
 
         <script src="js/app.js" async defer></script>
