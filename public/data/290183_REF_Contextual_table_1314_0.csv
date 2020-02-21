@@ -1,8 +1,4 @@
-INSTID,UKPRN,"Region 
-of provider",HE provider ,"Unit of 
-assessment number",Unit of assessment name,"Multiple 
-submission letter","Scaled FTE 
-of eligible staff"
+INSTID,UKPRN,"Region of provider",HE provider ,"Unit of assessment number",Unit of assessment name,"Multiple submission letter","Scaled FTE of eligible staff"
 47,10000291,EAST,Anglia Ruskin University,1,Clinical Medicine,Z,2
 47,10000291,EAST,Anglia Ruskin University,2,"Public Health, Health Services and Primary Care",Z,21
 47,10000291,EAST,Anglia Ruskin University,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,122
@@ -35,15 +31,15 @@ of eligible staff"
 47,10000291,EAST,Anglia Ruskin University,34,"Art and Design: History, Practice and Theory",Z,30
 47,10000291,EAST,Anglia Ruskin University,35,"Music, Drama, Dance and Performing Arts",Z,19
 47,10000291,EAST,Anglia Ruskin University,36,"Communication, Cultural and Media Studies, Library and Information Management",Z,9
-108,10007759,WMID,Aston University†,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,89
-108,10007759,WMID,Aston University†,11,Computer Science and Informatics,Z,26
-108,10007759,WMID,Aston University†,13,"Electrical and Electronic Engineering, Metallurgy and Materials",Z,32
-108,10007759,WMID,Aston University†,15,General Engineering,Z,39
-108,10007759,WMID,Aston University†,19,Business and Management Studies,Z,108
-108,10007759,WMID,Aston University†,23,Sociology,Z,7
-108,10007759,WMID,Aston University†,27,Area Studies,Z,14
-108,10007759,WMID,Aston University†,28,Modern Languages and Linguistics,Z,29
-108,10007759,WMID,Aston University†,N/A,UoA not recorded,Not recorded,115
+108,10007759,WMID,Aston Universityï¿½,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,89
+108,10007759,WMID,Aston Universityï¿½,11,Computer Science and Informatics,Z,26
+108,10007759,WMID,Aston Universityï¿½,13,"Electrical and Electronic Engineering, Metallurgy and Materials",Z,32
+108,10007759,WMID,Aston Universityï¿½,15,General Engineering,Z,39
+108,10007759,WMID,Aston Universityï¿½,19,Business and Management Studies,Z,108
+108,10007759,WMID,Aston Universityï¿½,23,Sociology,Z,7
+108,10007759,WMID,Aston Universityï¿½,27,Area Studies,Z,14
+108,10007759,WMID,Aston Universityï¿½,28,Modern Languages and Linguistics,Z,29
+108,10007759,WMID,Aston Universityï¿½,N/A,UoA not recorded,Not recorded,115
 48,10000571,SWES,Bath Spa University,4,"Psychology, Psychiatry and Neuroscience",Z,14
 48,10000571,SWES,Bath Spa University,5,Biological Sciences,Z,8
 48,10000571,SWES,Bath Spa University,17,"Geography, Environmental Studies and Archaeology",Z,11
@@ -416,20 +412,20 @@ of eligible staff"
 82,10007137,SEAS,The University of Chichester,33,Theology and Religious Studies,Z,4
 82,10007137,SEAS,The University of Chichester,34,"Art and Design: History, Practice and Theory",Z,5
 82,10007137,SEAS,The University of Chichester,35,"Music, Drama, Dance and Performing Arts",Z,37
-115,10001478,LOND,The City University†,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,162
-115,10001478,LOND,The City University†,4,"Psychology, Psychiatry and Neuroscience",Z,37
-115,10001478,LOND,The City University†,10,Mathematical Sciences,Z,20
-115,10001478,LOND,The City University†,11,Computer Science and Informatics,Z,51
-115,10001478,LOND,The City University†,15,General Engineering,Z,86
-115,10001478,LOND,The City University†,18,Economics and Econometrics,Z,26
-115,10001478,LOND,The City University†,19,Business and Management Studies,Z,156
-115,10001478,LOND,The City University†,20,Law,Z,70
-115,10001478,LOND,The City University†,21,Politics and International Studies,Z,15
-115,10001478,LOND,The City University†,23,Sociology,Z,39
-115,10001478,LOND,The City University†,25,Education,Z,1
-115,10001478,LOND,The City University†,28,Modern Languages and Linguistics,Z,4
-115,10001478,LOND,The City University†,35,"Music, Drama, Dance and Performing Arts",Z,14
-115,10001478,LOND,The City University†,36,"Communication, Cultural and Media Studies, Library and Information Management",Z,39
+115,10001478,LOND,The City Universityï¿½,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,162
+115,10001478,LOND,The City Universityï¿½,4,"Psychology, Psychiatry and Neuroscience",Z,37
+115,10001478,LOND,The City Universityï¿½,10,Mathematical Sciences,Z,20
+115,10001478,LOND,The City Universityï¿½,11,Computer Science and Informatics,Z,51
+115,10001478,LOND,The City Universityï¿½,15,General Engineering,Z,86
+115,10001478,LOND,The City Universityï¿½,18,Economics and Econometrics,Z,26
+115,10001478,LOND,The City Universityï¿½,19,Business and Management Studies,Z,156
+115,10001478,LOND,The City Universityï¿½,20,Law,Z,70
+115,10001478,LOND,The City Universityï¿½,21,Politics and International Studies,Z,15
+115,10001478,LOND,The City Universityï¿½,23,Sociology,Z,39
+115,10001478,LOND,The City Universityï¿½,25,Education,Z,1
+115,10001478,LOND,The City Universityï¿½,28,Modern Languages and Linguistics,Z,4
+115,10001478,LOND,The City Universityï¿½,35,"Music, Drama, Dance and Performing Arts",Z,14
+115,10001478,LOND,The City Universityï¿½,36,"Communication, Cultural and Media Studies, Library and Information Management",Z,39
 199,10001653,LOND,Conservatoire for Dance and Drama,N/A,UoA not recorded,Not recorded,4
 201,10007761,LOND,Courtauld Institute of Art,34,"Art and Design: History, Practice and Theory",Z,34
 56,10001726,WMID,Coventry University,2,"Public Health, Health Services and Primary Care",Z,30
@@ -791,7 +787,7 @@ of eligible staff"
 132,10003270,LOND,"Imperial College of Science, Technology and Medicine",19,Business and Management Studies,Z,62
 132,10003270,LOND,"Imperial College of Science, Technology and Medicine",25,Education,Z,4
 132,10003270,LOND,"Imperial College of Science, Technology and Medicine",36,"Communication, Cultural and Media Studies, Library and Information Management",Z,4
-133,10007766,LOND,Institute of Education† ,25,Education,Z,311
+133,10007766,LOND,Institute of Educationï¿½ ,25,Education,Z,311
 121,10007767,WMID,The University of Keele,1,Clinical Medicine,Z,17
 121,10007767,WMID,The University of Keele,2,"Public Health, Health Services and Primary Care",Z,10
 121,10007767,WMID,The University of Keele,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,122
@@ -986,31 +982,31 @@ of eligible staff"
 40,10003863,YORH,Leeds Trinity University,30,History,Z,4
 40,10003863,YORH,Leeds Trinity University,33,Theology and Religious Studies,Z,4
 40,10003863,YORH,Leeds Trinity University,36,"Communication, Cultural and Media Studies, Library and Information Management",Z,23
-125,10007796,EMID,The University of Leicester†,1,Clinical Medicine,Z,109
-125,10007796,EMID,The University of Leicester†,2,"Public Health, Health Services and Primary Care",Z,44
-125,10007796,EMID,The University of Leicester†,4,"Psychology, Psychiatry and Neuroscience",Z,50
-125,10007796,EMID,The University of Leicester†,5,Biological Sciences,Z,64
-125,10007796,EMID,The University of Leicester†,7,Earth Systems and Environmental Sciences,Z,24
-125,10007796,EMID,The University of Leicester†,8,Chemistry,Z,24
-125,10007796,EMID,The University of Leicester†,9,Physics,Z,62
-125,10007796,EMID,The University of Leicester†,10,Mathematical Sciences,Z,24
-125,10007796,EMID,The University of Leicester†,11,Computer Science and Informatics,Z,21
-125,10007796,EMID,The University of Leicester†,15,General Engineering,Z,32
-125,10007796,EMID,The University of Leicester†,17,"Geography, Environmental Studies and Archaeology",A,26
-125,10007796,EMID,The University of Leicester†,17,"Geography, Environmental Studies and Archaeology",B,27
-125,10007796,EMID,The University of Leicester†,18,Economics and Econometrics,Z,29
-125,10007796,EMID,The University of Leicester†,19,Business and Management Studies,Z,71
-125,10007796,EMID,The University of Leicester†,20,Law,Z,52
-125,10007796,EMID,The University of Leicester†,21,Politics and International Studies,Z,21
-125,10007796,EMID,The University of Leicester†,22,Social Work and Social Policy,Z,14
-125,10007796,EMID,The University of Leicester†,23,Sociology,Z,15
-125,10007796,EMID,The University of Leicester†,25,Education,Z,28
-125,10007796,EMID,The University of Leicester†,28,Modern Languages and Linguistics,Z,14
-125,10007796,EMID,The University of Leicester†,29,English Language and Literature,Z,29
-125,10007796,EMID,The University of Leicester†,30,History,Z,39
-125,10007796,EMID,The University of Leicester†,34,"Art and Design: History, Practice and Theory",Z,6
-125,10007796,EMID,The University of Leicester†,36,"Communication, Cultural and Media Studies, Library and Information Management",A,28
-125,10007796,EMID,The University of Leicester†,36,"Communication, Cultural and Media Studies, Library and Information Management",B,12
+125,10007796,EMID,The University of Leicesterï¿½,1,Clinical Medicine,Z,109
+125,10007796,EMID,The University of Leicesterï¿½,2,"Public Health, Health Services and Primary Care",Z,44
+125,10007796,EMID,The University of Leicesterï¿½,4,"Psychology, Psychiatry and Neuroscience",Z,50
+125,10007796,EMID,The University of Leicesterï¿½,5,Biological Sciences,Z,64
+125,10007796,EMID,The University of Leicesterï¿½,7,Earth Systems and Environmental Sciences,Z,24
+125,10007796,EMID,The University of Leicesterï¿½,8,Chemistry,Z,24
+125,10007796,EMID,The University of Leicesterï¿½,9,Physics,Z,62
+125,10007796,EMID,The University of Leicesterï¿½,10,Mathematical Sciences,Z,24
+125,10007796,EMID,The University of Leicesterï¿½,11,Computer Science and Informatics,Z,21
+125,10007796,EMID,The University of Leicesterï¿½,15,General Engineering,Z,32
+125,10007796,EMID,The University of Leicesterï¿½,17,"Geography, Environmental Studies and Archaeology",A,26
+125,10007796,EMID,The University of Leicesterï¿½,17,"Geography, Environmental Studies and Archaeology",B,27
+125,10007796,EMID,The University of Leicesterï¿½,18,Economics and Econometrics,Z,29
+125,10007796,EMID,The University of Leicesterï¿½,19,Business and Management Studies,Z,71
+125,10007796,EMID,The University of Leicesterï¿½,20,Law,Z,52
+125,10007796,EMID,The University of Leicesterï¿½,21,Politics and International Studies,Z,21
+125,10007796,EMID,The University of Leicesterï¿½,22,Social Work and Social Policy,Z,14
+125,10007796,EMID,The University of Leicesterï¿½,23,Sociology,Z,15
+125,10007796,EMID,The University of Leicesterï¿½,25,Education,Z,28
+125,10007796,EMID,The University of Leicesterï¿½,28,Modern Languages and Linguistics,Z,14
+125,10007796,EMID,The University of Leicesterï¿½,29,English Language and Literature,Z,29
+125,10007796,EMID,The University of Leicesterï¿½,30,History,Z,39
+125,10007796,EMID,The University of Leicesterï¿½,34,"Art and Design: History, Practice and Theory",Z,6
+125,10007796,EMID,The University of Leicesterï¿½,36,"Communication, Cultural and Media Studies, Library and Information Management",A,28
+125,10007796,EMID,The University of Leicesterï¿½,36,"Communication, Cultural and Media Studies, Library and Information Management",B,12
 62,10007151,EMID,The University of Lincoln,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,39
 62,10007151,EMID,The University of Lincoln,4,"Psychology, Psychiatry and Neuroscience",Z,33
 62,10007151,EMID,The University of Lincoln,5,Biological Sciences,Z,5
@@ -1029,26 +1025,26 @@ of eligible staff"
 62,10007151,EMID,The University of Lincoln,34,"Art and Design: History, Practice and Theory",Z,55
 62,10007151,EMID,The University of Lincoln,35,"Music, Drama, Dance and Performing Arts",Z,20
 62,10007151,EMID,The University of Lincoln,36,"Communication, Cultural and Media Studies, Library and Information Management",Z,48
-23,10003956,NWES,Liverpool Hope University†,2,"Public Health, Health Services and Primary Care",Z,3
-23,10003956,NWES,Liverpool Hope University†,4,"Psychology, Psychiatry and Neuroscience",Z,17
-23,10003956,NWES,Liverpool Hope University†,5,Biological Sciences,Z,4
-23,10003956,NWES,Liverpool Hope University†,11,Computer Science and Informatics,Z,8
-23,10003956,NWES,Liverpool Hope University†,17,"Geography, Environmental Studies and Archaeology",Z,6
-23,10003956,NWES,Liverpool Hope University†,19,Business and Management Studies,Z,12
-23,10003956,NWES,Liverpool Hope University†,21,Politics and International Studies,Z,8
-23,10003956,NWES,Liverpool Hope University†,22,Social Work and Social Policy,Z,13
-23,10003956,NWES,Liverpool Hope University†,23,Sociology,Z,4
-23,10003956,NWES,Liverpool Hope University†,25,Education,Z,46
-23,10003956,NWES,Liverpool Hope University†,26,"Sport and Exercise Sciences, Leisure and Tourism",Z,10
-23,10003956,NWES,Liverpool Hope University†,29,English Language and Literature,Z,16
-23,10003956,NWES,Liverpool Hope University†,30,History,Z,11
-23,10003956,NWES,Liverpool Hope University†,33,Theology and Religious Studies,Z,18
-23,10003956,NWES,Liverpool Hope University†,34,"Art and Design: History, Practice and Theory",Z,4
-23,10003956,NWES,Liverpool Hope University†,35,"Music, Drama, Dance and Performing Arts",A,7
-23,10003956,NWES,Liverpool Hope University†,35,"Music, Drama, Dance and Performing Arts",B,9
-23,10003956,NWES,Liverpool Hope University†,35,"Music, Drama, Dance and Performing Arts",Z,4
-23,10003956,NWES,Liverpool Hope University†,36,"Communication, Cultural and Media Studies, Library and Information Management",Z,4
-23,10003956,NWES,Liverpool Hope University†,N/A,UoA not recorded,Not recorded,8
+23,10003956,NWES,Liverpool Hope Universityï¿½,2,"Public Health, Health Services and Primary Care",Z,3
+23,10003956,NWES,Liverpool Hope Universityï¿½,4,"Psychology, Psychiatry and Neuroscience",Z,17
+23,10003956,NWES,Liverpool Hope Universityï¿½,5,Biological Sciences,Z,4
+23,10003956,NWES,Liverpool Hope Universityï¿½,11,Computer Science and Informatics,Z,8
+23,10003956,NWES,Liverpool Hope Universityï¿½,17,"Geography, Environmental Studies and Archaeology",Z,6
+23,10003956,NWES,Liverpool Hope Universityï¿½,19,Business and Management Studies,Z,12
+23,10003956,NWES,Liverpool Hope Universityï¿½,21,Politics and International Studies,Z,8
+23,10003956,NWES,Liverpool Hope Universityï¿½,22,Social Work and Social Policy,Z,13
+23,10003956,NWES,Liverpool Hope Universityï¿½,23,Sociology,Z,4
+23,10003956,NWES,Liverpool Hope Universityï¿½,25,Education,Z,46
+23,10003956,NWES,Liverpool Hope Universityï¿½,26,"Sport and Exercise Sciences, Leisure and Tourism",Z,10
+23,10003956,NWES,Liverpool Hope Universityï¿½,29,English Language and Literature,Z,16
+23,10003956,NWES,Liverpool Hope Universityï¿½,30,History,Z,11
+23,10003956,NWES,Liverpool Hope Universityï¿½,33,Theology and Religious Studies,Z,18
+23,10003956,NWES,Liverpool Hope Universityï¿½,34,"Art and Design: History, Practice and Theory",Z,4
+23,10003956,NWES,Liverpool Hope Universityï¿½,35,"Music, Drama, Dance and Performing Arts",A,7
+23,10003956,NWES,Liverpool Hope Universityï¿½,35,"Music, Drama, Dance and Performing Arts",B,9
+23,10003956,NWES,Liverpool Hope Universityï¿½,35,"Music, Drama, Dance and Performing Arts",Z,4
+23,10003956,NWES,Liverpool Hope Universityï¿½,36,"Communication, Cultural and Media Studies, Library and Information Management",Z,4
+23,10003956,NWES,Liverpool Hope Universityï¿½,N/A,UoA not recorded,Not recorded,8
 65,10003957,NWES,Liverpool John Moores University,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,169
 65,10003957,NWES,Liverpool John Moores University,4,"Psychology, Psychiatry and Neuroscience",Z,31
 65,10003957,NWES,Liverpool John Moores University,9,Physics,Z,30
@@ -1320,34 +1316,34 @@ of eligible staff"
 27,10007138,EMID,The University of Northampton,30,History,Z,8
 27,10007138,EMID,The University of Northampton,34,"Art and Design: History, Practice and Theory",Z,11
 27,10007138,EMID,The University of Northampton,N/A,UoA not recorded,Not recorded,280
-69,10001282,NEAS,University of Northumbria at Newcastle†,2,"Public Health, Health Services and Primary Care",Z,73
-69,10001282,NEAS,University of Northumbria at Newcastle†,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,151
-69,10001282,NEAS,University of Northumbria at Newcastle†,4,"Psychology, Psychiatry and Neuroscience",Z,34
-69,10001282,NEAS,University of Northumbria at Newcastle†,5,Biological Sciences,Z,40
-69,10001282,NEAS,University of Northumbria at Newcastle†,7,Earth Systems and Environmental Sciences,Z,16
-69,10001282,NEAS,University of Northumbria at Newcastle†,10,Mathematical Sciences,Z,17
-69,10001282,NEAS,University of Northumbria at Newcastle†,11,Computer Science and Informatics,Z,59
-69,10001282,NEAS,University of Northumbria at Newcastle†,12,"Aeronautical, Mechanical, Chemical and Manufacturing Engineering",Z,14
-69,10001282,NEAS,University of Northumbria at Newcastle†,13,"Electrical and Electronic Engineering, Metallurgy and Materials",Z,20
-69,10001282,NEAS,University of Northumbria at Newcastle†,14,Civil and Construction engineering,Z,18
-69,10001282,NEAS,University of Northumbria at Newcastle†,15,General Engineering,Z,23
-69,10001282,NEAS,University of Northumbria at Newcastle†,16,"Architecture, Built Environment and Planning",Z,70
-69,10001282,NEAS,University of Northumbria at Newcastle†,17,"Geography, Environmental Studies and Archaeology",Z,28
-69,10001282,NEAS,University of Northumbria at Newcastle†,19,Business and Management Studies,Z,130
-69,10001282,NEAS,University of Northumbria at Newcastle†,20,Law,Z,96
-69,10001282,NEAS,University of Northumbria at Newcastle†,21,Politics and International Studies,Z,3
-69,10001282,NEAS,University of Northumbria at Newcastle†,22,Social Work and Social Policy,Z,49
-69,10001282,NEAS,University of Northumbria at Newcastle†,23,Sociology,Z,16
-69,10001282,NEAS,University of Northumbria at Newcastle†,25,Education,Z,34
-69,10001282,NEAS,University of Northumbria at Newcastle†,26,"Sport and Exercise Sciences, Leisure and Tourism",Z,44
-69,10001282,NEAS,University of Northumbria at Newcastle†,28,Modern Languages and Linguistics,Z,24
-69,10001282,NEAS,University of Northumbria at Newcastle†,29,English Language and Literature,Z,44
-69,10001282,NEAS,University of Northumbria at Newcastle†,30,History,Z,25
-69,10001282,NEAS,University of Northumbria at Newcastle†,34,"Art and Design: History, Practice and Theory",Z,118
-69,10001282,NEAS,University of Northumbria at Newcastle†,35,"Music, Drama, Dance and Performing Arts",Z,6
-69,10001282,NEAS,University of Northumbria at Newcastle†,36,"Communication, Cultural and Media Studies, Library and Information Management",A,15
-69,10001282,NEAS,University of Northumbria at Newcastle†,36,"Communication, Cultural and Media Studies, Library and Information Management",B,7
-69,10001282,NEAS,University of Northumbria at Newcastle†,36,"Communication, Cultural and Media Studies, Library and Information Management",Z,11
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,2,"Public Health, Health Services and Primary Care",Z,73
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,151
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,4,"Psychology, Psychiatry and Neuroscience",Z,34
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,5,Biological Sciences,Z,40
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,7,Earth Systems and Environmental Sciences,Z,16
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,10,Mathematical Sciences,Z,17
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,11,Computer Science and Informatics,Z,59
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,12,"Aeronautical, Mechanical, Chemical and Manufacturing Engineering",Z,14
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,13,"Electrical and Electronic Engineering, Metallurgy and Materials",Z,20
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,14,Civil and Construction engineering,Z,18
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,15,General Engineering,Z,23
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,16,"Architecture, Built Environment and Planning",Z,70
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,17,"Geography, Environmental Studies and Archaeology",Z,28
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,19,Business and Management Studies,Z,130
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,20,Law,Z,96
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,21,Politics and International Studies,Z,3
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,22,Social Work and Social Policy,Z,49
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,23,Sociology,Z,16
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,25,Education,Z,34
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,26,"Sport and Exercise Sciences, Leisure and Tourism",Z,44
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,28,Modern Languages and Linguistics,Z,24
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,29,English Language and Literature,Z,44
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,30,History,Z,25
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,34,"Art and Design: History, Practice and Theory",Z,118
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,35,"Music, Drama, Dance and Performing Arts",Z,6
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,36,"Communication, Cultural and Media Studies, Library and Information Management",A,15
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,36,"Communication, Cultural and Media Studies, Library and Information Management",B,7
+69,10001282,NEAS,University of Northumbria at Newcastleï¿½,36,"Communication, Cultural and Media Studies, Library and Information Management",Z,11
 190,10004775,EAST,Norwich University of the Arts,34,"Art and Design: History, Practice and Theory",Z,41
 155,10007154,EMID,University of Nottingham,1,Clinical Medicine,Z,140
 155,10007154,EMID,University of Nottingham,2,"Public Health, Health Services and Primary Care",Z,47
@@ -1546,21 +1542,21 @@ of eligible staff"
 74,10007155,SEAS,The University of Portsmouth,35,"Music, Drama, Dance and Performing Arts",Z,5
 74,10007155,SEAS,The University of Portsmouth,36,"Communication, Cultural and Media Studies, Library and Information Management",Z,28
 74,10007155,SEAS,The University of Portsmouth,N/A,UoA not recorded,Not recorded,151
-139,10007775,LOND,Queen Mary University of London† ,1,Clinical Medicine,Z,..
-139,10007775,LOND,Queen Mary University of London† ,2,"Public Health, Health Services and Primary Care",Z,..
-139,10007775,LOND,Queen Mary University of London† ,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,..
-139,10007775,LOND,Queen Mary University of London† ,5,Biological Sciences,Z,..
+139,10007775,LOND,Queen Mary University of Londonï¿½ ,1,Clinical Medicine,Z,..
+139,10007775,LOND,Queen Mary University of Londonï¿½ ,2,"Public Health, Health Services and Primary Care",Z,..
+139,10007775,LOND,Queen Mary University of Londonï¿½ ,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,..
+139,10007775,LOND,Queen Mary University of Londonï¿½ ,5,Biological Sciences,Z,..
 139,10007775,LOND,Queen Mary University of London,8,Chemistry,Z,16
-139,10007775,LOND,Queen Mary University of London† ,9,Physics,Z,..
+139,10007775,LOND,Queen Mary University of Londonï¿½ ,9,Physics,Z,..
 139,10007775,LOND,Queen Mary University of London,10,Mathematical Sciences,Z,44
-139,10007775,LOND,Queen Mary University of London† ,11,Computer Science and Informatics,Z,..
+139,10007775,LOND,Queen Mary University of Londonï¿½ ,11,Computer Science and Informatics,Z,..
 139,10007775,LOND,Queen Mary University of London,13,"Electrical and Electronic Engineering, Metallurgy and Materials",A,21
-139,10007775,LOND,Queen Mary University of London† ,13,"Electrical and Electronic Engineering, Metallurgy and Materials",B,..
-139,10007775,LOND,Queen Mary University of London† ,15,General Engineering,Z,..
-139,10007775,LOND,Queen Mary University of London† ,17,"Geography, Environmental Studies and Archaeology",Z,..
+139,10007775,LOND,Queen Mary University of Londonï¿½ ,13,"Electrical and Electronic Engineering, Metallurgy and Materials",B,..
+139,10007775,LOND,Queen Mary University of Londonï¿½ ,15,General Engineering,Z,..
+139,10007775,LOND,Queen Mary University of Londonï¿½ ,17,"Geography, Environmental Studies and Archaeology",Z,..
 139,10007775,LOND,Queen Mary University of London,18,Economics and Econometrics,Z,31
-139,10007775,LOND,Queen Mary University of London† ,19,Business and Management Studies,Z,..
-139,10007775,LOND,Queen Mary University of London† ,20,Law,Z,..
+139,10007775,LOND,Queen Mary University of Londonï¿½ ,19,Business and Management Studies,Z,..
+139,10007775,LOND,Queen Mary University of Londonï¿½ ,20,Law,Z,..
 139,10007775,LOND,Queen Mary University of London,21,Politics and International Studies,Z,25
 139,10007775,LOND,Queen Mary University of London,28,Modern Languages and Linguistics,A,11
 139,10007775,LOND,Queen Mary University of London,28,Modern Languages and Linguistics,B,43
@@ -1706,7 +1702,7 @@ of eligible staff"
 159,10007157,YORH,The University of Sheffield,1,Clinical Medicine,Z,83
 159,10007157,YORH,The University of Sheffield,2,"Public Health, Health Services and Primary Care",Z,98
 159,10007157,YORH,The University of Sheffield,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",A,59
-159,10007157,YORH,The University of Sheffield† ,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",B,116
+159,10007157,YORH,The University of Sheffieldï¿½ ,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",B,116
 159,10007157,YORH,The University of Sheffield,4,"Psychology, Psychiatry and Neuroscience",Z,47
 159,10007157,YORH,The University of Sheffield,5,Biological Sciences,Z,49
 159,10007157,YORH,The University of Sheffield,7,Earth Systems and Environmental Sciences,Z,29
@@ -1716,8 +1712,8 @@ of eligible staff"
 159,10007157,YORH,The University of Sheffield,11,Computer Science and Informatics,Z,37
 159,10007157,YORH,The University of Sheffield,12,"Aeronautical, Mechanical, Chemical and Manufacturing Engineering",A,55
 159,10007157,YORH,The University of Sheffield,12,"Aeronautical, Mechanical, Chemical and Manufacturing Engineering",B,34
-159,10007157,YORH,The University of Sheffield† ,13,"Electrical and Electronic Engineering, Metallurgy and Materials",A,40
-159,10007157,YORH,The University of Sheffield† ,13,"Electrical and Electronic Engineering, Metallurgy and Materials",B,39
+159,10007157,YORH,The University of Sheffieldï¿½ ,13,"Electrical and Electronic Engineering, Metallurgy and Materials",A,40
+159,10007157,YORH,The University of Sheffieldï¿½ ,13,"Electrical and Electronic Engineering, Metallurgy and Materials",B,39
 159,10007157,YORH,The University of Sheffield,14,Civil and Construction engineering,Z,39
 159,10007157,YORH,The University of Sheffield,15,General Engineering,Z,26
 159,10007157,YORH,The University of Sheffield,16,"Architecture, Built Environment and Planning",Z,56
@@ -1896,7 +1892,7 @@ of eligible staff"
 149,10007784,LOND,University College London,21,Politics and International Studies,Z,30
 149,10007784,LOND,University College London,22,Social Work and Social Policy,Z,12
 149,10007784,LOND,University College London,24,Anthropology and Development Studies,Z,31
-149,10007784,LOND,University College London† ,25,Education,Z,11
+149,10007784,LOND,University College Londonï¿½ ,25,Education,Z,11
 149,10007784,LOND,University College London,27,Area Studies,Z,41
 149,10007784,LOND,University College London,28,Modern Languages and Linguistics,Z,51
 149,10007784,LOND,University College London,29,English Language and Literature,Z,29
@@ -2117,33 +2113,33 @@ of eligible staff"
 178,10007857,WALE,Bangor University,30,History,Z,18
 178,10007857,WALE,Bangor University,33,Theology and Religious Studies,Z,3
 178,10007857,WALE,Bangor University,35,"Music, Drama, Dance and Performing Arts",Z,26
-179,10007814,WALE,Cardiff University† ,1,Clinical Medicine,Z,..
-179,10007814,WALE,Cardiff University† ,2,"Public Health, Health Services and Primary Care",Z,..
-179,10007814,WALE,Cardiff University† ,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,..
-179,10007814,WALE,Cardiff University† ,4,"Psychology, Psychiatry and Neuroscience",Z,..
-179,10007814,WALE,Cardiff University† ,5,Biological Sciences,Z,..
-179,10007814,WALE,Cardiff University† ,7,Earth Systems and Environmental Sciences,Z,..
-179,10007814,WALE,Cardiff University† ,8,Chemistry,Z,..
-179,10007814,WALE,Cardiff University† ,9,Physics,Z,..
-179,10007814,WALE,Cardiff University† ,10,Mathematical Sciences,Z,..
-179,10007814,WALE,Cardiff University† ,11,Computer Science and Informatics,Z,..
-179,10007814,WALE,Cardiff University† ,14,Civil and Construction engineering,Z,..
-179,10007814,WALE,Cardiff University† ,15,General Engineering,Z,..
-179,10007814,WALE,Cardiff University† ,16,"Architecture, Built Environment and Planning",A,..
-179,10007814,WALE,Cardiff University† ,16,"Architecture, Built Environment and Planning",B,..
-179,10007814,WALE,Cardiff University† ,17,"Geography, Environmental Studies and Archaeology",Z,..
-179,10007814,WALE,Cardiff University† ,19,Business and Management Studies,Z,..
-179,10007814,WALE,Cardiff University† ,20,Law,Z,..
-179,10007814,WALE,Cardiff University† ,21,Politics and International Studies,Z,..
-179,10007814,WALE,Cardiff University† ,23,Sociology,Z,..
-179,10007814,WALE,Cardiff University† ,25,Education,Z,..
-179,10007814,WALE,Cardiff University† ,28,Modern Languages and Linguistics,Z,..
-179,10007814,WALE,Cardiff University† ,29,English Language and Literature,Z,..
-179,10007814,WALE,Cardiff University† ,30,History,Z,..
-179,10007814,WALE,Cardiff University† ,32,Philosophy,Z,..
-179,10007814,WALE,Cardiff University† ,33,Theology and Religious Studies,Z,..
-179,10007814,WALE,Cardiff University† ,35,"Music, Drama, Dance and Performing Arts",Z,..
-179,10007814,WALE,Cardiff University† ,36,"Communication, Cultural and Media Studies, Library and Information Management",Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,1,Clinical Medicine,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,2,"Public Health, Health Services and Primary Care",Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,4,"Psychology, Psychiatry and Neuroscience",Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,5,Biological Sciences,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,7,Earth Systems and Environmental Sciences,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,8,Chemistry,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,9,Physics,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,10,Mathematical Sciences,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,11,Computer Science and Informatics,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,14,Civil and Construction engineering,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,15,General Engineering,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,16,"Architecture, Built Environment and Planning",A,..
+179,10007814,WALE,Cardiff Universityï¿½ ,16,"Architecture, Built Environment and Planning",B,..
+179,10007814,WALE,Cardiff Universityï¿½ ,17,"Geography, Environmental Studies and Archaeology",Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,19,Business and Management Studies,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,20,Law,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,21,Politics and International Studies,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,23,Sociology,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,25,Education,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,28,Modern Languages and Linguistics,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,29,English Language and Literature,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,30,History,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,32,Philosophy,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,33,Theology and Religious Studies,Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,35,"Music, Drama, Dance and Performing Arts",Z,..
+179,10007814,WALE,Cardiff Universityï¿½ ,36,"Communication, Cultural and Media Studies, Library and Information Management",Z,..
 89,10007854,WALE,Cardiff Metropolitan University,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,102
 89,10007854,WALE,Cardiff Metropolitan University,19,Business and Management Studies,Z,71
 89,10007854,WALE,Cardiff Metropolitan University,25,Education,Z,54
@@ -2214,32 +2210,32 @@ of eligible staff"
 90,10007793,WALE,University of South Wales,34,"Art and Design: History, Practice and Theory",Z,86
 90,10007793,WALE,University of South Wales,35,"Music, Drama, Dance and Performing Arts",Z,79
 186,10008574,WALE,The University of Wales (central functions),28,Modern Languages and Linguistics,Z,16
-170,10007783,SCOT,The University of Aberdeen†,1,Clinical Medicine,Z,161
-170,10007783,SCOT,The University of Aberdeen†,2,"Public Health, Health Services and Primary Care",Z,153
-170,10007783,SCOT,The University of Aberdeen†,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,3
-170,10007783,SCOT,The University of Aberdeen†,4,"Psychology, Psychiatry and Neuroscience",Z,32
-170,10007783,SCOT,The University of Aberdeen†,5,Biological Sciences,Z,205
-170,10007783,SCOT,The University of Aberdeen†,6,"Agriculture, Veterinary and Food Science",Z,31
-170,10007783,SCOT,The University of Aberdeen†,7,Earth Systems and Environmental Sciences,Z,46
-170,10007783,SCOT,The University of Aberdeen†,8,Chemistry,Z,47
-170,10007783,SCOT,The University of Aberdeen†,10,Mathematical Sciences,Z,29
-170,10007783,SCOT,The University of Aberdeen†,11,Computer Science and Informatics,Z,44
-170,10007783,SCOT,The University of Aberdeen†,15,General Engineering,Z,68
-170,10007783,SCOT,The University of Aberdeen†,16,"Architecture, Built Environment and Planning",Z,14
-170,10007783,SCOT,The University of Aberdeen†,17,"Geography, Environmental Studies and Archaeology",Z,27
-170,10007783,SCOT,The University of Aberdeen†,18,Economics and Econometrics,Z,26
-170,10007783,SCOT,The University of Aberdeen†,19,Business and Management Studies,Z,24
-170,10007783,SCOT,The University of Aberdeen†,20,Law,Z,35
-170,10007783,SCOT,The University of Aberdeen†,21,Politics and International Studies,Z,13
-170,10007783,SCOT,The University of Aberdeen†,23,Sociology,Z,18
-170,10007783,SCOT,The University of Aberdeen†,24,Anthropology and Development Studies,Z,20
-170,10007783,SCOT,The University of Aberdeen†,25,Education,Z,32
-170,10007783,SCOT,The University of Aberdeen†,28,Modern Languages and Linguistics,Z,26
-170,10007783,SCOT,The University of Aberdeen†,29,English Language and Literature,Z,24
-170,10007783,SCOT,The University of Aberdeen†,30,History,Z,29
-170,10007783,SCOT,The University of Aberdeen†,32,Philosophy,Z,18
-170,10007783,SCOT,The University of Aberdeen†,33,Theology and Religious Studies,Z,20
-170,10007783,SCOT,The University of Aberdeen†,35,"Music, Drama, Dance and Performing Arts",Z,13
+170,10007783,SCOT,The University of Aberdeenï¿½,1,Clinical Medicine,Z,161
+170,10007783,SCOT,The University of Aberdeenï¿½,2,"Public Health, Health Services and Primary Care",Z,153
+170,10007783,SCOT,The University of Aberdeenï¿½,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,3
+170,10007783,SCOT,The University of Aberdeenï¿½,4,"Psychology, Psychiatry and Neuroscience",Z,32
+170,10007783,SCOT,The University of Aberdeenï¿½,5,Biological Sciences,Z,205
+170,10007783,SCOT,The University of Aberdeenï¿½,6,"Agriculture, Veterinary and Food Science",Z,31
+170,10007783,SCOT,The University of Aberdeenï¿½,7,Earth Systems and Environmental Sciences,Z,46
+170,10007783,SCOT,The University of Aberdeenï¿½,8,Chemistry,Z,47
+170,10007783,SCOT,The University of Aberdeenï¿½,10,Mathematical Sciences,Z,29
+170,10007783,SCOT,The University of Aberdeenï¿½,11,Computer Science and Informatics,Z,44
+170,10007783,SCOT,The University of Aberdeenï¿½,15,General Engineering,Z,68
+170,10007783,SCOT,The University of Aberdeenï¿½,16,"Architecture, Built Environment and Planning",Z,14
+170,10007783,SCOT,The University of Aberdeenï¿½,17,"Geography, Environmental Studies and Archaeology",Z,27
+170,10007783,SCOT,The University of Aberdeenï¿½,18,Economics and Econometrics,Z,26
+170,10007783,SCOT,The University of Aberdeenï¿½,19,Business and Management Studies,Z,24
+170,10007783,SCOT,The University of Aberdeenï¿½,20,Law,Z,35
+170,10007783,SCOT,The University of Aberdeenï¿½,21,Politics and International Studies,Z,13
+170,10007783,SCOT,The University of Aberdeenï¿½,23,Sociology,Z,18
+170,10007783,SCOT,The University of Aberdeenï¿½,24,Anthropology and Development Studies,Z,20
+170,10007783,SCOT,The University of Aberdeenï¿½,25,Education,Z,32
+170,10007783,SCOT,The University of Aberdeenï¿½,28,Modern Languages and Linguistics,Z,26
+170,10007783,SCOT,The University of Aberdeenï¿½,29,English Language and Literature,Z,24
+170,10007783,SCOT,The University of Aberdeenï¿½,30,History,Z,29
+170,10007783,SCOT,The University of Aberdeenï¿½,32,Philosophy,Z,18
+170,10007783,SCOT,The University of Aberdeenï¿½,33,Theology and Religious Studies,Z,20
+170,10007783,SCOT,The University of Aberdeenï¿½,35,"Music, Drama, Dance and Performing Arts",Z,13
 95,10007849,SCOT,University of Abertay Dundee,3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,7
 95,10007849,SCOT,University of Abertay Dundee,4,"Psychology, Psychiatry and Neuroscience",Z,15
 95,10007849,SCOT,University of Abertay Dundee,5,Biological Sciences,Z,20
@@ -2374,19 +2370,19 @@ of eligible staff"
 168,10007794,SCOT,The University of Glasgow,34,"Art and Design: History, Practice and Theory",Z,20
 168,10007794,SCOT,The University of Glasgow,35,"Music, Drama, Dance and Performing Arts",Z,11
 168,10007794,SCOT,The University of Glasgow,36,"Communication, Cultural and Media Studies, Library and Information Management",Z,25
-171,10007764,SCOT,Heriot-Watt University†,4,"Psychology, Psychiatry and Neuroscience",Z,15
-171,10007764,SCOT,Heriot-Watt University†,6,"Agriculture, Veterinary and Food Science",Z,15
-171,10007764,SCOT,Heriot-Watt University†,7,Earth Systems and Environmental Sciences,Z,20
-171,10007764,SCOT,Heriot-Watt University†,8,Chemistry,Z,33
-171,10007764,SCOT,Heriot-Watt University†,9,Physics,Z,22
-171,10007764,SCOT,Heriot-Watt University†,10,Mathematical Sciences,Z,41
-171,10007764,SCOT,Heriot-Watt University†,11,Computer Science and Informatics,Z,29
-171,10007764,SCOT,Heriot-Watt University†,15,General Engineering,Z,126
-171,10007764,SCOT,Heriot-Watt University†,16,"Architecture, Built Environment and Planning",Z,44
-171,10007764,SCOT,Heriot-Watt University†,19,Business and Management Studies,Z,60
-171,10007764,SCOT,Heriot-Watt University†,28,Modern Languages and Linguistics,Z,16
-171,10007764,SCOT,Heriot-Watt University†,34,"Art and Design: History, Practice and Theory",Z,10
-171,10007764,SCOT,Heriot-Watt University†,N/A,UoA not recorded,Not recorded,191
+171,10007764,SCOT,Heriot-Watt Universityï¿½,4,"Psychology, Psychiatry and Neuroscience",Z,15
+171,10007764,SCOT,Heriot-Watt Universityï¿½,6,"Agriculture, Veterinary and Food Science",Z,15
+171,10007764,SCOT,Heriot-Watt Universityï¿½,7,Earth Systems and Environmental Sciences,Z,20
+171,10007764,SCOT,Heriot-Watt Universityï¿½,8,Chemistry,Z,33
+171,10007764,SCOT,Heriot-Watt Universityï¿½,9,Physics,Z,22
+171,10007764,SCOT,Heriot-Watt Universityï¿½,10,Mathematical Sciences,Z,41
+171,10007764,SCOT,Heriot-Watt Universityï¿½,11,Computer Science and Informatics,Z,29
+171,10007764,SCOT,Heriot-Watt Universityï¿½,15,General Engineering,Z,126
+171,10007764,SCOT,Heriot-Watt Universityï¿½,16,"Architecture, Built Environment and Planning",Z,44
+171,10007764,SCOT,Heriot-Watt Universityï¿½,19,Business and Management Studies,Z,60
+171,10007764,SCOT,Heriot-Watt Universityï¿½,28,Modern Languages and Linguistics,Z,16
+171,10007764,SCOT,Heriot-Watt Universityï¿½,34,"Art and Design: History, Practice and Theory",Z,10
+171,10007764,SCOT,Heriot-Watt Universityï¿½,N/A,UoA not recorded,Not recorded,191
 100,10005337,SCOT,"Queen Margaret University, Edinburgh",3,"Allied Health Professions, Dentistry, Nursing and Pharmacy",Z,85
 100,10005337,SCOT,"Queen Margaret University, Edinburgh",4,"Psychology, Psychiatry and Neuroscience",Z,10
 100,10005337,SCOT,"Queen Margaret University, Edinburgh",19,Business and Management Studies,Z,31
