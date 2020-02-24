@@ -108,3 +108,7 @@ Each section should summarise the pattern’s perceived advantages and disadvant
 ## Sun burst chart
 
 Sunbusrt chart which shows countries, cities and universities. Click on element, display pie chart of all ratings for that element. IE: user clicks scotland pie chart shows 0-5 stars of all ratings for all unis in scotland.
+
+## Example title
+
+Example explanation of the todo.
