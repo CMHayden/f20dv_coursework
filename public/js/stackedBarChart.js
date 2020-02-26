@@ -104,19 +104,20 @@ function pie()
         .append("g")
             .attr("transform", "translate(" + radius + "," + radius + ")");
 
-
+    //pie chart colours
     var colours = d3.scaleOrdinal(d3.schemeCategory10);
 
+    //putting the data into slices
     var pieChart = d3.pie().value(function (d) {
         return d.code;
     });
 
-
+    //creates the slices 
     var path = d3.arc()
         .outerRadius(radius)
         .innerRadius(0);
 
-  
+    //giving colour to the different slices and makes the pie chart
     svg.selectAll("slice")
         .data(pieChart(data))
         .enter()
@@ -129,7 +130,7 @@ function pie()
         });
 
     
-
+    //adding text to the slices in the middle of the slices
     svg.selectAll("slice")
         .data(pieChart(data))
         .enter()
@@ -143,14 +144,78 @@ function pie()
         });
 
   
-
-    var padding = 20,
-        legx = radius + padding,
-        legend = svg.append("g")
-            .attr("class", "legend")
-            .attr("transform", "translate(" + legx + ", 0)")
-            .style("font-size", "12px")
-
     
   
+}
+
+
+function sunburst()
+{
+
+
+    var data = {
+        "name": "Grades", "children": [{
+            "name": "HW",
+            "children": [{ "name": "MACS", "size": 50 }, { "name": "Mech Eng", "size": 1 }, { "name": "Lang", "size": 3 }, { "name": "Business", "size": 6 }]
+        }, {
+            "name": "Edinburgh Uni",
+                "children": [{ "name": "Comp Sci", "size": 2 }, { "name": "Med School", "size": 5 }, {
+                "name": "Art", "size": 3
+            }]
+        }, {
+            "name": "Napier",
+                "children": [{ "name": "Comp Sci", "size": 1 }, { "name": "Art", "size": 2 },  { "name": "Nursing", "size": 4 }, { "name": "Film", "size": 3}]
+        }]
+    };
+
+
+    var width = 960;
+    var height = 700;
+    var radius = Math.min(width, height) / 2;
+    var color = d3.scaleOrdinal(d3.schemeCategory20)
+
+    var svg = d3.select('#sunburst')
+        .append('svg')
+            .attr('width', width)
+            .attr('height', height)
+        .append('g')
+            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');;
+
+    //helper to put data in sunburst format
+    var sunburstFormat = d3.partition()
+        .size([360, radius])
+        
+    
+    //stores the data in d3 hierarchical format for later processing
+    var root = d3.hierarchy(data)  
+        .sum(function (d) { return d.size }); 
+
+    // put data into sunburst mode
+    sunburstFormat(root)
+
+    var xScale = d3.scaleLinear()
+        .domain([0, radius])
+        .range([0, Math.PI * 2])
+       
+    //calculates the sizes of the different data slices
+    var slices = d3.arc()
+        .startAngle(d => xScale(d.x0))
+        .endAngle(d => xScale(d.x1))
+        .innerRadius(d => d.y0)
+        .outerRadius(d => d.y1)
+
+    //displays the data
+    var path = svg.selectAll('path')
+        .data(root.descendants()) //array of all the nodes
+        .enter().append('path')
+        .attr("display", function (d) { return d.depth ? null : "none"; })
+        .attr("d", slices)
+        .style('stroke', '#fff')
+        .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
+
+
+
+
+
+
 }
