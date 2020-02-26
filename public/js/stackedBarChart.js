@@ -213,9 +213,17 @@ function sunburst()
         .style('stroke', '#fff')
         .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
 
-
-
-
-
+    //adds text to sunburst
+    svg.selectAll("slice")
+        .data(root.descendants())
+        .enter()
+        .append("text")
+        .attr("transform", function (d) {
+            return "translate(" + slices.centroid(d) + ")";
+        })
+        .attr("text-anchor", "middle")
+        .text(function (d) {
+            return d.data.name;
+        });
 
 }
