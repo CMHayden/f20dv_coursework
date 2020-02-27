@@ -204,14 +204,46 @@ function sunburst()
         .innerRadius(d => d.y0)
         .outerRadius(d => d.y1)
 
+    //tooltip div
+    var tooltip = d3.select("#sunburst")
+        .append('div')
+        .attr('class', 'label')
+        .style("background", "lightblue")
+        .style("position", "absolute")
+        .style("visibility", "hidden");
+
+
     //displays the data
     var path = svg.selectAll('path')
         .data(root.descendants()) //array of all the nodes
         .enter().append('path')
         .attr("display", function (d) { return d.depth ? null : "none"; })
         .attr("d", slices)
+        .on("mouseover", mouseOver)
+        .on("mousemove", function (d) {
+            tooltip.html(d.data.size)
+                .style("left", (d3.event.pageX - 34) + "px")
+                .style("top", (d3.event.pageY - 12) + "px");
+        })
+        .on("mouseout", mouseOut)
         .style('stroke', '#fff')
         .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
+
+
+    //mouseOver for tooltip
+    function mouseOver() {
+        tooltip.transition()
+            .duration(500)
+            .style("visibility", "visible");
+    }
+ 
+    //mouseOut for tooltip
+    function mouseOut() {
+        tooltip.transition()
+            .duration(500)
+            .style("visibility", "hidden");	
+    }
+   
 
     //adds text to sunburst
     svg.selectAll("slice")
@@ -225,5 +257,10 @@ function sunburst()
         .text(function (d) {
             return d.data.name;
         });
+       
+   
+       
 
 }
+
+
