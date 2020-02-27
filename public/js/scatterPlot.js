@@ -136,18 +136,11 @@ function scatter() {
                         { return "#ec7014"; }
                     else { return "#4292c6"; }
             });
-            const brushedNodes = data.filter(d =>
-                // helper function that returns true if the point is
-                // within the selection rect
-                rectContains(selection, [xScale(d.x), yScale(d.y)])
-              );
-            
-              // helper to visualize the highlighted data points
-              // see the full source code for details
-              CoolFunctionBro(brushedNodes);
        }
   
        function brushended() {
+        const { selection } = d3.event
+
            if (!d3.event.selection) {
                svg.selectAll('circle')
                  .transition()
@@ -155,6 +148,15 @@ function scatter() {
                  .ease(d3.easeLinear)
                  .style("fill", "#4292c6");
            }
+           const brushedNodes = data.filter(d =>
+            // helper function that returns true if the point is
+            // within the selection rect
+            rectContains(selection, [xScale(d.x), yScale(d.y)])
+          );
+        
+          // helper to visualize the highlighted data points
+          // see the full source code for details
+          CoolFunctionBro(brushedNodes);
        }
 
        function rectContains(rect, point) {
