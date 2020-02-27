@@ -97,5 +97,11 @@ h2 {
   text-align: center;
 }
 
+.not-selected {
+  fill: #4292c6;
+}
 
+.selection {
+  fill: #4292c6;
+}
 /*# sourceMappingURL=main.css.map */
