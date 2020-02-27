@@ -1,5 +1,10 @@
 function scatter() {
 
+    const X = 0;
+    const Y = 1;
+    const TOP_LEFT = 0;
+    const BOTTOM_RIGHT = 1;
+    
     const data = [
         { 'x': 2, 'y': 3, 'label': 'Heriot Watt'},
         { 'x': 4, 'y': 3, 'label': 'Heriot Watt'},
@@ -15,7 +20,6 @@ function scatter() {
         { 'x': 2, 'y': 6, 'label': 'Heriot Watt'},
         { 'x': 2, 'y': 10, 'label': 'Heriot Watt'},
     ]
-
 
     // outer svg dimensions
     const width = 600;
@@ -39,10 +43,10 @@ function scatter() {
     /*
      * Initialize scales.
      *
-     * Should change so domain takes ([0,X]) where X is the largest value.
+     * Should change so domain takes ([0,X]) where X is the largest value + 1 to help with brushing
      */
-    const xScale = d3.scaleLinear().domain([0, 10]).range([0, plotAreaWidth]);
-    const yScale = d3.scaleLinear().domain([0, 10]).range([plotAreaHeight, 0]);
+    const xScale = d3.scaleLinear().domain([0, 11]).range([0, plotAreaWidth]);
+    const yScale = d3.scaleLinear().domain([0, 12]).range([plotAreaHeight, 0]);
     const colorScale = d3.scaleLinear().domain([0, 10]).range(['#383c4a', '#383c4a']); // Incase we want colour to change based on value
 
     // select the root container where the chart will be added
@@ -69,6 +73,7 @@ function scatter() {
         .attr('text-anchor', 'middle')
         .text('Title'); // Change for title
 
+    // add in y-axis groups
     const yAxisG = g.append('g').classed('y-axis', true)
         .attr('transform', `translate(${-pointRadius} 0)`);
 
@@ -104,8 +109,47 @@ function scatter() {
 
     binding.enter().append('circle')
         .classed('data-point', true)
+        .attr('class', 'not-selected')
         .attr('r', pointRadius)
         .attr('cx', d => xScale(d.x))
         .attr('cy', d => yScale(d.y))
         .attr('fill', d => colorScale(d.y));
+
+        // Create d3 brush
+        const brush = d3.brush()
+            .extent([[0, 0], [plotAreaWidth, plotAreaHeight]])
+            .on('brush', brushed)
+            .on('end', brushended);
+
+        // Set class of brush + call it to initiate the brush
+        const gBrush = g.append('g')
+            .attr('class', 'brush')
+            .call(brush);
+
+  
+        function brushed() {
+            const { selection } = d3.event
+  
+           svg.selectAll('circle')
+              .style("fill", function (d) {
+                  if (rectContains(selection, [xScale(d.x), yScale(d.y)]))
+                       { return "#ec7014"; }
+                  else { return "#4292c6"; }
+              });
+       }
+  
+       function brushended() {
+           if (!d3.event.selection) {
+               svg.selectAll('circle')
+                 .transition()
+                 .duration(150)
+                 .ease(d3.easeLinear)
+                 .style("fill", "#4292c6");
+           }
+       }
+
+       function rectContains(rect, point) {
+        return rect[TOP_LEFT][X] <= point[X] && point[X] <= rect[BOTTOM_RIGHT][X] &&
+                rect[TOP_LEFT][Y] <= point[Y] && point[Y] <= rect[BOTTOM_RIGHT][Y];
+    }
 }
