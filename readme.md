@@ -102,12 +102,37 @@ This document should reflect on the use of design patterns presented in the cour
 
 Each section should summarise the pattern’s perceived advantages and disadvantages both as it was used in the project, and as it might be used to improve the project
 
+# Done Charts:
+
+* Sunburst chart
+
+* Stacked Bar chart
+
+* Spider Chart
+
+* Pie Chart
+
+* Scatter (almost)
+
+## Interactions
+
+* Map to spider chart
+
 
 # TODOS:
 
 ## Sun burst chart
 
-Sunbusrt chart which shows countries, cities and universities. Click on element, display pie chart of all ratings for that element. IE: user clicks scotland pie chart shows 0-5 stars of all ratings for all unis in scotland.
+Sunburst chart which shows countries, cities and universities. Click on element, display pie chart of all ratings for that element. IE: user clicks scotland pie chart shows 0-5 stars of all ratings for all unis in scotland.
+
+## Agglomerative clustering
+
+## Interactions
+
+* Sun burst -> pie chart 
+
+* Scatterplot brushing -> map -> sun burst chart
+
 
 ## Example title
 
