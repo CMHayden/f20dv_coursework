@@ -4,6 +4,8 @@ $nav-bg: #383c4a;
 $gray: #7c818c;
 $light: #f7f7f7;
 $blue-hl: #4292c6;
+$change-increase: #009900;
+$change-decrease: #b20000;
 
 *, body {
     padding: 0;
@@ -103,4 +105,12 @@ h2 {
 
 .selection {
     fill: $blue-hl;
+}
+
+.change-pos {
+    fill: $change-increase;
+}
+
+.change-neg {
+    fill: $change-decrease;
 }

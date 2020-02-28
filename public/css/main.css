@@ -104,4 +104,12 @@ h2 {
 .selection {
   fill: #4292c6;
 }
+
+.change-pos {
+  fill: #009900;
+}
+
+.change-neg {
+  fill: #b20000;
+}
 /*# sourceMappingURL=main.css.map */
