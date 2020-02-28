@@ -104,4 +104,16 @@ h2 {
 .selection {
   fill: #4292c6;
 }
+
+.change-pos {
+  fill: #009900;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.change-neg {
+  fill: #b20000;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
 /*# sourceMappingURL=main.css.map */
