@@ -121,7 +121,7 @@ Each section should summarise the pattern’s perceived advantages and disadvant
 * Scatterplot "coolFunctionBro()" sends data to be used by another chart.
 
 ## Done display:
-
+Display 1: Map to spider graph (Click a circle on the map and update spider graph)
 
 # TODOS:
 
