@@ -120,6 +120,8 @@ Each section should summarise the pattern’s perceived advantages and disadvant
 
 * Scatterplot "coolFunctionBro()" sends data to be used by another chart.
 
+## Done display:
+
 
 # TODOS:
 
