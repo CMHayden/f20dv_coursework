@@ -67,7 +67,7 @@ You may use other publicly available data, but you must clearly identify the sou
 | R4     | Use of D3 transitions to highlight new (entering) data | 2 |   X   |
 | R5     | Use of D3 transitions to highlight updating data  | 2 |   X   |
 | R6     | Use of D3 transitions to highlight exiting data | 3 |   X   |
-| R7     | Use of cross-layout brushing in which moussing over a data point in one chart highlights associated data in another chart | 2 |   ✓   |
+| R7     | Use of cross-layout brushing in which moussing over a data point in one chart highlights associated data in another chart | 2 |   X   |
 | R8     | Use of cross-layout brushing in which moussing over one data point in one chart highlights multiple associated data points in another chart. Note: you must use a different combination of layouts than the ones provided in lab examples. | 3 |   X   |
 | R9     | Significant use of data (> 100 data items) not provided by the course | 2 |   X   |
 | R10    | Use of a scatter plot, a stacked barchart or, a linechart | 4 |   ✓   |
@@ -112,27 +112,56 @@ Each section should summarise the pattern’s perceived advantages and disadvant
 
 * Pie Chart
 
-* Scatter (almost)
+* Scatter with brushing
 
 ## Interactions
 
 * Map to spider chart
 
+* Scatterplot "coolFunctionBro()" sends data to be used by another chart.
+
 
 # TODOS:
 
+## G2
+
+Use the lab to get it done. Do dendogram (type of tree graph).
+
+## R4, R5, R6
+
+Transitions to be done. Wont be too awkward, just add classes for increase and decrease in value.
+
+## R7, R8 
+
+Still need to hook up coolfunctionbro (in scatterPlot.js) to another chart
+
+## R9
+
+Find data sources plus data items to use.
+
+## R11
+
+Create interaction between a Map, a sunburst and some other still TBC.
+
+## R12 
+
+Still need to do two: stacked bar chart and scatter plot.
+
 ## R14
 
-Can do this with sun burst.
+Can do this with sun burst. Set so you click on higher level to display lower level data.
 
-## Agglomerative clustering
+## R19
 
-## Interactions
+Using stacked bar chart going to compare star ratings of unis across different countries.
 
-* Sun burst -> pie chart 
+## R20 R21
 
-* Scatterplot brushing -> map -> sun burst chart
+Need to ask questions to see if these are done in an acceptable fashion.
 
+## R22
+
+Still need to work out what data we want to cluster together.
 
 ## Example title
 
