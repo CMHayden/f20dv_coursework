@@ -109,8 +109,10 @@ h2 {
 
 .change-pos {
     fill: $change-increase;
+    transition: 0.3s;
 }
 
 .change-neg {
     fill: $change-decrease;
+    transition: 0.3s;
 }
