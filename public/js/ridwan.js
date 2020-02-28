@@ -12,7 +12,7 @@ function ridwansGraph() {
     	.append("g");
 
     d3.queue()
-    .defer(d3.json, "uk.json")
+    .defer(d3.json, "data/uk.json")
     .defer(d3.csv, "data/learning-providers-plus.csv")
     .defer(d3.csv, "data/REF2014_Results.csv")
     .await(ready)
@@ -49,8 +49,11 @@ function ridwansGraph() {
         stars.forEach(function(d) {
             circle = d3.select('#id' + d["Institution code (UKPRN)"]); 
             circle.attr("r", function(){
-            if (d["4*"] < 5) { return 1 } else if (d["4*"] < 10) { return 2 } else if (d["4*"] < 20) { return 3 } else if (d["4*"] < 30) { return 4 } else if (d["4*"] < 4) { return 5 } else { return 6 }
-        }) 
+                if (d["4*"] < 5) { return 1 } else if (d["4*"] < 10) { return 2 } else if (d["4*"] < 20) { return 3 } else if (d["4*"] < 30) { return 4 } else if (d["4*"] < 4) { return 5 } else { return 6 }
+            }) 
+            circle.on('mousedown.log', function () {
+                update(d);
+            })
         })
 
     	/*svg.selectAll(".labels")
@@ -71,5 +74,41 @@ function ridwansGraph() {
     	.attr("dx", 10)
     	.attr("dy", 5)*/
 
+    let radialScale = d3.scaleLinear()
+        .domain([0,10])
+        .range([0,250]);
+         let features = ["1*","2*","3*","4*","5*"];
+
+    function getPathCoordinates(data_point){
+        console.log(data_point)
+        let coordinates = [];
+        for (var i = 0; i < features.length; i++){
+            let ft_name = features[i];
+            let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
+            coordinates.push(angleToCoordinate(angle, data_point[ft_name]));
+        }
+        return coordinates;
+    }
+
+    function angleToCoordinate(angle, value){
+        let x = Math.cos(angle) * radialScale(value);
+        let y = Math.sin(angle) * radialScale(value);
+        return {"x": 300 + x, "y": 300 - y};
+    }
+
+    let line = d3.line()
+        .x(d => d.x)
+        .y(d => d.y);
+
+        function update(data) {
+            console.log(data)
+            let coordinates = getPathCoordinates(data);
+            // Update selection: Resize and position existing 
+            // DOM elements with data bound to them.
+            d3.select('#graph1')
+            .selectAll("path")
+            .datum(coordinates)
+            .attr("d", line);
+        };
     }
 }
