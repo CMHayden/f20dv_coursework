@@ -2,6 +2,27 @@
 function stacked()
 {   
 
+ 
+
+
+    d3.queue()
+        .defer(d3.json, "data/uk.json")
+        .defer(d3.csv, "data/learning-providers-plus.csv")
+        .defer(d3.csv, "data/REF2014_Results.csv")
+        .await(dataDisplay)
+
+    function dataDisplay(error, data, universities, stars) {
+        console.log("FGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG")
+        countries = topojson.feature(data, data.objects.subunits).features;
+        svg.selectAll(".country")
+            .data(countries)
+            .enter().append("path")
+            .attr("class", "country")
+            .attr("d", path)
+
+        console.log("countries " + countries)
+    }
+
     var initStackedBarChart = {
         draw: function(config) {
             me = this,
