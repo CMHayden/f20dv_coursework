@@ -95,20 +95,34 @@ function ridwansGraph() {
         let y = Math.sin(angle) * radialScale(value);
         return {"x": 300 + x, "y": 300 - y};
     }
-
+    
+    function sortInts(a, b) {
+  		return a - b;
+	}
     let line = d3.line()
         .x(d => d.x)
         .y(d => d.y);
 
         function update(data) {
-            console.log(data)
+            let arr = [parseInt(data["1*"]), parseInt(data["2*"]), parseInt(data["3*"]), parseInt(data["4*"])]
+            arr = arr.sort(sortInts);
+
+            factor = Math.ceil(arr[3]/4)
+            ticks2 = [factor, factor*2, factor*3, factor*4]
+
             let coordinates = getPathCoordinates(data);
-            // Update selection: Resize and position existing 
-            // DOM elements with data bound to them.
-            d3.select('#graph1')
-            .selectAll("path")
+            let svg = d3.select('#graph1')
+
+            ticks2.forEach(t =>
+            	svg.selectAll("text")
+            	.text(t.toString())
+            );
+
+            svg.selectAll("path")
             .datum(coordinates)
             .attr("d", line);
+
+
         };
     }
 }
