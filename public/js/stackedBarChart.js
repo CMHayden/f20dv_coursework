@@ -2,26 +2,8 @@
 function stacked()
 {   
 
- 
+    let countriesMap = new Map();
 
-
-    d3.queue()
-        .defer(d3.json, "data/uk.json")
-        .defer(d3.csv, "data/learning-providers-plus.csv")
-        .defer(d3.csv, "data/REF2014_Results.csv")
-        .await(dataDisplay)
-
-    function dataDisplay(error, data, universities, stars) {
-        console.log("FGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG")
-        countries = topojson.feature(data, data.objects.subunits).features;
-        svg.selectAll(".country")
-            .data(countries)
-            .enter().append("path")
-            .attr("class", "country")
-            .attr("d", path)
-
-        console.log("countries " + countries)
-    }
 
     var initStackedBarChart = {
         draw: function(config) {
@@ -42,7 +24,154 @@ function stacked()
                     .attr("height", height + margin.top + margin.bottom)
                     .append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    
+
+         
+            d3.queue()                    
+                .defer(d3.csv, "data/REF2014_Results.csv")
+                .defer(d3.csv, "data/learning-providers-plus.csv")
+                .defer(d3.csv, "data/Towns_List (1).csv")
+                .await(dataDisplay)
+
+          
+            function dataDisplay(error, universities, towns, countries) {
+
+
+               
+           
+                console.log("unis")
+                console.log(universities)
+                console.log("stars")
+                console.log(towns)
+                console.log("context")
+                console.log(countries);
+                var total = 0
+                universities.forEach(function (d) {
+                    total = total+1
+                   
+                })
+                var total4 = 0
+                towns.forEach(function (d) {
+                    total4 = total4 + 1
+
+                })
+                var total2 = 0;
+                countries.forEach(function (d) {
+                    total2 = total2 + 1
+
+                })
+                countries.forEach(function (d) {
+                    if (countriesMap.has(d["Country"])) {
+
+                    } else {
+                        countriesMap.set(d["Country"], [0,0,0,0,0])
+                    }
+                 
+                })
+                console.log("Size of map " + countriesMap.size)
+                for (let i of countriesMap.keys())
+                {
+                    console.log(i)
+                }
+                console.log("nb of unis " + total)
+                console.log("nb of towns " + total4)
+                console.log("nb of country " + total2)
+
+                var string = "World"
+                var string2 = "WORLD"
+
+                var result = (string.toLowerCase()).localeCompare(string2.toLowerCase()); // returns 0 if true and -1 if false
+                console.log(result)
+                var currentUniID = 0
+                var uniSchools = 0
+                var uniScores = [0, 0, 0, 0]
+                
+                universities.forEach(function (d)
+                {
+                    if (currentUniID == 0)
+                    {
+                        //console.log("Institution name " + d["Institution name"])
+                        currentUniID = d["Institution code (UKPRN)"];
+                      
+                    }
+                    else if (d["Institution code (UKPRN)"] == currentUniID)
+                    {
+                        if (d["Profile"].localeCompare("Overall") == 0)
+                        {
+                           
+                            uniSchools = uniSchools + 1;
+                            uniScores[0] = parseFloat(uniScores[0]) + parseFloat(d["4*"])
+                            uniScores[1] = parseFloat(uniScores[1]) + parseFloat(d["3*"])
+                            uniScores[2] = parseFloat(uniScores[2]) + parseFloat(d["2*"])
+                            uniScores[3] = parseFloat(uniScores[3]) + parseFloat(d["1*"])
+
+                        }
+                    } else {
+                            //  console.log("UKPRN " + d["Institution code (UKPRN)"])
+                        //console.log("Institution name " + currentUniID)
+                        var uniTown = townSearch(currentUniID)
+                        var country = countrySearch(uniTown)                      
+                        var countryScores = countriesMap.get(country)                      
+                        countryScores[0] = parseFloat(countryScores[0]) + 1                    
+                        
+                        var count = 1
+                        for (let uniScore of uniScores) {
+                            //   console.log(stars + "* = " + Math.round(b / uniSchools))
+                            countryScores[count] = parseFloat(countryScores[count]) + parseFloat(uniScore)
+                            count++;
+                        }
+                        countriesMap.set(country, countryScores);
+                        currentUniID = d["Institution code (UKPRN)"];
+                        uniSchools = 0;
+                        uniScores = [0, 0, 0, 0]
+                    }
+
+                })
+
+                function townSearch(uniID)
+                {
+                    for (let town of towns) {
+                        if (uniID == town["UKPRN"]) {
+                            return town["TOWN"].toLowerCase()
+                        }
+                    }
+                }
+
+                function countrySearch(townName)
+                {
+                    if (townName == null) {
+
+                    } else {
+                        for (let country of countries) {
+                            if (townName.localeCompare(country["Town"])) {
+                                return country["Country"]
+
+                            }
+                        }
+                    }
+                    
+                }
+
+
+                function calculateCountryScore(ScoreMap)
+                {
+                    for (let country of ScoreMap.keys())
+                    {
+                        var result = ScoreMap.get(country);                     
+                        var i;
+                        for (i = 1; i < result.length; i++)
+                        {
+                            result[i] = Math.round(result[i] / result[0]);
+                        } 
+                        ScoreMap.set(country, result);
+                    }
+                }
+
+                calculateCountryScore(countriesMap);
+                countriesMap.forEach(function (d) {
+                    console.log("whatever" + d)
+                })
+            }
+
             var stack = d3.stack()
                 .keys(stackKey)
                 .order(d3.stackOrderNone)
