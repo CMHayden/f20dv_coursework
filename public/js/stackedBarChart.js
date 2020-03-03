@@ -50,7 +50,8 @@ function stacked()
                 var currentUniID = 0;
                 var uniSchools = 0;
                 var uniScores = [0, 0, 0, 0];
-
+                var uniUKPRNNotExistCount = 0;
+                var uniTownNotExist = 0;
                 //goes through every uni and averages it's star rating and adds its averages to the uni's country
                 universities.forEach(function (d)
                 {
@@ -76,7 +77,7 @@ function stacked()
                     {
                           
                         var uniTown = townSearch(currentUniID);
-
+                        
                         //some university's UKPRNs did not exist in learning-provider-plus.csv so they are ignored
                         if (uniTown != null) {
                             var country = countrySearch(uniTown.toLowerCase());    
@@ -95,9 +96,13 @@ function stacked()
                                 
                                 countriesMap.set(country, countryScores);
 
+                            }else{
+                                uniTownNotExist ++;
                             }
                            
                     
+                        }else{
+                            uniUKPRNNotExistCount ++;
                         }
 
                        
@@ -160,7 +165,9 @@ function stacked()
 
                 countriesMap = calculateCountryScore(countriesMap);
                 // prints out result
-                
+                console.log("number of unis not existing " + uniTownNotExist);
+                console.log("number of unis not existing2 " + uniUKPRNNotExistCount);
+                console.log("number of unis not existing " + (uniTownNotExist+ uniUKPRNNotExistCount));
                 for (let country of countriesMap.keys()) {
                     console.log("result " + country + " " +  countriesMap.get(country))
                 }
