@@ -34,95 +34,63 @@ function stacked()
 
           
             function dataDisplay(error, universities, towns, countries) {
-
-
+         
+          
                
-           
-                console.log("unis")
-                console.log(universities)
-                console.log("stars")
-                console.log(towns)
-                console.log("context")
-                console.log(countries);
-                var total = 0
-                universities.forEach(function (d) {
-                    total = total+1
-                   
-                })
-                var total4 = 0
-                towns.forEach(function (d) {
-                    total4 = total4 + 1
-
-                })
-                var total2 = 0;
-                countries.forEach(function (d) {
-                    total2 = total2 + 1
-
-                })
                 countries.forEach(function (d) {
                     if (countriesMap.has(d["Country"])) {
 
                     } else {
-                        countriesMap.set(d["Country"], [0,0,0,0,0])
+                        countriesMap.set(d["Country"], [0, 0, 0, 0, 0]);
                     }
                  
                 })
-                console.log("Size of map " + countriesMap.size)
-                for (let i of countriesMap.keys())
-                {
-                    console.log(i)
-                }
-                console.log("nb of unis " + total)
-                console.log("nb of towns " + total4)
-                console.log("nb of country " + total2)
-
-                var string = "World"
-                var string2 = "WORLD"
-
-                var result = (string.toLowerCase()).localeCompare(string2.toLowerCase()); // returns 0 if true and -1 if false
-                console.log(result)
-                var currentUniID = 0
-                var uniSchools = 0
-                var uniScores = [0, 0, 0, 0]
                 
+
+                var currentUniID = 0;
+                var uniSchools = 0;
+                var uniScores = [0, 0, 0, 0];
+
+                //goes through every uni and averages it's star rating and adds its averages to the uni's country
                 universities.forEach(function (d)
                 {
+                    //this if clause is to avoid skipping the first university
                     if (currentUniID == 0)
                     {
-                        //console.log("Institution name " + d["Institution name"])
                         currentUniID = d["Institution code (UKPRN)"];
                       
                     }
                     else if (d["Institution code (UKPRN)"] == currentUniID)
-                    {
+                    {   //only getting the overall scores
                         if (d["Profile"].localeCompare("Overall") == 0)
                         {
-                           
+                            //counting the number of schools in a university to allow for average calculation later on
                             uniSchools = uniSchools + 1;
-                            uniScores[0] = parseFloat(uniScores[0]) + parseFloat(d["4*"])
-                            uniScores[1] = parseFloat(uniScores[1]) + parseFloat(d["3*"])
-                            uniScores[2] = parseFloat(uniScores[2]) + parseFloat(d["2*"])
-                            uniScores[3] = parseFloat(uniScores[3]) + parseFloat(d["1*"])
+                            uniScores[0] = parseFloat(uniScores[0]) + parseFloat(d["4*"]);
+                            uniScores[1] = parseFloat(uniScores[1]) + parseFloat(d["3*"]);
+                            uniScores[2] = parseFloat(uniScores[2]) + parseFloat(d["2*"]);
+                            uniScores[3] = parseFloat(uniScores[3]) + parseFloat(d["1*"]);
 
                         }
                     } else
                     {
-                            //  console.log("UKPRN " + d["Institution code (UKPRN)"])
-                        //console.log("Institution name " + currentUniID)
-                        var uniTown = townSearch(currentUniID)
-                                     
+                          
+                        var uniTown = townSearch(currentUniID);
+
+                        //some university's UKPRNs did not exist in learning-provider-plus.csv so they are ignored
                         if (uniTown != null) {
-                            var country = countrySearch(uniTown.toLowerCase())    
-                           // console.log(country)
+                            var country = countrySearch(uniTown.toLowerCase());    
+
+                            //some uni towns did not exist in towns_list(1).csv so they are ignored
                             if (country != true)
                             {
-                                var countryScores = countriesMap.get(country)
-                               // console.log("scores" +countryScores)
-                                countryScores[0] = parseFloat(countryScores[0]) + 1
+                                var countryScores = countriesMap.get(country);       
+                                //countryScores[0] keeps track of the number of universities in a country
+                                countryScores[0] = parseFloat(countryScores[0]) + 1;
 
-                                var count
+                                var count;
                                 for (count = 0; count < uniScores.length; count++) {
-                                    countryScores[count + 1] = parseFloat(countryScores[count + 1]) + parseFloat(uniScores[count] / uniSchools)
+                                    countryScores[count + 1] = parseFloat(countryScores[count + 1]) + parseFloat(uniScores[count] / uniSchools);
                                 } 
                                 
                                 countriesMap.set(country, countryScores);
@@ -135,7 +103,7 @@ function stacked()
                        
                         currentUniID = d["Institution code (UKPRN)"];
                         uniSchools = 0;
-                        uniScores = [0, 0, 0, 0]
+                        uniScores = [0, 0, 0, 0];
                     }
 
                 })
@@ -146,7 +114,7 @@ function stacked()
                 {
                     for (let town of towns) {
                         if (uniID == town["UKPRN"]) {
-                            return town["TOWN"].toLowerCase()
+                            return town["TOWN"].toLowerCase();
                         }
                     }
                 }
@@ -159,12 +127,10 @@ function stacked()
                     } else {
                         var notFound = true;
                         for (let country of countries) {
-                            // console.log(townName)
+                          
                             if (townName.toLowerCase().localeCompare(country["Town"].toLowerCase()) == 0) {
-                                //console.log(country["Town"].toLowerCase())
-                               // console.log(country["Country"])
                                 notFound = false;
-                                return country["Country"]
+                                return country["Country"];
 
                             }
                         }
@@ -175,26 +141,30 @@ function stacked()
                     
                 }
 
-
-                function calculateCountryScore()
+                //calculate average score for each star rating per country
+                function calculateCountryScore(ScoreMap)
                 {
-                    for (let country of countriesMap.keys())
+                    for (let country of ScoreMap.keys())
                     { 
-                        var result = countriesMap.get(country);                     
+                        var result = ScoreMap.get(country);                     
                         var i;
                         for (i = 1; i < result.length; i++)
                         {
                             result[i] = Math.round(result[i] / result[0]);
                           
                         } 
-                        countriesMap.set(country, result);
+                        ScoreMap.set(country, result);
                     }
+                    return ScoreMap;
                 }
 
-                calculateCountryScore();
+                countriesMap = calculateCountryScore(countriesMap);
+                // prints out result
+                
                 for (let country of countriesMap.keys()) {
                     console.log("result " + country + " " +  countriesMap.get(country))
                 }
+                
             }
 
             var stack = d3.stack()
