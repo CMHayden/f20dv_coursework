@@ -1,4 +1,4 @@
-function callumsGraph() {
+function callumsGraph(data) {
 
     /* 
      * Can accept variables by removing data, features, and ticks.
@@ -13,17 +13,17 @@ function callumsGraph() {
     console.log(data);
 
     let svg = d3.select('#graph1').append('svg')
-        .attr("width", 600)
-        .attr("height", 600)
+        .attr("width", 300)
+        .attr("height", 220)
     
     let radialScale = d3.scaleLinear()
         .domain([0,10])
-        .range([0,250]);
+        .range([0,80]);
 
     ticks.forEach(t =>
         svg.append("circle")
-        .attr("cx", 300)
-        .attr("cy", 300)
+        .attr("cx", 100)
+        .attr("cy", 100)
         .attr("fill", "none")
         .attr("stroke", "gray")
         .attr("r", radialScale(t))
@@ -31,15 +31,16 @@ function callumsGraph() {
 
     ticks.forEach(t =>
         svg.append("text")
-        .attr("x", 305)
-        .attr("y", 300 - radialScale(t))
+        .attr("x", 105)
+        .attr("y", 105 - radialScale(t))
         .text(t.toString())
+        .attr("fill", "gray")
     );
 
     function angleToCoordinate(angle, value){
         let x = Math.cos(angle) * radialScale(value);
         let y = Math.sin(angle) * radialScale(value);
-        return {"x": 300 + x, "y": 300 - y};
+        return {"x": 100 + x, "y": 100 - y};
     }
 
     for (var i = 0; i < features.length; i++) {
@@ -50,16 +51,17 @@ function callumsGraph() {
     
         //draw axis line
         svg.append("line")
-        .attr("x1", 300)
-        .attr("y1", 300)
+        .attr("x1", 100)
+        .attr("y1", 100)
         .attr("x2", line_coordinate.x)
         .attr("y2", line_coordinate.y)
-        .attr("stroke","black");
+        .attr("stroke","gray");
     
         //draw axis label
         svg.append("text")
         .attr("x", label_coordinate.x)
         .attr("y", label_coordinate.y)
+        .attr("fill", "gray")
         .text(ft_name);
     }
 
