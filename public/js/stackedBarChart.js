@@ -1,275 +1,115 @@
 
 function stacked()
 {   
+    var stackedModel = modelConstructor();
+    var dataModel;
 
-    let countriesMap = new Map();
-
-
-    var initStackedBarChart = {
-        draw: function(config) {
-            me = this,
-            domEle = config.element,
-            stackKey = config.key,
-            data = config.data,
-            margin = {top: 20, right: 20, bottom: 30, left: 50},
-            width = 960 - margin.left - margin.right,
-            height = 500 - margin.top - margin.bottom,
-            xScale = d3.scaleBand().range([0, width]).padding(0.1),
-            yScale = d3.scaleLinear().range([height, 0]),
-            color = d3.scaleOrdinal(d3.schemeCategory20),
-            xAxis = d3.axisBottom(xScale),
-            yAxis =  d3.axisLeft(yScale),
-            svg = d3.select("#"+domEle).append("svg")
-                    .attr("width", width + margin.left + margin.right)
-                    .attr("height", height + margin.top + margin.bottom)
-                    .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-         
-            d3.queue()                    
-                .defer(d3.csv, "data/REF2014_Results.csv")
-                .defer(d3.csv, "data/learning-providers-plus.csv")               
-                .defer(d3.csv, "data/uk-towns.csv")  // from https://github.com/bwghughes/badbatch
-                .defer(d3.csv, "data/Towns_List (1).csv")
-                .await(dataDisplay)
-
-          
-            function dataDisplay(error, universities, towns, countries, countries2) {
-         
-          
-               
-                countries.forEach(function (d) {
-                    if (countriesMap.has(d["country"])) {
-
-                    } else {
-                        countriesMap.set(d["country"], [0, 0, 0, 0, 0]);
-                    }
-                 
-                })
-                
-
-                var currentUniID = 0;
-                var uniSchools = 0;
-                var uniScores = [0, 0, 0, 0];
-                var uniUKPRNNotExistCount = 0;
-                var uniTownNotExist = 0;
-                //goes through every uni and averages it's star rating and adds its averages to the uni's country
-                universities.forEach(function (d)
-                {
-                    //this if clause is to avoid skipping the first university
-                    if (currentUniID == 0)
-                    {
-                        currentUniID = d["Institution code (UKPRN)"];
-                      
-                    }
-                    else if (d["Institution code (UKPRN)"] == currentUniID)
-                    {   //only getting the overall scores
-                        if (d["Profile"].localeCompare("Overall") == 0)
-                        {
-                            //counting the number of schools in a university to allow for average calculation later on
-                            uniSchools = uniSchools + 1;
-                            uniScores[0] = parseFloat(uniScores[0]) + parseFloat(d["4*"]);
-                            uniScores[1] = parseFloat(uniScores[1]) + parseFloat(d["3*"]);
-                            uniScores[2] = parseFloat(uniScores[2]) + parseFloat(d["2*"]);
-                            uniScores[3] = parseFloat(uniScores[3]) + parseFloat(d["1*"]);
-
-                        }
-                    } else
-                    {
-                          
-                        var uniTown = townSearch(currentUniID);
-                        
-                        //some university's UKPRNs did not exist in learning-provider-plus.csv so they are ignored
-                        if (uniTown != null) {
-                            var country = countrySearch(uniTown.toLowerCase());    
-
-                            //some uni towns did not exist in towns_list(1).csv so they are ignored
-                            if (country != true)
-                            {
-                                processUniAverage(country, uniScores);
-
-                            } else {
-                                //to go through a second csv to find the country
-                                var countryOfUni = countrySearchMissing(uniTown.toLowerCase());
-
-                                if (countryOfUni != true) {
-                                    processUniAverage(countryOfUni, uniScores);
-
-                                } else {
-                                    
-                                    
-                                    uniTownNotExist++;
-                                }                             
-                                
-                               
-                            }                           
-                    
-                        }else{
-                            uniUKPRNNotExistCount ++;
-                        }
-
-                       
-                        currentUniID = d["Institution code (UKPRN)"];
-                        uniSchools = 0;
-                        uniScores = [0, 0, 0, 0];
-                    }
-
-                })
+    d3.queue()
+        .defer(d3.csv, "data/REF2014_Results.csv")
+        .defer(d3.csv, "data/learning-providers-plus.csv")
+        .defer(d3.csv, "data/uk-towns.csv")  // from https://github.com/bwghughes/badbatch
+        .defer(d3.csv, "data/Towns_List (1).csv")
+        .await(dataDisplay)
 
 
-                //get town of uni
-                function townSearch(uniID)
-                {
-                    for (let town of towns) {
-                        if (uniID == town["UKPRN"]) {
-                            return town["TOWN"];
-                        }
-                    }
-                }
 
-               
-                // calculates the average of the ratings for the uni and adds the array values to the uni's country
-                function processUniAverage(country, uniScores)
-                {
-                    var countryScores = countriesMap.get(country);
-                    //countryScores[0] keeps track of the number of universities in a country
-                    countryScores[0] = parseFloat(countryScores[0]) + 1;
-
-                    var count;
-                    for (count = 0; count < uniScores.length; count++) {
-                        countryScores[count + 1] = parseFloat(countryScores[count + 1]) + parseFloat(uniScores[count] / uniSchools);
-                    }
-
-                    countriesMap.set(country, countryScores);
-                }
-
-                //get country of uni
-                function countrySearch(townName)
-                {
-                    if (townName.toLowerCase() == null) {
-
-                    } else {
-                        var notFound = true;
-                        for (let country of countries) {
-                          
-                            if (townName.toLowerCase().localeCompare(country["place_name"].toLowerCase()) == 0 || townName.toLowerCase().localeCompare(country["county"].toLowerCase()) == 0) {
-                                notFound = false;
-                                return country["country"];
-
-                            }
-                        }
-                        if (notFound) {
-                            return notFound;
-                        }
-                    }
-                    
-                }
-
-                //find countries of missing uni towns
-                function countrySearchMissing(townName) {
-                    if (townName.toLowerCase() == null) {
-
-                    } else {
-                        var notFound = true;
-                        for (let country of countries2) {
-
-                            if (townName.toLowerCase().localeCompare(country["Town"].toLowerCase()) == 0 ) {
-                                notFound = false;
-                                return country["Country"];
-
-                            }
-                        }
-                        if (notFound) {
-                            return notFound;
-                        }
-                    }
-
-                }
-
-                //calculate average score for each star rating per country
-                function calculateCountryScore(ScoreMap)
-                {
-                    for (let country of ScoreMap.keys())
-                    { 
-                        var result = ScoreMap.get(country);                     
-                        var i;
-                        for (i = 1; i < result.length; i++)
-                        {
-                            result[i] = Math.round(result[i] / result[0]);
-                          
-                        } 
-                        ScoreMap.set(country, result);
-                    }
-                    return ScoreMap;
-                }
-
-                countriesMap = calculateCountryScore(countriesMap);
-               /* // prints out result
-                console.log("number of unis not existing " + uniTownNotExist);
-                console.log("number of unis not existing2 " + uniUKPRNNotExistCount);
-                console.log("number of unis not existing " + (uniTownNotExist+ uniUKPRNNotExistCount));
-                */
-                for (let country of countriesMap.keys()) {
-                    console.log("result " + country + " " +  countriesMap.get(country))
-                }
-                
-            }
-
-            var stack = d3.stack()
-                .keys(stackKey)
-                .order(d3.stackOrderNone)
-                .offset(d3.stackOffsetNone);
+    function dataDisplay(error, universities, towns, countries, countries2) {
         
-            var layers= stack(data);
-                data.sort(function(a, b) { return b.total - a.total; });
-                xScale.domain(data.map(function(d) { return d.uni; }));
-                yScale.domain([0, d3.max(layers[layers.length - 1], function(d) { return d[0] + d[1]; }) ]).nice();
-    
-            var layer = svg.selectAll(".layer")
-                .data(layers)
-                .enter().append("g")
-                .attr("class", "layer")
-                .style("fill", function(d, i) { return color(i); });
-    
-              layer.selectAll("rect")
-                  .data(function(d) { return d; })
-                .enter().append("rect")
-                  .attr("x", function(d) { return xScale(d.data.uni); })
-                  .attr("y", function(d) { return yScale(d[1]); })
-                  .attr("height", function(d) { return yScale(d[0]) - yScale(d[1]); })
-                  .attr("width", xScale.bandwidth());
-    
+        stackedModel.processData(universities, towns, countries, countries2);
+        dataModel = stackedModel.model().json;
+         console.log("datamodel")
+         //console.log(dataModel.json)
+
+
+        
+
+        var initStackedBarChart = {
+            draw: function (config) {
+                me = this,
+                    domEle = config.element,
+                    stackKey = config.key,
+                    data = config.data,
+                    margin = { top: 20, right: 20, bottom: 30, left: 50 },
+                    width = 960 - margin.left - margin.right,
+                    height = 500 - margin.top - margin.bottom,
+                    xScale = d3.scaleBand().range([0, width]).padding(0.1),
+                    yScale = d3.scaleLinear().range([height, 0]),
+                    color = d3.scaleOrdinal(d3.schemeCategory20),
+                    xAxis = d3.axisBottom(xScale),
+                    yAxis = d3.axisLeft(yScale),
+                    svg = d3.select("#" + domEle).append("svg")
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom)
+                        .append("g")
+                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+
+
+
+                var stack = d3.stack()
+                    .keys(stackKey)
+                    .order(d3.stackOrderNone)
+                    .offset(d3.stackOffsetNone);
+
+                var layers = stack(data);
+                data.sort(function (a, b) { return b.total - a.total; });
+                xScale.domain(data.map(function (d) { return d.country; }));
+                yScale.domain([0, d3.max(layers[layers.length - 1], function (d) { return d[0] + d[1]; })]).nice();
+
+                var layer = svg.selectAll(".layer")
+                    .data(layers)
+                    .enter().append("g")
+                    .attr("class", "layer")
+                    .style("fill", function (d, i) { return color(i); });
+
+                layer.selectAll("rect")
+                    .data(function (d) { return d; })
+                    .enter().append("rect")
+                    .attr("x", function (d) { return xScale(d.data.country); })
+                    .attr("y", function (d) { return yScale(d[1]); })
+                    .attr("height", function (d) { return yScale(d[0]) - yScale(d[1]); })
+                    .attr("width", xScale.bandwidth());
+
                 svg.append("g")
-                .attr("class", "axis axis--x")
-                .attr("transform", "translate(0," + (height+5) + ")")
-                .call(xAxis);
-    
+                    .attr("class", "axis axis--x")
+                    .attr("transform", "translate(0," + (height + 4) + ")")
+                    .call(xAxis);
+
                 svg.append("g")
-                .attr("class", "axis axis--y")
-                .attr("transform", "translate(0,0)")
-                .call(yAxis);							
+                    .attr("class", "axis axis--y")
+                    .attr("transform", "translate(0,0)")
+                    .call(yAxis);
+            }
         }
+
+
+        //Set key and data for the graph. Key is the repeated part between each uni
+
+        var key = ["1 star", "2 star", "3 star", "4 star"];
+        /*
+        var data = [
+            { 'uni': 'HW', '1 star': 3, '2 star': 2, '3 star': 6, '4 star': 11, '5 star': 9 },
+            { 'uni': 'Napier', '1 star': 6, '2 star': 3, '3 star': 3, '4 star': 3, '5 star': 4 },
+            { 'uni': 'Clyde', '1 star': 2, '2 star': 5, '3 star': 2, '4 star': 6, '5 star': 5 },
+            { 'uni': 'Glasgow', '1 star': 1, '2 star': 3, '3 star': 2, '4 star': 4, '5 star': 11 },
+        ];
+        */
+        //Call the draw function for the stacked bar chart class
+         //console.log(data)
+        //console.log("kkkkkkkkkkkkkkkkkkkkkk")
+
+        console.log(dataModel.json.length)
+
+
+        initStackedBarChart.draw({
+            data: dataModel.json,
+            key: key,
+            element: 'graph1'
+        });
+
     }
-
-    //Set key and data for the graph. Key is the repeated part between each uni
-
-    var key = ["1 star", "2 star", "3 star", "4 star", "5 star"];
-    var data = [
-        {'uni': 'HW', '1 star': 3, '2 star': 2, '3 star': 6, '4 star': 11, '5 star': 9},
-        {'uni': 'Napier', '1 star': 6, '2 star': 3, '3 star': 3, '4 star': 3, '5 star': 4},
-        {'uni': 'Clyde', '1 star': 2, '2 star': 5, '3 star': 2, '4 star': 6, '5 star': 5},
-        {'uni': 'Glasgow', '1 star': 1, '2 star': 3, '3 star': 2, '4 star': 4, '5 star': 11},
-    ];
-
-    //Call the draw function for the stacked bar chart class
-
-    initStackedBarChart.draw({
-        data: data,
-        key: key,
-        element: 'graph1'
-    });
-
-    
 }
 
 function pie()
