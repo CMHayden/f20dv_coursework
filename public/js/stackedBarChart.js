@@ -14,13 +14,13 @@ function stacked()
 
 
     function dataDisplay(error, universities, towns, countries, countries2) {
-        
+
         stackedModel.processData(universities, towns, countries, countries2);
         dataModel = stackedModel.model().json;
-         console.log("datamodel")
-         //console.log(dataModel.json)
+        console.log("datamodel")
+        //console.log(dataModel.json)
 
-
+    }
         
 
         var initStackedBarChart = {
@@ -31,18 +31,13 @@ function stacked()
                     data = config.data,
                     margin = { top: 20, right: 20, bottom: 30, left: 50 },
                     width = 960 - margin.left - margin.right,
-                    height = 500 - margin.top - margin.bottom,
-                    xScale = d3.scaleBand().range([0, width]).padding(0.1),
-                    yScale = d3.scaleLinear().range([height, 0]),
-                    color = d3.scaleOrdinal(d3.schemeCategory20),
-                    xAxis = d3.axisBottom(xScale),
-                    yAxis = d3.axisLeft(yScale),
+                    height = 500 - margin.top - margin.bottom,                    
+                    color = d3.scaleOrdinal(d3.schemeCategory20),                  
                     svg = d3.select("#" + domEle).append("svg")
                         .attr("width", width + margin.left + margin.right)
                         .attr("height", height + margin.top + margin.bottom)
                         .append("g")
                         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
 
 
 
@@ -77,10 +72,40 @@ function stacked()
                     .attr("transform", "translate(0," + (height + 4) + ")")
                     .call(xAxis);
 
+               
                 svg.append("g")
                     .attr("class", "axis axis--y")
                     .attr("transform", "translate(0,0)")
                     .call(yAxis);
+
+
+
+                function updateScaleAndAxes() {
+                    xScale = d3.scaleBand().range([0, width]).padding(0.1);
+
+                    yScale = d3.scaleLinear().range([height, 0]);
+
+                    xAxis = d3.axisBottom(xScale);
+                    svg.select("xAxis")
+                        .transition().duration(500).delay(500)
+                        .attr("class", "axis axis--x")
+                        .attr("transform", "translate(0," + (height + 4) + ")")
+                        .call(xAxis);
+
+                    yAxis = d3.axisLeft(yScale);
+                    svg.select("yAxis")
+                        .transition().duration(500).delay(500)
+                        .attr("class", "axis axis--y")
+                        .attr("transform", "translate(0,0)")
+                        .call(yAxis);
+                }
+
+
+                function GUP() {
+
+
+
+                }
             }
         }
 
@@ -88,28 +113,24 @@ function stacked()
         //Set key and data for the graph. Key is the repeated part between each uni
 
         var key = ["1 star", "2 star", "3 star", "4 star"];
-        /*
+        
         var data = [
             { 'uni': 'HW', '1 star': 3, '2 star': 2, '3 star': 6, '4 star': 11, '5 star': 9 },
             { 'uni': 'Napier', '1 star': 6, '2 star': 3, '3 star': 3, '4 star': 3, '5 star': 4 },
             { 'uni': 'Clyde', '1 star': 2, '2 star': 5, '3 star': 2, '4 star': 6, '5 star': 5 },
             { 'uni': 'Glasgow', '1 star': 1, '2 star': 3, '3 star': 2, '4 star': 4, '5 star': 11 },
         ];
-        */
-        //Call the draw function for the stacked bar chart class
-         //console.log(data)
-        //console.log("kkkkkkkkkkkkkkkkkkkkkk")
-
-        console.log(dataModel.json.length)
+        
+       
 
 
         initStackedBarChart.draw({
-            data: dataModel.json,
+            data: data,
             key: key,
             element: 'graph1'
         });
 
-    }
+    
 }
 
 function pie()
