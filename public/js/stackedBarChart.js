@@ -48,35 +48,18 @@ function stacked()
                     .order(d3.stackOrderNone)
                     .offset(d3.stackOffsetNone);
 
-                var layers = stack(data);
-                data.sort(function (a, b) { return b.total - a.total; });
-                xScale.domain(data.map(function (d) { return d.country; }));
-                yScale.domain([0, d3.max(layers[layers.length - 1], function (d) { return d[0] + d[1]; })]).nice();
-
-                var layer = svg.selectAll(".layer")
-                    .data(layers)
-                    .enter().append("g")
-                    .attr("class", "layer")
-                    .style("fill", function (d, i) { return color(i); });
-
-                layer.selectAll("rect")
-                    .data(function (d) { return d; })
-                    .enter().append("rect")
-                    .attr("x", function (d) { return xScale(d.data.country); })
-                    .attr("y", function (d) { return yScale(d[1]); })
-                    .attr("height", function (d) { return yScale(d[0]) - yScale(d[1]); })
-                    .attr("width", xScale.bandwidth());
 
                 svg.append("g")
                     .attr("class", "axis axis--x")
                     .attr("transform", "translate(0," + (height + 4) + ")")
                     .call(xAxis);
 
-               
+
                 svg.append("g")
                     .attr("class", "axis axis--y")
                     .attr("transform", "translate(0,0)")
-                    .call(yAxis);
+                    .call(yAxis);             
+                                              
 
 
 
@@ -103,8 +86,64 @@ function stacked()
 
                 function GUP() {
 
+                    var layers = stack(data);
+                    data.sort(function (a, b) { return b.total - a.total; });
+                    xScale.domain(data.map(function (d) { return d.key; })); // changed country to key to make it more general
+                    yScale.domain([0, d3.max(layers[layers.length - 1], function (d) { return d[0] + d[1]; })]).nice();
 
 
+                    /* original code
+                    var layer = svg.selectAll(".layer")
+                        .data(layers)
+                        .enter().append("g")
+                        .attr("class", "layer")
+                        .style("fill", function (d, i) { return color(i); });
+
+                    layer.selectAll("rect")
+                        .data(function (d) { return d; })
+                        .enter().append("rect")
+                        .attr("x", function (d) { return xScale(d.data.country); })
+                        .attr("y", function (d) { return yScale(d[1]); })
+                        .attr("height", function (d) { return yScale(d[0]) - yScale(d[1]); })
+                        .attr("width", xScale.bandwidth());
+                        */
+                    var selection = svg.selectAll(".layer")
+                        .data(layers)
+
+
+                    var enterSelection = selection
+                        .enter().append("g")
+                        .attr("class", "layer")
+                        .style("fill", function (d, i) { return color(i); });
+
+                    enterSelection.selectAll("rect")
+                        .data(function (d) { return d; })
+                        .enter().append("rect")
+                        .attr("x", function (d) { return xScale(d.data.key); })
+                        .attr("y", function (d) { return yScale(d[1]); })
+                        .attr("height", function (d) { return yScale(d[0]) - yScale(d[1]); })
+                        .attr("width", xScale.bandwidth());
+
+
+                    var updateSelection = selection
+                        .enter().append("g")
+                        .attr("class", "layer")
+                        .style("fill", function (d, i) { return color(i); });
+
+                    updateSelection.selectAll("rect")
+                        .data(function (d) { return d; })
+                        .enter().append("rect")
+                        .attr("x", function (d) { return xScale(d.data.key); })
+                        .attr("y", function (d) { return yScale(d[1]); })
+                        .attr("height", function (d) { return yScale(d[0]) - yScale(d[1]); })
+                        .attr("width", xScale.bandwidth())
+
+
+                    var exitSelection = selection.exit()
+                        .classed("exitSelection", true)
+                        .transition()
+                        .duration(500)
+                            .remove()
                 }
             }
         }
