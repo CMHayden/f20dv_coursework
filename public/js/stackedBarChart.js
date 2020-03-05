@@ -22,131 +22,159 @@ function stacked()
 
     }
         
-
-        var initStackedBarChart = {
-            draw: function (config) {
-                me = this,
-                    domEle = config.element,
-                    stackKey = config.key,
-                    data = config.data,
-                    margin = { top: 20, right: 20, bottom: 30, left: 50 },
-                    width = 960 - margin.left - margin.right,
-                    height = 500 - margin.top - margin.bottom,                    
-                    color = d3.scaleOrdinal(d3.schemeCategory20),                  
-                    svg = d3.select("#" + domEle).append("svg")
-                        .attr("width", width + margin.left + margin.right)
-                        .attr("height", height + margin.top + margin.bottom)
-                        .append("g")
-                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
 
 
+    var initStackedBarChart =
+    {   
+        enter: function (config)
+        {
+            me = this,
+                domEle = config.element,
+                stackKey = config.key,
+                data = config.data;
+
+                
+
+                var layer = svg.selectAll(".layer")
+                    .data(layers)
+                    .enter().append("g")
+                    .attr("class", "layer")
+                    .style("fill", function (d, i) { return color(i); });
+
+                layer.selectAll("rect")
+                    .data(function (d) { return d; })
+                    .enter().append("rect")
+                    .attr("x", function (d) { return xScale(d.data.country); })
+                    .attr("y", function (d) { return yScale(d[1]); })
+                    .attr("height", function (d) { return yScale(d[0]) - yScale(d[1]); })
+                    .attr("width", xScale.bandwidth());
+        },
+
+        update: function (config)
+        {
+            me = this,
+                domEle = config.element,
+                stackKey = config.key,
+                data = config.data;
+
+            var layer = svg.selectAll(".layer")
+                .data(layers)
+                .enter().append("g")
+                .attr("class", "layer")
+                .style("fill", function (d, i) { return color(i); });
+
+            layer.selectAll("rect")
+                .data(function (d) { return d; })
+                .enter().append("rect")
+                .attr("x", function (d) { return xScale(d.data.country); })
+                .attr("y", function (d) { return yScale(d[1]); })
+                .attr("height", function (d) { return yScale(d[0]) - yScale(d[1]); })
+                .attr("width", xScale.bandwidth());
+        },
+        exit: function (config)
+        {
+            me = this,
+                domEle = config.element,
+                stackKey = config.key,
+                data = config.data;
+
+            
+
+            var selection = svg.selectAll(".layer")
+                .data(layers)
+
+            selection.exit()
+                .classed("exitSelection", true)
+                .transition()
+                .duration(500)
+                .remove()
+        },
+        render: function () {
+            
+            initStackedBarChart.draw({
+                data: data,
+                key: key,
+                element: 'graph1'
+            });
+            initStackedBarChart.enter({
+                data: data,
+                key: key,
+                element: 'graph1'
+            });
+            initStackedBarChart.update({
+                data: data,
+                key: key,
+                element: 'graph1'
+            });
+            initStackedBarChart.exit({
+                data: data,
+                key: key,
+                element: 'graph1'
+            });
+            
+        },         
+        draw: function (config)
+        {
+            me = this,
+                domEle = config.element,
+                stackKey = config.key,
+                data = config.data,
+                margin = { top: 20, right: 20, bottom: 30, left: 50 },
+                width = 960 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom,   
+                xScale = d3.scaleBand().range([0, width]).padding(0.1),
+                yScale = d3.scaleLinear().range([height, 0]),
+                color = d3.scaleOrdinal(d3.schemeCategory20),                  
+                svg = d3.select("#" + domEle).append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
 
-                var stack = d3.stack()
-                    .keys(stackKey)
-                    .order(d3.stackOrderNone)
-                    .offset(d3.stackOffsetNone);
+            var stack = d3.stack()
+                .keys(stackKey)
+                .order(d3.stackOrderNone)
+                .offset(d3.stackOffsetNone);
+
+            var layers = stack(data);
+            data.sort(function (a, b) { return b.total - a.total; });            
+
+            xScale.domain(data.map(function (d) { return d.uni; })); // changed country to key to make it more general
+            yScale.domain([0, d3.max(layers[layers.length - 1], function (d) { return d[0] + d[1]; })]).nice();
+
+          
+
+            xAxis = d3.axisBottom(xScale);
+            svg.select("xAxis")
+                .transition().duration(500).delay(500)
+                .attr("class", "axis axis--x")
+                .attr("transform", "translate(0," + (height + 4) + ")")
+                .call(xAxis);
+
+            yAxis = d3.axisLeft(yScale);
+            svg.select("yAxis")
+                .transition().duration(500).delay(500)
+                .attr("class", "axis axis--y")
+                .attr("transform", "translate(0,0)")
+                .call(yAxis);
+
+            svg.append("g")
+                .attr("class", "axis axis--x")
+                .attr("transform", "translate(0," + (height + 4) + ")")
+                .call(xAxis);
 
 
-                svg.append("g")
-                    .attr("class", "axis axis--x")
-                    .attr("transform", "translate(0," + (height + 4) + ")")
-                    .call(xAxis);
-
-
-                svg.append("g")
-                    .attr("class", "axis axis--y")
-                    .attr("transform", "translate(0,0)")
-                    .call(yAxis);             
-                                              
-
-
-
-                function updateScaleAndAxes() {
-                    xScale = d3.scaleBand().range([0, width]).padding(0.1);
-
-                    yScale = d3.scaleLinear().range([height, 0]);
-
-                    xAxis = d3.axisBottom(xScale);
-                    svg.select("xAxis")
-                        .transition().duration(500).delay(500)
-                        .attr("class", "axis axis--x")
-                        .attr("transform", "translate(0," + (height + 4) + ")")
-                        .call(xAxis);
-
-                    yAxis = d3.axisLeft(yScale);
-                    svg.select("yAxis")
-                        .transition().duration(500).delay(500)
-                        .attr("class", "axis axis--y")
-                        .attr("transform", "translate(0,0)")
-                        .call(yAxis);
-                }
-
-
-                function GUP() {
-
-                    var layers = stack(data);
-                    data.sort(function (a, b) { return b.total - a.total; });
-                    xScale.domain(data.map(function (d) { return d.key; })); // changed country to key to make it more general
-                    yScale.domain([0, d3.max(layers[layers.length - 1], function (d) { return d[0] + d[1]; })]).nice();
-
-
-                    /* original code
-                    var layer = svg.selectAll(".layer")
-                        .data(layers)
-                        .enter().append("g")
-                        .attr("class", "layer")
-                        .style("fill", function (d, i) { return color(i); });
-
-                    layer.selectAll("rect")
-                        .data(function (d) { return d; })
-                        .enter().append("rect")
-                        .attr("x", function (d) { return xScale(d.data.country); })
-                        .attr("y", function (d) { return yScale(d[1]); })
-                        .attr("height", function (d) { return yScale(d[0]) - yScale(d[1]); })
-                        .attr("width", xScale.bandwidth());
-                        */
-                    var selection = svg.selectAll(".layer")
-                        .data(layers)
-
-
-                    var enterSelection = selection
-                        .enter().append("g")
-                        .attr("class", "layer")
-                        .style("fill", function (d, i) { return color(i); });
-
-                    enterSelection.selectAll("rect")
-                        .data(function (d) { return d; })
-                        .enter().append("rect")
-                        .attr("x", function (d) { return xScale(d.data.key); })
-                        .attr("y", function (d) { return yScale(d[1]); })
-                        .attr("height", function (d) { return yScale(d[0]) - yScale(d[1]); })
-                        .attr("width", xScale.bandwidth());
-
-
-                    var updateSelection = selection
-                        .enter().append("g")
-                        .attr("class", "layer")
-                        .style("fill", function (d, i) { return color(i); });
-
-                    updateSelection.selectAll("rect")
-                        .data(function (d) { return d; })
-                        .enter().append("rect")
-                        .attr("x", function (d) { return xScale(d.data.key); })
-                        .attr("y", function (d) { return yScale(d[1]); })
-                        .attr("height", function (d) { return yScale(d[0]) - yScale(d[1]); })
-                        .attr("width", xScale.bandwidth())
-
-
-                    var exitSelection = selection.exit()
-                        .classed("exitSelection", true)
-                        .transition()
-                        .duration(500)
-                            .remove()
-                }
-            }
+            svg.append("g")
+                .attr("class", "axis axis--y")
+                .attr("transform", "translate(0,0)")
+                .call(yAxis);                                                       
+            
+                                            
         }
+    }
 
 
         //Set key and data for the graph. Key is the repeated part between each uni
@@ -163,13 +191,9 @@ function stacked()
        
 
 
-        initStackedBarChart.draw({
-            data: data,
-            key: key,
-            element: 'graph1'
-        });
+        
 
-    
+        initStackedBarChart.render()
 }
 
 function pie()
