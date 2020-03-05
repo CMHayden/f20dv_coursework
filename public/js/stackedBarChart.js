@@ -30,6 +30,7 @@ function stacked()
         enter: function (config)
         {
             me = this,
+                layers = config.layers,
                 domEle = config.element,
                 stackKey = config.key,
                 data = config.data;
@@ -54,6 +55,7 @@ function stacked()
         update: function (config)
         {
             me = this,
+                layers = config.layers,
                 domEle = config.element,
                 stackKey = config.key,
                 data = config.data;
@@ -75,6 +77,7 @@ function stacked()
         exit: function (config)
         {
             me = this,
+                layers = config.layers,
                 domEle = config.element,
                 stackKey = config.key,
                 data = config.data;
@@ -92,22 +95,25 @@ function stacked()
         },
         render: function () {
             
-            initStackedBarChart.draw({
-                data: data,
-                key: key,
-                element: 'graph1'
-            });
+            var layers = initStackedBarChart.draw({
+                            data: data,
+                            key: key,
+                            element: 'graph1'
+                        });
             initStackedBarChart.enter({
+                layers: layers,
                 data: data,
                 key: key,
                 element: 'graph1'
             });
             initStackedBarChart.update({
+                layers: layers,
                 data: data,
                 key: key,
                 element: 'graph1'
             });
             initStackedBarChart.exit({
+                layers: layers,
                 data: data,
                 key: key,
                 element: 'graph1'
@@ -171,7 +177,8 @@ function stacked()
                 .attr("class", "axis axis--y")
                 .attr("transform", "translate(0,0)")
                 .call(yAxis);                                                       
-            
+
+            return layers;
                                             
         }
     }
