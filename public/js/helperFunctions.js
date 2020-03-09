@@ -22,3 +22,22 @@ function getTicks(jsonData) {
 
     return ticks;
 }
+
+function getLegend(jsonData)
+{    
+    var features = [];
+    var temp = [];  
+        
+    for (var d in jsonData[0]) {
+        temp.push(d);      
+    }      
+    
+
+    for (var i = 1; i < temp.length; i++) {
+        features.push(temp[i])
+        console.log(temp[i])
+    }
+
+    return features;
+
+}

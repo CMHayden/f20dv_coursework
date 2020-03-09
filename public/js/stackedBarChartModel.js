@@ -187,7 +187,7 @@ function modelConstructor() {
         //putting the country data into an array 
         for (let country of countriesMap.keys()) {
             var countryResults = countriesMap.get(country);
-            data[count] = { 'country': country, '1 star': countryResults[4], '2 star': countryResults[3], '3 star': countryResults[2], '4 star': countryResults[1] };
+            data[count] = { 'key': country, '1 star': countryResults[4], '2 star': countryResults[3], '3 star': countryResults[2], '4 star': countryResults[1] };
             count++;
         }
 
