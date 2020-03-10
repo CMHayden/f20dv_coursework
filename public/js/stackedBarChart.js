@@ -31,7 +31,8 @@ function stacked(domEle)
     var width = 960 - margin.left - margin.right;
     var height = 500 - margin.top - margin.bottom;
     var color = d3.scaleOrdinal(d3.schemeCategory20);
-
+    var xScaleDomain = function (d) { return d.key; };
+    var yScaleDomainPart = function (d) { return d[0] + d[1]; };
 
     let stackedBarChart = d3.select("#" + domEle).append("svg");
 
@@ -52,7 +53,11 @@ function stacked(domEle)
 
     function draw()
     {
-       
+        d3.selectAll("g").selectAll("text").remove();
+        d3.selectAll("tick").remove();
+        d3.selectAll("line").remove();
+        d3.selectAll("text").remove();
+
         xScale = d3.scaleBand().range([0, width]).padding(0.1),
         yScale = d3.scaleLinear().range([height, 0]),
        
@@ -77,42 +82,34 @@ function stacked(domEle)
         
         data.sort(function (a, b) { return b.total - a.total; });
 
-        xScale.domain(data.map(function (d) { return d.key; })); 
-        yScale.domain([0, d3.max(layers[layers.length - 1], function (d) { return d[0] + d[1]; })]).nice();
+        xScale.domain(data.map(xScaleDomain)); 
+        yScale.domain([0, d3.max(layers[layers.length - 1], yScaleDomainPart)]).nice();
 
 
         xAxis = d3.axisBottom(xScale);
-        stackedBarChart.append("g")
-            .transition().duration(500).delay(500)
+        stackedBarChart.append("g")          
             .attr("class", "axis axis--x")
             .attr("transform", "translate(0," + (height) + ")")
             .call(xAxis);
 
         yAxis = d3.axisLeft(yScale);
-        stackedBarChart.append("g")
-            .transition().duration(500).delay(500)
+        stackedBarChart.append("g")            
             .attr("class", "axis axis--y")
-            .attr("transform", "translate(0,0)")
+            .attr("transform", "translate("+ 20 + "," + 20 +")")
             .call(yAxis);
 
         
-        stackedBarChart.select("xAxis")
-            .transition().duration(500).delay(500)
+        stackedBarChart.select("xAxis")            
             .attr("class", "axis axis--x")
             .attr("transform", "translate(0," + (height) + ")")
             .call(xAxis);
 
-        stackedBarChart.select("yAxis")
-            .transition().duration(500).delay(500)
+        stackedBarChart.select("yAxis")           
             .attr("class", "axis axis--y")
             .attr("transform", "translate(0,0)")
-            .call(yAxis);
-            
-     
-
-
-
-      
+            .call(yAxis);        
+ 
+    
 
     }
 
