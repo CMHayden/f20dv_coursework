@@ -29,6 +29,7 @@ function spiderChart(domElement) {
     /* DRAW THE GRAPH */
 
     function draw() {
+        removeData()
         renderGraph()
         renderData()
         return spiderChartObj
@@ -107,20 +108,26 @@ function spiderChart(domElement) {
         let colors = ["lightblue"];
 
 
-            let d = dataset;
-            let color = colors;
-            let coordinates = getPathCoordinates(d, features);
-        
-            //draw the path element
-            spiderChart.append("path")
-                .datum(coordinates)
-                .attr("d",line)
-                .attr("stroke-width", 3)
-                .attr("stroke", color)
-                .attr("fill", color)
-                .attr("stroke-opacity", 1)
-                .attr("opacity", 0.5);
-        
+        let d = dataset;
+        let color = colors;
+        let coordinates = getPathCoordinates(d, features);
+    
+        //draw the path element
+        spiderChart.append("path")
+            .datum(coordinates)
+            .attr("d",line)
+            .attr("stroke-width", 3)
+            .attr("stroke", color)
+            .attr("fill", color)
+            .attr("stroke-opacity", 1)
+            .attr("opacity", 0.5);
+    
+        return spiderChartObj
+    }
+
+    function removeData() {
+        oldPath = d3.select("path").remove();
+
         return spiderChartObj
     }
 
