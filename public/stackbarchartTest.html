@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -16,25 +16,54 @@
     <script src="d3/topojson.vi.min.js"></script>
     <script src="js/helperFunctions.js"></script>
     <script src="js/stackedBarChart.js"></script>
+    <script src="js/stackedBarChartModel.js"></script>
 </head>
 <body>
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="test" id="test"></div>
+    <div class="test" id="test">
+        <select id="choices" onchange="choice(this);">
+            <option ></option>
+            <option value="uni">uni</option>
+            <option value="country">country</option>
+
+        </select>
+    </div>
 
     <script>
-            var data = [
-            { 'key': 'HW', '1 star': 3, '2 star': 2, '3 star': 6, '4 star': 11, '5 star': 9 },
-            { 'key': 'Napier', '1 star': 6, '2 star': 3, '3 star': 3, '4 star': 3, '5 star': 4 },
-            { 'key': 'Clyde', '1 star': 2, '2 star': 5, '3 star': 2, '4 star': 6, '5 star': 5 },
-            { 'key': 'Glasgow', '1 star': 1, '2 star': 3, '3 star': 2, '4 star': 4, '5 star': 11 },
-            ];
+        
+        var data1 = [
+        { 'key': 'HW', '1 star': 3, '2 star': 2, '3 star': 6, '4 star': 11 },
+        { 'key': 'Napier', '1 star': 6, '2 star': 3, '3 star': 3, '4 star': 3 },
+        { 'key': 'Clyde', '1 star': 2, '2 star': 5, '3 star': 2, '4 star': 6},
+        { 'key': 'Glasgow', '1 star': 1, '2 star': 3, '3 star': 2, '4 star': 4},
+        ];
+
+        var data2 = [
+        { 'key': 'EdiUni', '1 star': 2, '2 star': 6, '3 star': 1, '4 star': 2, '5 star': 9 },
+        { 'key': 'Dundee Uni', '1 star': 1, '2 star': 2, '3 star': 3, '4 star': 7, '5 star': 9 },
+        { 'key': 'Bristol', '1 star': 1, '2 star': 2, '3 star': 4, '4 star': 4, '5 star': 3 },
+        { 'key': 'Aberdeen', '1 star': 9, '2 star': 3, '3 star': 2, '4 star': 4, '5 star': 11 },
+        ];
+        var data;
+         stackedBarChart = stacked("test")        
+        function choice(obj) {
+            if (obj.value == "uni") {
+                data = data1;
+               
+                stackedBarChart.loadAndRenderDataset(data)
+            } else {
+                data = data2;
+                      
+                stackedBarChart.loadAndRenderDataset(data)
+                console.log("yeeeees")
+            }
+            
+        }
             
 
-        stackedBarChart = stacked("test")
-        console.log("lele")
-            stackedBarChart.loadAndRenderDataset(data)
+        
     </script>
 </body>
 </html>

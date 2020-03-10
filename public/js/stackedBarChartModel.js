@@ -6,7 +6,7 @@ function modelConstructor() {
       var uniTownNotExist 
 
 
-     */
+
     var model = {};
 
     model.processData = function (universities, towns, countries, countries2) {
@@ -22,10 +22,21 @@ function modelConstructor() {
 
 
     var dataInJson = {};
+    */
+    let countriesMap = new Map();
+    var data = []; 
 
-    function dataDisplay(universities, towns, countries, countries2) {
+    d3.queue()
+        .defer(d3.csv, "data/REF2014_Results.csv")
+        .defer(d3.csv, "data/learning-providers-plus.csv")
+        .defer(d3.csv, "data/uk-towns.csv")  // from https://github.com/bwghughes/badbatch
+        .defer(d3.csv, "data/Towns_List (1).csv")
+        .await(dataDisplay)
 
-        let countriesMap = new Map();
+
+    function dataDisplay(error, universities, towns, countries, countries2) {
+
+
 
         countries.forEach(function (d) {
             if (countriesMap.has(d["country"])) {
@@ -40,8 +51,8 @@ function modelConstructor() {
         var currentUniID = 0;
         var uniSchools = 0;
         var uniScores = [0, 0, 0, 0];
-        var uniUKPRNNotExistCount = 0; //tracks unis where their UKPRN doesn't match anything (can be deleted when done)
-        var uniTownNotExist = 0;  //tracks uni's where their towns can't be found(can be deleted when done)
+        var uniUKPRNNotExistCount = 0;
+        var uniTownNotExist = 0;
         //goes through every uni and averages it's star rating and adds its averages to the uni's country
         universities.forEach(function (d) {
             //this if clause is to avoid skipping the first university
@@ -181,9 +192,10 @@ function modelConstructor() {
         }
 
         countriesMap = calculateCountryScore(countriesMap);
+
        
         var count = 0;
-        var data = [];
+        //var data = [];
         //putting the country data into an array 
         for (let country of countriesMap.keys()) {
             var countryResults = countriesMap.get(country);
@@ -192,8 +204,8 @@ function modelConstructor() {
         }
 
         
-        return data;
+       
     }
-
-    return model;
+    return data;
+   
 }

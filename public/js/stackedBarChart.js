@@ -27,12 +27,17 @@ function stacked(domEle)
     var data;
     var stackKey;
     var layers;
+    var margin = { top: 20, right: 20, bottom: 30, left: 50 };
+    var width = 960 - margin.left - margin.right;
+    var height = 500 - margin.top - margin.bottom;
+    var color = d3.scaleOrdinal(d3.schemeCategory20);
+
 
     let stackedBarChart = d3.select("#" + domEle).append("svg");
 
     stackedBarChartObj.loadAndRenderDataset = function (dataset)
     {
-        console.log("el mejor ")
+       
         data = dataset;
         stackKey = getLegend(data);
         for (var i in stackKey.length) {
@@ -47,18 +52,19 @@ function stacked(domEle)
 
     function draw()
     {
-        margin = { top: 20, right: 20, bottom: 30, left: 50 },
-        width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom,
+       
         xScale = d3.scaleBand().range([0, width]).padding(0.1),
         yScale = d3.scaleLinear().range([height, 0]),
-        color = d3.scaleOrdinal(d3.schemeCategory20),
+       
         stackedBarChart
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+
+
+        
         var stack = d3.stack()
             .keys(stackKey)
             .order(d3.stackOrderNone)
@@ -67,49 +73,60 @@ function stacked(domEle)
        layers = stack(data);
 
        
-
+       
         
         data.sort(function (a, b) { return b.total - a.total; });
 
-        xScale.domain(data.map(function (d) { return d.key; })); // changed country to key to make it more general
+        xScale.domain(data.map(function (d) { return d.key; })); 
         yScale.domain([0, d3.max(layers[layers.length - 1], function (d) { return d[0] + d[1]; })]).nice();
 
 
-
         xAxis = d3.axisBottom(xScale);
-        stackedBarChart.select("xAxis")
+        stackedBarChart.append("g")
             .transition().duration(500).delay(500)
             .attr("class", "axis axis--x")
-            .attr("transform", "translate(0," + (height + 4) + ")")
+            .attr("transform", "translate(0," + (height) + ")")
             .call(xAxis);
 
         yAxis = d3.axisLeft(yScale);
+        stackedBarChart.append("g")
+            .transition().duration(500).delay(500)
+            .attr("class", "axis axis--y")
+            .attr("transform", "translate(0,0)")
+            .call(yAxis);
+
+        
+        stackedBarChart.select("xAxis")
+            .transition().duration(500).delay(500)
+            .attr("class", "axis axis--x")
+            .attr("transform", "translate(0," + (height) + ")")
+            .call(xAxis);
+
         stackedBarChart.select("yAxis")
             .transition().duration(500).delay(500)
             .attr("class", "axis axis--y")
             .attr("transform", "translate(0,0)")
             .call(yAxis);
-
-        stackedBarChart.append("g")
-            .attr("class", "axis axis--x")
-            .attr("transform", "translate(0," + (height + 4) + ")")
-            .call(xAxis);
+            
+     
 
 
-        stackedBarChart.append("g")
-            .attr("class", "axis axis--y")
-            .attr("transform", "translate(0,0)")
-            .call(yAxis);
 
-        return stackedBarChartObj;
+      
 
     }
-
 
     function GUP()
     {
         var selection = stackedBarChart.selectAll(".layer")
             .data(layers)
+
+        var exitSelection = selection.exit()
+            .classed("exitSelection", true)
+            .transition()
+            .duration(500)
+            .remove();
+
 
         var enterSelection = selection
             .enter().append("g")
@@ -117,35 +134,34 @@ function stacked(domEle)
             .style("fill", function (d, i) { return color(i); });
 
         enterSelection.selectAll("rect")
-            .data(function (d) { return d; })
+            .data(function (d) { return d; })            
             .enter().append("rect")
-            .attr("x", function (d) { return xScale(d.data.key); })
-            .attr("y", function (d) { return yScale(d[1]); })
-            .attr("height", function (d) { return yScale(d[0]) - yScale(d[1]); })
-            .attr("width", xScale.bandwidth());
+            .transition()
+            .duration(1000)
+            .delay(1000)
+                .attr("x", function (d) { return xScale(d.data.key); })
+                .attr("y", function (d) { return yScale(d[1]); })
+                .attr("height", function (d) { return yScale(d[0]) - yScale(d[1]); })
+                .attr("width", xScale.bandwidth());
 
 
-        //add highlighting for enter
-
-        var updateSelection = selection
-            .enter().append("g")
+       
+      
+        var updateSelection = selection        
             .attr("class", "layer")
             .style("fill", function (d, i) { return color(i); });
 
         updateSelection.selectAll("rect")
             .data(function (d) { return d; })
-            .enter().append("rect")
-            .attr("x", function (d) { return xScale(d.data.key); })
-            .attr("y", function (d) { return yScale(d[1]); })
-            .attr("height", function (d) { return yScale(d[0]) - yScale(d[1]); })
-            .attr("width", xScale.bandwidth());
-     
-
-        var exitSelection = selection.exit()
-            .classed("exitSelection", true)
             .transition()
-            .duration(500)
-            .remove()
+            .duration(1000)
+            .delay(1000)
+                .attr("x", function (d) { return xScale(d.data.key); })
+                .attr("y", function (d) { return yScale(d[1]); })
+                .attr("height", function (d) { return yScale(d[0]) - yScale(d[1]); })
+                .attr("width", xScale.bandwidth());
+    
+
 
         return stackedBarChartObj;
     }
@@ -155,7 +171,7 @@ function stacked(domEle)
     {
         draw();
         GUP();
-        return stackedBarChartObj
+       
     }
 
     return stackedBarChartObj;

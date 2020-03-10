@@ -26,8 +26,8 @@ function getTicks(jsonData) {
 function getLegend(jsonData)
 {    
     var features = [];
-    var temp = [];  
-        
+    var temp = [];
+    console.log(jsonData) 
     for (var d in jsonData[0]) {
         temp.push(d);      
     }      
