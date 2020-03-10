@@ -10,16 +10,19 @@ function spiderChart(domElement) {
     var dataset;
     let features;
     let ticks;
+    let max;
 
     let spiderChart = d3.select('#'+ domElement).append('svg')
 
-    let radialScale = d3.scaleLinear()
-        .domain([0,10])
-        .range([0,80]);
+    let radialScale;
 
 
     spiderChartObj.loadAndRenderDataset = function (data) {
         dataset=data; //create local copy of references so that we can sort etc.
+        radialScale= d3.scaleLinear()
+            .domain([0,getMax(dataset)])
+            .range([0,70]);
+        max = getMax(dataset)
         features = getFeatures(dataset)
         ticks = getTicks(dataset)
 		draw();
@@ -30,6 +33,7 @@ function spiderChart(domElement) {
 
     function draw() {
         removeData()
+        removeGraph()
         renderGraph()
         renderData()
         return spiderChartObj
@@ -60,8 +64,8 @@ function spiderChart(domElement) {
         for (var i = 0; i < features.length; i++) {
             let ft_name = features[i];
             let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
-            let line_coordinate = angleToCoordinate(angle, 11);
-            let label_coordinate = angleToCoordinate(angle, 11.5);
+            let line_coordinate = angleToCoordinate(angle, getMax(dataset) + 1);
+            let label_coordinate = angleToCoordinate(angle, getMax(dataset) + 1.5);
         
             //draw axis line
             spiderChart.append("line")
@@ -120,7 +124,7 @@ function spiderChart(domElement) {
             .attr("stroke", color)
             .attr("fill", color)
             .attr("stroke-opacity", 1)
-            .attr("opacity", 0.5);
+            .attr("opacity", 0.5)
     
         return spiderChartObj
     }
@@ -129,6 +133,12 @@ function spiderChart(domElement) {
         oldPath = d3.select("path").remove();
 
         return spiderChartObj
+    }
+
+    function removeGraph() {
+        d3.selectAll("circle").remove();
+        d3.selectAll("text").remove();
+        d3.selectAll("line").remove();
     }
 
 
