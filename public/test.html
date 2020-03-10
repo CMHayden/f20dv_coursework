@@ -19,14 +19,15 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div class="test" id="test"></div>
-
+        <div class="test" id="spider"></div>
+        <br><br><br>
+        <div class="test" id="scatter"></div>
         <script>
-            var data = [{'1 Star': 5, '2 Stars': 8, '3 Stars': 10, '4 Stars': 9, '5 Stars': 4}, {'1 Star': 2, '2 Stars': 8, '3 Stars': 10, '4 Stars': 9, '5 Stars': 4}];
+            var spiderData = [{'1 Star': 150, '2 Stars': 180, '3 Stars': 100, '4 Stars': 190, '5 Stars': 140}, {'1 Star': 2, '2 Stars': 8, '3 Stars': 2, '4 Stars': 9, '5 Stars': 4}];
 
-            spider = spiderChart("test")
+            spider = spiderChart("spider")
 
-            spider.loadAndRenderDataset(data[0])
+            spider.loadAndRenderDataset(spiderData[0])
         </script>
     </body>
 </html>
