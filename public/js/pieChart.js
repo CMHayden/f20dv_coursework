@@ -37,14 +37,15 @@ function pie(domEle) {
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
-            .attr("transform", "translate(" + radius + "," + radius + ")");
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 
         //putting the data into slices
         var sliceMaker = d3.pie().value(function (d) {
             return d.code;
         });
-        /*
+
+
         var selection = pieChart.selectAll("slice")
             .data(sliceMaker(data))
 
@@ -103,8 +104,8 @@ function pie(domEle) {
                 });
 
         selection.exit().remove();
-        */
         
+        /*
         //giving colour to the different slices and makes the pie chart
         pieChart.selectAll("slice")
             .data(sliceMaker(data))
@@ -130,7 +131,7 @@ function pie(domEle) {
             .text(function (d) {
                 return d.data.key + " code: " + d.data.code;
             });
-
+        */
         
 
         return pieChartObj;
