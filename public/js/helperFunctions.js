@@ -5,16 +5,9 @@ function getFeatures(jsonData) {
     return features
 }
 
-function getTicks(jsonData) {
+function getTicks() {
     let ticks = [];
-    var max;
-    var temp = [];
-
-    Object.keys(jsonData).forEach(function(key) {
-        temp.push(jsonData[key]);
-    });
-
-    max = Math.max.apply(null, temp);
+    var max = getMax;
 
     for(var i=1 ; i<=5 ; i++){
         ticks.push(Math.floor((max / 5) * i) + 1)
@@ -41,3 +34,14 @@ function getLegend(jsonData)
     return features;
 
 }
+
+function getMax(jsonData) {
+    var temp = [];
+
+    Object.keys(jsonData).forEach(function(key) {
+        temp.push(jsonData[key]);
+    });
+
+    return Math.max.apply(null, temp);
+}
+
