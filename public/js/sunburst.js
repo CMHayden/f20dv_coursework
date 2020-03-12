@@ -94,16 +94,21 @@ function sunburst(domEle) {
 
         //displays the data
         var enterSelection = selection
-            .enter().append('path')
-            .transition()
-            .duration(1000)
-            .delay(1000)
-                .attr("display", function (d) { return d.depth ? null : "none"; })
-                .attr("d", slices)   
-                .style('stroke', '#fff')
-                .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
+            .enter().append('path')       
+            .attr("display", function (d) { return d.depth ? null : "none"; })
+            .attr("d", slices)                   
+            .style('stroke', '#fff')
+            .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
 
 
+        enterSelection
+            .on("mouseover", mouseOver)
+            .on("mousemove", function (d) {
+                tooltip.html(d.data.size)
+                    .style("left", (d3.event.pageX - 34) + "px")
+                    .style("top", (d3.event.pageY - 12) + "px");
+            })
+            .on("mouseout", mouseOut)
 
         //adds text to sunburst
         burst.selectAll("slice")  
@@ -128,11 +133,18 @@ function sunburst(domEle) {
             .duration(1000)
             .delay(1000)
                 .attr("display", function (d) { return d.depth ? null : "none"; })
-                .attr("d", slices)
+                .attr("d", slices)                
                 .style('stroke', '#fff')
                 .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
 
-
+        updateSelection
+            .on("mouseover", mouseOver)
+            .on("mousemove", function (d) {
+                tooltip.html(d.data.size)
+                    .style("left", (d3.event.pageX - 34) + "px")
+                    .style("top", (d3.event.pageY - 12) + "px");
+            })
+            .on("mouseout", mouseOut)
 
         //adds text to sunburst
         burst.selectAll("slice")
@@ -153,40 +165,6 @@ function sunburst(domEle) {
             .duration(500)
             .remove();
 
-
-        
-        /*
-        //displays the data
-        var path = burst.selectAll('path')
-            .data(root.descendants()) //array of all the nodes
-            .enter().append('path')
-            .attr("display", function (d) { return d.depth ? null : "none"; })
-            .attr("d", slices)
-            .on("mouseover", mouseOver)
-            .on("mousemove", function (d) {
-                tooltip.html(d.data.size)
-                    .style("left", (d3.event.pageX - 34) + "px")
-                    .style("top", (d3.event.pageY - 12) + "px");
-            })
-            .on("mouseout", mouseOut)
-            .style('stroke', '#fff')
-            .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
-
-
-
-        //adds text to sunburst
-        burst.selectAll("slice")
-            .data(root.descendants())
-            .enter()
-            .append("text")
-            .attr("transform", function (d) {
-                return "translate(" + slices.centroid(d) + ")";
-            })
-            .attr("text-anchor", "middle")
-            .text(function (d) {
-                return d.data.name;
-            });
-            */
         return sunburstObj;
     }
 
