@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -53,17 +53,17 @@
 
         var data;
 
-        pieChart = pie("test")
+        pieChart = pie("test");
 
 
         function choice(obj) {
             if (obj.value == "uni") {
                 data = data1;
-
-                pieChart.loadAndRenderDataset(data)
+               // pie2();
+               pieChart.loadAndRenderDataset(data)
             } else {
                 data = data2;
-
+              //  pie2();
                 pieChart.loadAndRenderDataset(data)
                 console.log("yeeeees")
             }

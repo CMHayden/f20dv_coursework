@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>test</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <script src="d3/d3.v4.js"></script>
+    <script src="d3/topojson.vi.min.js"></script>
+    <script src="js/helperFunctions.js"></script>
+    <script src="js/sunburst.js"></script>
+</head>
+<body>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <h1>Sunburst Test</h1>
+    <select id="choices" onchange="choice(this);">
+        <option></option>
+        <option value="uni">uni</option>
+        <option value="country">country</option>
+
+    </select>
+    <div class="test" id="test" style="position:absolute; left:100px; top: 100px;">
+
+    </div>
+
+    <script>
+
+
+         var data1 = {
+            "name": "Grades", "children": [{
+                "name": "HW",
+                "children": [{ "name": "MACS", "size": 50 }, { "name": "Mech Eng", "size": 1 }, { "name": "Lang", "size": 3 }, { "name": "Business", "size": 6 }]
+            }, {
+                "name": "Edinburgh Uni",
+                "children": [{ "name": "Comp Sci", "size": 2 }, { "name": "Med School", "size": 5 }, {
+                    "name": "Art", "size": 3
+                }]
+            }, {
+                "name": "Napier",
+                "children": [{ "name": "Comp Sci", "size": 1 }, { "name": "Art", "size": 2 }, { "name": "Nursing", "size": 4 }, { "name": "Film", "size": 3 }]
+            }]
+         };
+
+
+        var data2 = {
+            "name": "Grades", "children": [{
+                "name": "EU",
+                "children": [{ "name": "UK", "size": 10 }, { "name": "France", "size": 5 }, { "name": "Germany", "size": 15 }]
+            }, {
+                "name": "Asia",
+                "children": [{ "name": "HK", "size": 8}, { "name": "Japan", "size": 5 }, {"name": "South Korea", "size": 2}]
+            }, {
+                "name": "America",
+                "children": [{ "name": "USA", "size": 1 }, { "name": "Canada", "size": 5 }, { "name": "Mexico", "size": 4 }, { "name": "Costa Rica", "size": 2 }]
+            }]
+         };
+
+        var data = data1;
+
+      
+        sun = sunburst("test");
+
+        function choice(obj) {
+            if (obj.value == "uni") {
+                data = data1;
+                console.log("fkjkdj")
+                
+                sun.loadAndRenderDataset(data);
+            } else {
+                data = data2;
+                
+               sun.loadAndRenderDataset(data);
+                
+            }
+
+        }
+
+
+
+    </script>
+</body>
+</html>
