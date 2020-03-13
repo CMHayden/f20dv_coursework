@@ -203,7 +203,7 @@
  * Look into clustering.
  */
 
-function scatter(data, domElement) {
+function scatter(data, domElement, titleX, titleY) {
 
     const X = 0;
     const Y = 1;
@@ -267,7 +267,7 @@ function scatter(data, domElement) {
         .attr('dy', -4) // adjust distance from the bottom edge
         .attr('class', 'axis-label')
         .attr('text-anchor', 'middle')
-        .text('Title'); // Change for title
+        .text(titleX); // Change for title
 
     // add in y-axis groups
     const yAxisG = g.append('g').classed('y-axis', true)
@@ -279,7 +279,7 @@ function scatter(data, domElement) {
         .attr('dy', 12) // adjust distance from the left edge
         .attr('class', 'axis-label')
         .attr('text-anchor', 'middle')
-        .text('Title'); // Change for title
+        .text(titleY); // Change for title
 
     // set up axis generating functions
     const xTicks = Math.round(plotAreaWidth / 50);
