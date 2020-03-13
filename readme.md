@@ -125,46 +125,16 @@ Display 1: Map to spider graph (Click a circle on the map and update spider grap
 
 # TODOS:
 
-## G2
+## Sunburst, Tree & Stacked Bar Chart Interaction
 
-Use the lab to get it done. Do dendogram (type of tree graph).
+Create interaction between the sunburst chart, the tree chart and the stacked bar chart to show the UK at the highest level, which will break down into countries (ie Scotland, Wales), cities (ie Edinburgh, London), and universities (ie Heriot Watt, Napier). 
 
-## R4, R5, R6
+Could potentially add average scores for each university, quantity of students, or some other data regarding a university.
 
-Transitions to be done. Wont be too awkward, just add classes for increase and decrease in value.
+## Map & Spider Chart Interaction
 
-## R7, R8 
+Create interaction between the map and the spider chart to allow for selecting a university on the map and show a number of ratings for the university in a spider chart.
 
-Still need to hook up coolfunctionbro (in scatterPlot.js) to another chart
+## Scatterplot & Pie Chart Interaction
 
-## R9
-
-Find data sources plus data items to use.
-
-## R11
-
-Create interaction between a Map, a sunburst and some other still TBC.
-
-## R12 
-
-Still need to do two: stacked bar chart and scatter plot.
-
-## R14
-
-Can do this with sun burst. Set so you click on higher level to display lower level data.
-
-## R19
-
-Using stacked bar chart going to compare star ratings of unis across different countries.
-
-## R20 R21
-
-Need to ask questions to see if these are done in an acceptable fashion.
-
-## R22
-
-Still need to work out what data we want to cluster together.
-
-## Example title
-
-Example explanation of the todo.
+Create interaction between the scatterplot and the pie chart where when brushing on the scatterplot, the data will be shown on the pie chart.
