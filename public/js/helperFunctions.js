@@ -5,9 +5,9 @@ function getFeatures(jsonData) {
     return features
 }
 
-function getTicks() {
+function getTicks(jsonData) {
     let ticks = [];
-    var max = getMax;
+    var max = getMax(jsonData);
 
     for(var i=1 ; i<=5 ; i++){
         ticks.push(Math.floor((max / 5) * i) + 1)
