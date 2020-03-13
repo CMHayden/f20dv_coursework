@@ -100,6 +100,9 @@ function sunburst(domEle) {
             .style('stroke', '#fff')
             .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
 
+        enterSelection.transition()
+            .duration(500)
+            .delay(500)
 
         enterSelection
             .on("mouseover", mouseOver)
@@ -110,14 +113,18 @@ function sunburst(domEle) {
             })
             .on("mouseout", mouseOut)
 
+
+       
+
+
         //adds text to sunburst
         burst.selectAll("slice")  
             .data(root.descendants())
             .enter()
             .append("text")
             .transition()
-            .duration(1000)
-            .delay(1000)
+            .duration(500)
+            .delay(500)
                 .attr("transform", function (d) {
                     return "translate(" + slices.centroid(d) + ")";
                 })
@@ -125,17 +132,22 @@ function sunburst(domEle) {
                 .text(function (d) {
                     return d.data.name;
                 });
-
+        
 
         //displays the data
-        var updateSelection = selection
-            .transition()
-            .duration(1000)
-            .delay(1000)
-                .attr("display", function (d) { return d.depth ? null : "none"; })
-                .attr("d", slices)                
+        var updateSelection = selection          
+                .attr("d", slices)    
+                .attr("display", function (d) { return d.depth ? null : "none"; })         
                 .style('stroke', '#fff')
                 .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
+
+
+
+        /*
+        updateSelection.transition()
+            .duration(1000)
+            .delay(1000)
+            */
 
         updateSelection
             .on("mouseover", mouseOver)
@@ -146,11 +158,12 @@ function sunburst(domEle) {
             })
             .on("mouseout", mouseOut)
 
+        
         //adds text to sunburst
         burst.selectAll("slice")
             .transition()
-            .duration(1000)
-            .delay(1000)
+            .duration(500)
+            .delay(500)
                 .attr("transform", function (d) {
                     return "translate(" + slices.centroid(d) + ")";
                 })
