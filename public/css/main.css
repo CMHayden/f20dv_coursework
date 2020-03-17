@@ -1,119 +1,56 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700,900&display=swap");
 *, body {
   padding: 0;
   margin: 0;
-  font-family: 'Nunito', sans-serif;
 }
 
 body {
-  background-color: #7c818c;
+  background-color: #1b2139;
 }
 
-.left-nav {
-  height: 100%;
-  width: 80px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #383c4a;
-  overflow-x: hidden;
-  padding-top: 60px;
+.graph-section {
+  background-color: #252a45;
+  margin-right: 5%;
+  margin-left: 5%;
+  margin-top: 45px;
 }
 
-.left-nav .navLinkSmall {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #7c818c;
-  display: block;
+.tick, .domain {
+  stroke: #4292c6;
+  fill: #4292c6;
 }
 
-.left-nav .navLink {
-  display: none;
+line {
+  stroke: #4292c6;
 }
 
-.left-nav:hover {
-  width: 300px;
+.axis-label {
+  fill: #4292c6;
+  font-family: 'Montserrat';
+  font-weight: bolder;
 }
 
-.left-nav:hover .navLinkSmall {
-  display: none;
+#scatter-to-pie {
+  padding-left: 5%;
+  padding-bottom: 5%;
 }
 
-.left-nav:hover .navLink {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #7c818c;
-  display: block;
+#scatter-to-pie h1 {
+  font-family: 'Montserrat';
+  text-align: center;
+  line-height: 100px;
+  color: #4292c6;
 }
 
-.top-nav {
-  padding-left: 100px;
-  padding-right: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+#scatter-to-pie .wrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  background-color: #383c4a;
-  color: #7c818c;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
 }
 
-.left-nav:hover + .top-nav {
-  padding-left: 320px;
-}
-
-.content {
-  padding-left: 100px;
-  padding-top: 10px;
-  background-color: #7c818c;
-  height: 100%;
-}
-
-.left-nav:hover ~ .content {
-  padding-left: 320px;
-}
-
-h2 {
-  padding-left: 50px;
-  padding-top: 25px;
-}
-
-.graph {
-  background-color: #f7f7f7;
-  margin-left: 50px;
-  margin-right: 70px;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  padding: 10px;
-  text-align: center;
-}
-
-.not-selected {
-  fill: #4292c6;
-}
-
-.selection {
-  fill: #4292c6;
-}
-
-.change-pos {
-  fill: #009900;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
-}
-
-.change-neg {
-  fill: #b20000;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
+#scatter-to-pie #pieChart {
+  margin-left: 10%;
+  padding-top: 55px;
 }
 /*# sourceMappingURL=main.css.map */

@@ -203,12 +203,14 @@
  * Look into clustering.
  */
 
-function scatter(data, domElement, titleX, titleY) {
+function scatter(data, domElement, titleX, titleY, displayChart) {
 
     const X = 0;
     const Y = 1;
     const TOP_LEFT = 0;
     const BOTTOM_RIGHT = 1;
+    pie = pie("pieChart"); 
+
 
     // outer svg dimensions
     const width = 600;
@@ -259,7 +261,8 @@ function scatter(data, domElement, titleX, titleY) {
 
     // add in axis groups
     const xAxisG = g.append('g').classed('x-axis', true)
-        .attr('transform', `translate(0 ${plotAreaHeight + pointRadius})`);
+        .attr('transform', `translate(0 ${plotAreaHeight + pointRadius})`)
+        .style('fill', '#ff7c43');
 
     // x-axis label
     g.append('text')
@@ -366,5 +369,19 @@ function scatter(data, domElement, titleX, titleY) {
             console.log(node);
             
         });
+
+        // let data = [{}];
+        // var i = 0;
+        // nodes.forEach(node => {
+        //     data[i].key = node.key;
+        //     data[i].code = node.x;
+        //     i++;
+        // })
+
+        var data = nodes;
+
+        pie.loadAndRenderDataset(data);
+
+        
 }}
 

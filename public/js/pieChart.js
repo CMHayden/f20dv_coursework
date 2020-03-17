@@ -42,7 +42,7 @@ function pie(domEle) {
 
         //putting the data into slices
         var sliceMaker = d3.pie().value(function (d) {
-            return d.code;
+            return d.x;
         });
 
 
@@ -57,7 +57,7 @@ function pie(domEle) {
             .attr("data-legend", function (d) { return d.data.name; })
             .attr("data-legend-pos", function (d, i) { return i; })
             .attr("fill", function (d) {
-                return colours(d.data.code);
+                return colours(d.data.key);
             });
           
             
@@ -74,7 +74,7 @@ function pie(domEle) {
             })
             .attr("text-anchor", "middle")
             .text(function (d) {
-                return d.data.key + " code: " + d.data.code;
+                return d.data.key + " code: " + d.data.x;
             });
 
         var mergeSelection = enterSelection.merge(selection)
