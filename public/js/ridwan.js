@@ -1,8 +1,4 @@
 function ridwansGraph(domElement, spider) {
-	let data = [{'1 Star': 5, '2 Stars': 8, '3 Stars': 10, '4 Stars': 9, '5 Stars': 4}];
-    let features = ["1 Star","2 Stars","3 Stars","4 Stars","5 Stars"];
-    let ticks = [2, 4, 6, 8, 10];
-
     let width = 960, height = 1600;
 
 	var svg = d3.select('#'+ domElement)
@@ -33,6 +29,19 @@ function ridwansGraph(domElement, spider) {
     	.attr("d", path)
         .style("fill", "#D3D3D3");
 
+        for (var i = 0; i < universities.length; i++) {
+            if (universities[i]["UKPRN"] == "10008010" ||  universities[i]["UKPRN"] == "10007807" || universities[i]["UKPRN"] == "10005343") {
+                universities.splice(i, 1);
+            }
+        }
+
+        console.log(stars);
+        for (var i = 0; i < stars.length; i++) {
+            if (stars[i]["Institution code (UKPRN)"] == "10008010" ||  stars[i]["Institution code (UKPRN)"] == "10007807" || stars[i]["Institution code (UKPRN)"] == "10005343") {
+                stars.splice(i, 1);
+            }
+        }
+
     	var circle = svg.selectAll(".circle")
     	.data(universities)
     	.enter().append("circle")
@@ -53,7 +62,6 @@ function ridwansGraph(domElement, spider) {
                 if (d["4*"] < 5) { return 1 } else if (d["4*"] < 10) { return 2 } else if (d["4*"] < 20) { return 3 } else if (d["4*"] < 30) { return 4 } else if (d["4*"] < 4) { return 5 } else { return 6 }
             }) 
             circle.on('mousedown.log', function () {
-                console.log(d);
                 update(d);
             })
         })
@@ -77,8 +85,8 @@ function ridwansGraph(domElement, spider) {
     	.attr("dy", 5)*/
 
         function update(data) {
-            var spiderData = [{'1 Star': parseInt(data["1*"]), '2 Stars': parseInt(data["2*"]), '3 Stars': parseInt(data["3*"]), '4 Stars': parseInt(data["4*"]), '5 Stars': 10}];
-            spider.loadAndRenderDataset(spiderData[0])
+            var spiderData = {'1 Star': parseInt(data["1*"]), '2 Stars': parseInt(data["2*"]), '3 Stars': parseInt(data["3*"]), '4 Stars': parseInt(data["4*"]), '5 Stars': 10};
+            spider.loadAndRenderDataset(spiderData);
         };
     }
 }
