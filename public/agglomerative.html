@@ -269,7 +269,7 @@ function initialiseApp(error, ref14data, ref14context , learningProviders, jsonT
 	//Create model 
 	dm1.loadData(ref14data, ref14context , learningProviders, jsonTopicData)
 	dataModel = dm1.model();
-	console.log(dataModel.learningProviders);
+
 	d3.select("#topicDataDiv")
 		.html(
 			"<pre>" 

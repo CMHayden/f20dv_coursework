@@ -176,7 +176,7 @@ function tree(targetDOMelement) {
 	//Declare and append SVG element
 	var margin = {top: 20, right: 200, bottom: 20, left: 50},
 	width = 800 - margin.right - margin.left,
-	height = 500 - margin.top - margin.bottom;
+	height = 600 - margin.top - margin.bottom;
 
 	//Set up SVG and append group to act as container for tree graph
 	var grp = d3.select(targetDOMelement).append("svg")
