@@ -1,0 +1,303 @@
+<!-------------------------------------------------------------------- 
+  
+   Module: Agglomerative clustering example 
+  
+   Author: Mike Chantler
+  
+   What it does:
+	Plots topic similarity data as matrix
+	Performs agglomerative clustering and outputs linkage table
+  
+ 
+   Version history
+  	v001	15/08/2018	mjc	Created.
+
+
+  
+----------------------------------------------------------------------> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Agglomerative Clustering Example</title>
+	<script type="text/javascript" src="d3/d3.v4.js"></script>
+	<script src="js/ref14model_v002.js"></script> 
+	<script src="js/similarityMatrix_d3v4_v001.js"></script> 
+	<script src="js/agglomerative_v001.js"></script> 
+	<script src="js/tree_v001.js"></script> 
+	<link rel="stylesheet" type="text/css" href="mikeCSS/general.css"/>
+	<link rel="stylesheet" type="text/css" href="mikeCSS/simMatrix-v001.css"/>
+	<link rel="stylesheet" type="text/css" href="mikeCSS/table-v001.css"/>
+</head>
+
+<body>
+
+<h1>Agglomerative Clustering Example</h1>
+<p>Plots the similarity matrix contained in dataModel.topics</p>
+<div>
+	<button type="button" onclick="findAndDisplayMax()">1. Find max similarity</button>
+	<button type="button" onclick="findAndDisplayMaxRowCols()">2. Show associated rows and cols</button>
+	<button type="button" onclick="addCluster()">3. Add Cluster</button>
+	<button type="button" onclick="removeOldNodes()">4. Remove Old Nodes</button>
+</div>
+<div>
+	<button type="button" onclick="findAndDisplayMaxRowCols();addCluster();removeOldNodes()">Do steps 1 to 4</button>
+</div>
+
+<div id=simMatrrixDiv></div>	
+<div>
+	<button type="button" onclick="findAndDisplayMaxRowCols();addCluster();removeOldNodes()">Do steps 1 to 4</button>
+</div>
+
+
+<h2>Linkage Table</h2>
+<div id="linkageTableDiv"></div>
+<table>
+	<thead>
+		<th>Index</th><th>Category</th><th>Similarity</th><th>Child A</th><th>Child B</th>
+	</thead>
+	<tbody id="topicDataTableBody">	</tbody>	
+</table>
+
+<div id=treeDiv></div>	
+<div>
+	<button type="button" onclick="findAndDisplayMaxRowCols();addCluster();removeOldNodes()">Do steps 1 to 4</button>
+	<button type="button" onclick="createTree()">Create Tree</button>
+</div>
+<h1>Topic data</h1>
+<div id=topicDataDiv></div>
+
+<script type="text/javascript">
+"use strict"
+
+var dm1 = modelConstructor()
+			.addBasicTopicArrayData(false); //Create datamodel object (gives access to methods in ref14model.js etc )
+var dataModel; //shorthand for dm1.model() and declared as nasty outer block variable for easy access from console.
+var oneDsimMatrix;
+var twoDsimMatrix;
+var listOfCategories;
+var simMatrixView1 = simMatrix("#simMatrrixDiv"); //similarity matrix viewer
+var agC1  = agglomCluster(); //Agglomerative clustering service
+var maxSim;
+var indexOfLastNode;
+var linkageTable;
+var tree = tree('#treeDiv');
+
+//=============== READ DATA FILES ================================
+
+
+d3.queue()
+	.defer(d3.csv, "data/topics/REF2014T30TopicOrder.csv")
+	.defer(d3.csv, "data/290183_REF_Contextual_table_1314_0.csv")
+	.defer(d3.csv, "data/learning-providers-plus.csv")
+	.defer(d3.json, "data/topics/REF2014T30Python.json")
+	.await(initialiseApp)
+
+//======================== BUTTON FUNCTIONS ==============================
+
+
+
+
+
+function findAndDisplayMax(){
+	maxSim = agC1.maxSim();
+	simMatrixView1
+		.setSimCssClass(maxSim, "max");
+}
+
+function findAndDisplayMaxRowCols(){
+	maxSim = agC1.maxSim();
+	simMatrixView1
+		.setSimColRowCssClass(maxSim, "maxRoWCol")
+		.setSimCssClass(maxSim, "max");
+}
+
+function addCluster(){
+	maxSim = agC1.maxSim();
+	agC1.addCluster(maxSim, "node_"+indexOfLastNode);
+	indexOfLastNode++;
+	oneDsimMatrix = agC1.oneDsimMatrix();
+	listOfCategories = agC1.listOfCategories();
+	simMatrixView1
+		.refLoadAndRenderSimData(oneDsimMatrix, listOfCategories)
+		.setSimColRowCssClass(maxSim, "maxRoWCol")
+		.setSimCssClass(maxSim, "max");
+
+	//Just add each max similarity node to the table (as this is all the linkage table is)
+	linkageTable = agC1.linkageTable()
+	console.log("linkageTable: ",linkageTable)
+	renderLinkageTable(linkageTable, true);
+}
+
+function createTree() {
+	var data = createDataSet();
+	/*var nestFormatHierarchy = d3
+		.nest()
+		.key(d=>d.nodeIndex)
+		.entries(dataSet);
+		tree.loadAndRenderNestDataset(nestFormatHierarchy, "test");*/
+
+	tree.loadAndRenderDataset(data);
+}
+
+var obj = {};
+var jsonTree = {}
+
+function changeNodes(expandNode) {
+	if(expandNode.children[0].name.substring(0,4) == "node") {
+		expandNode.children[0] = obj[expandNode.children[0].name];
+		changeNodes(expandNode.children[0])
+	}
+
+	if(expandNode.children[1].name.substring(0,4) == "node") {
+		expandNode.children[1] = obj[expandNode.children[1].name];
+		changeNodes(expandNode.children[1])
+	}
+}
+function createDataSet() {
+	for (var i = dataSet.length - 1; i > -1; i--) { 
+		var obj2 = convertData(dataSet[i])
+  		obj[obj2.name.toString()] = obj2;
+	} 
+
+	var head = obj["node_58"];
+
+	var current = head;
+	changeNodes(current)
+
+	return head;
+}
+var dataSet = []
+var keys = []
+
+function renderLinkageTable(linkageTable, onlyClusters){
+	//A little GUP pattern to render the table
+	var tbody = d3.select("#topicDataTableBody")
+	
+	var rows = tbody.selectAll('tr')
+	  .data(linkageTable)
+	  .enter()
+	  .append('tr')
+	  .on("click", d=>console.log("d = ",d))	
+
+	rows = rows.enter().merge(rows)
+	//Render leaves
+	if (!onlyClusters) rows
+		.filter(d=>!d.similarity)
+		.html (function(d){
+			return ("<td>" + (d.nodeIndex) + "</td>"
+				 + "<td>" + (d.topic.words.first3words) + "</td>"
+			)
+		})	
+	//Render clusters	
+	rows
+		.filter(d=>d.similarity)
+		.html (function(d){
+			dataSet.push(d);
+			keys.push(d.nodeIndex);
+			console.log(dataSet);
+
+			//tree.loadAndRenderDataset(convertData(d));
+
+			/*var nestFormatHierarchy = d3
+			.nest()
+			.key(d=>d.nodeIndex)
+			.entries(dataSet);
+			tree.loadAndRenderNestDataset(nestFormatHierarchy, "test");*/
+
+			/*tree.nodeLabelIfNoKey(function(){return d["similarity"]})
+			tree.loadAndRenderNestDataset(dataSet, d["nodeIndex"]);
+			console.log("tree:" + tree.getDatasetAsJsonD3Hierarchy());*/
+
+			/*tree.loadAndRenderDataset(dataSet);
+			console.log(d3.hierarchy(d));*/
+
+
+			//keys.push(d.nodeIndex);
+			//tree.loadAndRenderFlatDataset(d, d.nodeIndex, keys);
+			return ("<td>" + (d.nodeIndex) + "</td>"
+			    + "<td>" + (d.nodeIndex) + "</td>"
+				+ "<td>" + d.similarity.similarity + "</td>"
+				+ "<td>" + d.similarity.xCat + "</td>"
+				+ "<td>" + d.similarity.yCat + "</td>")		
+		})	
+}
+
+function convertData(d){
+	var json = new Object();
+	json.name = d.nodeIndex;
+	json.children = []
+
+	var child1 = new Object();
+	child1.name = d.similarity.xCat;
+	child1.size = d.children[0];
+
+	var child2 = new Object();
+	child2.name = d.similarity.yCat;
+	child2.size = d.children[1];
+
+	json.children.push(child1);
+	json.children.push(child2);
+
+	return json
+
+
+}
+function removeOldNodes(){
+	agC1.inactivateOldRowsAndColums(maxSim);
+	oneDsimMatrix = agC1.oneDsimMatrix();
+	listOfCategories = agC1.listOfCategories();
+	simMatrixView1
+		.refLoadAndRenderSimData(oneDsimMatrix, listOfCategories);
+}
+function do4steps(){
+	agC1.createAgglomerativeNode("node_"+indexOfLastNode);
+	oneDsimMatrix = agC1.oneDsimMatrix();
+	listOfCategories = agC1.listOfCategories();
+	simMatrixView1
+		.refLoadAndRenderSimData(oneDsimMatrix, listOfCategories);
+	indexOfLastNode++;
+}
+
+//======================== MAIN FUNCTION =================================
+//Carries out all initialization and setup
+function initialiseApp(error, ref14data, ref14context , learningProviders, jsonTopicData){
+	//Check data files have loaded
+	if (error) {console.log (" there are errror with loading the data: ", error); return;}
+	
+	//Create model 
+	dm1.loadData(ref14data, ref14context , learningProviders, jsonTopicData)
+	dataModel = dm1.model();
+	console.log(dataModel.learningProviders);
+	d3.select("#topicDataDiv")
+		.html(
+			"<pre>" 
+			+ JSON.stringify(dataModel.topics, null, 2) 
+			+ "</pre>"
+		);
+
+	agC1.refFormatLoadSimData(dataModel.topics);
+	oneDsimMatrix = agC1.oneDsimMatrix();
+	listOfCategories = agC1.listOfCategories();
+	indexOfLastNode = listOfCategories.length;
+	twoDsimMatrix=agC1.twoDsimMatrix();
+
+
+
+	//View Sim Matrix
+	simMatrixView1
+		.refLoadAndRenderSimData(oneDsimMatrix, listOfCategories); 
+
+
+
+}		
+
+
+
+
+
+	
+</script>
+</body>
+</html>
