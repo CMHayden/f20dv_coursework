@@ -50,6 +50,7 @@ function spiderChart(domElement) {
                 .attr("cy", 100)
                 .attr("fill", "none")
                 .attr("stroke", "gray")
+                .attr("class", "radar")
                 .attr("r", radialScale(t))
         );
 
@@ -58,6 +59,7 @@ function spiderChart(domElement) {
                 .attr("x", 105)
                 .attr("y", 105 - radialScale(t))
                 .text(t.toString())
+                .attr("class", "radar")
                 .attr("fill", "gray")
         );
 
@@ -73,6 +75,7 @@ function spiderChart(domElement) {
                 .attr("y1", 100)
                 .attr("x2", line_coordinate.x)
                 .attr("y2", line_coordinate.y)
+                .attr("class", "radar")
                 .attr("stroke","gray");
         
             //draw axis label
@@ -80,6 +83,7 @@ function spiderChart(domElement) {
                 .attr("x", label_coordinate.x)
                 .attr("y", label_coordinate.y)
                 .attr("fill", "gray")
+                .attr("class", "radar")
                 .text(ft_name);
         }
         return spiderChartObj
@@ -136,9 +140,7 @@ function spiderChart(domElement) {
     }
 
     function removeGraph() {
-        d3.selectAll("circle").remove();
-        d3.selectAll("text").remove();
-        d3.selectAll("line").remove();
+        d3.selectAll(".radar").remove();
     }
 
 
