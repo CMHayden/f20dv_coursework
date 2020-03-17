@@ -9,8 +9,7 @@ function sunburst(domEle) {
     var height = 700;
     var radius = Math.min(width, height) / 2;
     var color = d3.scaleOrdinal(d3.schemeCategory20)
-    var data;
-    var data1; //backup full data
+    var data;  
     var root;
     var previousNode; //store the center point of the sunburst
     let burst = d3.select("#" + domEle)
@@ -43,14 +42,7 @@ function sunburst(domEle) {
         .range([0, Math.PI * 2])
 
  
-   /*
-    //calculates the sizes of the different data slices
-    slices = d3.arc()
-        .startAngle(d => xScale(d.x0))
-        .endAngle(d => xScale(d.x1))
-        .innerRadius(d => d.y0)
-        .outerRadius(d => d.y1)
-      */
+   
     const x = d3.scaleLinear()
         .range([0, 2 * Math.PI])
     
@@ -77,6 +69,7 @@ function sunburst(domEle) {
 
 
         root.each(d => d.current = d)
+        //sets previous node to root to start
         previousNode = root
     }
 
@@ -102,9 +95,10 @@ function sunburst(domEle) {
             .style("visibility", "hidden");
     }
 
+    //click function
     function clicked(d) {
         
-       
+        //checking to see if the middle item is has the same name as the previous item clicked, if so then it means that the middle was clicked 
         if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
             
            
@@ -160,7 +154,7 @@ function sunburst(domEle) {
                     return t => d.x0 = i(t);
                 })
 
-            // .attrTween("d", arcTween)
+         
             enterSelection
                 .on("mouseover", mouseOver)
                 .on("mousemove", function (d) {
@@ -220,8 +214,7 @@ function sunburst(domEle) {
                     return t => d.x0 = i(t);
                 })
 
-            // .attrTween("d", arcTween)
-
+           
 
             //adds text to sunburst
             burst.selectAll("slice")
@@ -245,27 +238,13 @@ function sunburst(domEle) {
                 .remove();
 
 
-            //function to make the transition possible
-            function arcTween(a) {
-                console.log("gkjdkg")
-                var interpolation = d3.interpolate({ x: a.x0s, x1: a.x1s }, a);
-                return function (t) {
-                    var b = interpolation(t);
-                    console.log("gkjdkg")
-                    a.x0s = b.x0;
-                    a.x1s = b.x1;
-                    return slices(b);
-                };
-
-
-            }
+            
 
 
             return sunburstObj;
 
         } else {
-            console.log("na na na")
-            console.log(root.descendants().length)
+            //if it's the clicked node has no children it doesn't allow to go deeper
         }
     }
 
