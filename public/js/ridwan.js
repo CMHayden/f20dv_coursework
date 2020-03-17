@@ -1,11 +1,11 @@
-function ridwansGraph() {
+function ridwansGraph(domElement, spider) {
 	let data = [{'1 Star': 5, '2 Stars': 8, '3 Stars': 10, '4 Stars': 9, '5 Stars': 4}];
     let features = ["1 Star","2 Stars","3 Stars","4 Stars","5 Stars"];
     let ticks = [2, 4, 6, 8, 10];
 
     let width = 960, height = 1600;
 
-	var svg = d3.select("#graph2")
+	var svg = d3.select('#'+ domElement)
 		.append("svg")
     	.attr("width", width)
     	.attr("height", height)
@@ -31,6 +31,7 @@ function ridwansGraph() {
     	.enter().append("path")
     	.attr("class", "country")
     	.attr("d", path)
+        .style("fill", "#D3D3D3");
 
     	var circle = svg.selectAll(".circle")
     	.data(universities)
@@ -52,6 +53,7 @@ function ridwansGraph() {
                 if (d["4*"] < 5) { return 1 } else if (d["4*"] < 10) { return 2 } else if (d["4*"] < 20) { return 3 } else if (d["4*"] < 30) { return 4 } else if (d["4*"] < 4) { return 5 } else { return 6 }
             }) 
             circle.on('mousedown.log', function () {
+                console.log(d);
                 update(d);
             })
         })
@@ -74,55 +76,9 @@ function ridwansGraph() {
     	.attr("dx", 10)
     	.attr("dy", 5)*/
 
-    let radialScale = d3.scaleLinear()
-        .domain([0,10])
-        .range([0,250]);
-         let features = ["1*","2*","3*","4*","5*"];
-
-    function getPathCoordinates(data_point){
-        console.log(data_point)
-        let coordinates = [];
-        for (var i = 0; i < features.length; i++){
-            let ft_name = features[i];
-            let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);
-            coordinates.push(angleToCoordinate(angle, data_point[ft_name]));
-        }
-        return coordinates;
-    }
-
-    function angleToCoordinate(angle, value){
-        let x = Math.cos(angle) * radialScale(value);
-        let y = Math.sin(angle) * radialScale(value);
-        return {"x": 300 + x, "y": 300 - y};
-    }
-    
-    function sortInts(a, b) {
-  		return a - b;
-	}
-    let line = d3.line()
-        .x(d => d.x)
-        .y(d => d.y);
-
         function update(data) {
-            let arr = [parseInt(data["1*"]), parseInt(data["2*"]), parseInt(data["3*"]), parseInt(data["4*"])]
-            arr = arr.sort(sortInts);
-
-            factor = Math.ceil(arr[3]/4)
-            ticks2 = [factor, factor*2, factor*3, factor*4]
-
-            let coordinates = getPathCoordinates(data);
-            let svg = d3.select('#graph1')
-
-            ticks2.forEach(t =>
-            	svg.selectAll("text")
-            	.text(t.toString())
-            );
-
-            svg.selectAll("path")
-            .datum(coordinates)
-            .attr("d", line);
-
-
+            var spiderData = [{'1 Star': parseInt(data["1*"]), '2 Stars': parseInt(data["2*"]), '3 Stars': parseInt(data["3*"]), '4 Stars': parseInt(data["4*"]), '5 Stars': 10}];
+            spider.loadAndRenderDataset(spiderData[0])
         };
     }
 }
