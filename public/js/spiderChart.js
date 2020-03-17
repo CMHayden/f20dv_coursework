@@ -129,12 +129,13 @@ function spiderChart(domElement) {
             .attr("fill", color)
             .attr("stroke-opacity", 1)
             .attr("opacity", 0.5)
+            .attr("class", "radarPath")
     
         return spiderChartObj
     }
 
     function removeData() {
-        oldPath = d3.select("path").remove();
+        d3.select(".radarPath").remove();
 
         return spiderChartObj
     }
