@@ -1,4 +1,8 @@
 function ridwansGraph(domElement) {
+    /*
+        data taken from: https://www.hesa.ac.uk/news/17-01-2019/sb252-higher-education-student-statistics/location.
+        license for it is: Creative Commons Attribution 4.0 International Licence
+    */
     let width = 960, height = 1600;
 
 	var svg = d3.select('#'+ domElement)
