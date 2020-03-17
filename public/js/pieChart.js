@@ -86,7 +86,7 @@ function pie(domEle) {
 
         selection.exit().remove();
 
-
+        //makees transitions possible
         function arcTween(b) {            
             var interpolation = d3.interpolate({ startAngle: 0, end: 0 }, b);
             return function (t) { return path(interpolation(t)); };

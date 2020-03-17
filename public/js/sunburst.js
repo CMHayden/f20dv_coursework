@@ -10,45 +10,61 @@ function sunburst(domEle) {
     var radius = Math.min(width, height) / 2;
     var color = d3.scaleOrdinal(d3.schemeCategory20)
     var data;
+    var data1; //backup full data
     var root;
+    var previousNode; //store the center point of the sunburst
     let burst = d3.select("#" + domEle)
         .append('svg')
         .attr('width', width)
         .attr('height', height)
         .append('g')
         .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');;
-
+    var backArr = []
 
    
 
     sunburstObj.loadAndRenderDataset = function (dataset) {
 
-        data = dataset;    
-        dataProcessor();
-        GUP();
+        data = dataset; 
+        data1 = dataset;
+        render(data);
         return sunburstObj;
     } 
 
  
+    function render(dataUsed) {
+        dataProcessor(dataUsed);
+        GUP();
 
+    }
+    
     var xScale = d3.scaleLinear()
         .domain([0, radius])
         .range([0, Math.PI * 2])
 
+ 
+   /*
     //calculates the sizes of the different data slices
-    var slices = d3.arc()
+    slices = d3.arc()
         .startAngle(d => xScale(d.x0))
         .endAngle(d => xScale(d.x1))
         .innerRadius(d => d.y0)
         .outerRadius(d => d.y1)
-
+      */
+    const x = d3.scaleLinear()
+        .range([0, 2 * Math.PI])
     
 
-   
 
-    function dataProcessor() {
+    const slices = d3.arc()
+        .startAngle(d => xScale(d.x0))
+        .endAngle(d => xScale(d.x1))
+        .innerRadius(d =>  d.y0)
+        .outerRadius(d => d.y1);
+
+    function dataProcessor(dataSet) {
         //stores the data in d3 hierarchical format for later processing
-        root = d3.hierarchy(data)
+        root = d3.hierarchy(dataSet)
             .sum(function (d) { return d.size });
 
         //helper to put data in sunburst format
@@ -58,6 +74,10 @@ function sunburst(domEle) {
 
         // put data into sunburst mode
         sunburstFormat(root)
+
+
+        root.each(d => d.current = d)
+        previousNode = root
     }
 
     //tooltip div
@@ -82,88 +102,86 @@ function sunburst(domEle) {
             .style("visibility", "hidden");
     }
 
+    function clicked(d) {
+        
+       
+        if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
+            
+           
+            render(backArr[backArr.length - 1]);
+            data = backArr[backArr.length - 1];
+            backArr.splice(backArr.length - 1, 1);            
+        
+
+        } else {
+
+            backArr.push(data);            
+            render(d.data);
+            data = d.data;
+            previousNode = d;
+
+        }
+        
+       
+     
+
+
+    }
     function GUP() {
 
-          
-        d3.selectAll("text").remove();
-        
-        var selection = burst.selectAll('path')
-            .data(root.descendants()) //array of all the nodes
+        if (root.descendants().length > 1) {
+
+
+            d3.selectAll("text").remove();
+            d3.selectAll("g").selectAll("path").remove();
 
 
 
-        //displays the data
-        var enterSelection = selection
-            .enter().append('path')       
-            .attr("display", function (d) { return d.depth ? null : "none"; })
-            .attr("d", slices)                   
-            .style('stroke', '#fff')
-            .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
 
-        enterSelection.transition()
-            .duration(500)
-            .delay(500)
+            var selection = burst.selectAll('path')
+                .data(root.descendants()) //array of all the nodes
 
-        enterSelection
-            .on("mouseover", mouseOver)
-            .on("mousemove", function (d) {
-                tooltip.html(d.data.size)
-                    .style("left", (d3.event.pageX - 34) + "px")
-                    .style("top", (d3.event.pageY - 12) + "px");
-            })
-            .on("mouseout", mouseOut)
+           
 
-
-       
-
-
-        //adds text to sunburst
-        burst.selectAll("slice")  
-            .data(root.descendants())
-            .enter()
-            .append("text")
-            .transition()
-            .duration(500)
-            .delay(500)
-                .attr("transform", function (d) {
-                    return "translate(" + slices.centroid(d) + ")";
-                })
-                .attr("text-anchor", "middle")
-                .text(function (d) {
-                    return d.data.name;
-                });
-        
-
-        //displays the data
-        var updateSelection = selection          
-                .attr("d", slices)    
-                .attr("display", function (d) { return d.depth ? null : "none"; })         
+            //displays the data
+            var enterSelection = selection
+                .enter().append('path')
+                .attr("display", function (d) { return d.depth == 0 })
+                .attr("d", d => slices(d.current))
                 .style('stroke', '#fff')
                 .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
+                .on('click', clicked)
+
+            enterSelection.selectAll("path").transition()
+                .duration(1000)
+                .delay(1000)
+                .tween("data", d => {
+                    const i = d3.interpolate(d.x0, d.x1);
+                    return t => d.x0 = i(t);
+                })
+
+            // .attrTween("d", arcTween)
+            enterSelection
+                .on("mouseover", mouseOver)
+                .on("mousemove", function (d) {
+                    tooltip.html(d.data.size)
+                        .style("left", (d3.event.pageX - 34) + "px")
+                        .style("top", (d3.event.pageY - 12) + "px");
+                })
+                .on("mouseout", mouseOut)
 
 
 
-        /*
-        updateSelection.transition()
-            .duration(1000)
-            .delay(1000)
-            */
 
-        updateSelection
-            .on("mouseover", mouseOver)
-            .on("mousemove", function (d) {
-                tooltip.html(d.data.size)
-                    .style("left", (d3.event.pageX - 34) + "px")
-                    .style("top", (d3.event.pageY - 12) + "px");
-            })
-            .on("mouseout", mouseOut)
 
-        
-        //adds text to sunburst
-        burst.selectAll("slice")
-            .transition()
-            .duration(500)
-            .delay(500)
+            //adds text to sunburst
+            burst.selectAll("slice")
+                .data(root.descendants())
+                .enter()
+                .append("text")
+                .transition()
+                .duration(500)
+                .delay(500)
                 .attr("transform", function (d) {
                     return "translate(" + slices.centroid(d) + ")";
                 })
@@ -172,15 +190,86 @@ function sunburst(domEle) {
                     return d.data.name;
                 });
 
-        var exitSelection = selection.exit()
-            .classed("exitSelection", true)
-            .transition()
-            .duration(500)
-            .remove();
 
-        return sunburstObj;
+            //displays the data
+            var updateSelection = selection
+                .attr("d", d => slices(d.current))
+                .attr("display", function (d) { return d.depth == 0 })
+                .style('stroke', '#fff')
+                .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
+                .on('click', clicked)
+
+
+
+            updateSelection
+                .on("mouseover", mouseOver)
+                .on("mousemove", function (d) {
+                    tooltip.html(d.data.size)
+                        .style("left", (d3.event.pageX - 34) + "px")
+                        .style("top", (d3.event.pageY - 12) + "px");
+                })
+                .on("mouseout", mouseOut)
+
+
+            updateSelection.selectAll("path")
+                .transition()
+                .duration(1000)
+                .delay(1000)
+                .tween("data", d => {
+                    const i = d3.interpolate(d.x0, d.x1);
+                    return t => d.x0 = i(t);
+                })
+
+            // .attrTween("d", arcTween)
+
+
+            //adds text to sunburst
+            burst.selectAll("slice")
+                .transition()
+                .duration(500)
+                .delay(500)
+                .attr("transform", function (d) {
+                    return "translate(" + slices.centroid(d) + ")";
+                })
+                .attr("text-anchor", "middle")
+                .text(function (d) {
+                    return d.data.name;
+                });
+
+
+
+            var exitSelection = selection.exit()
+                .classed("exitSelection", true)
+                .transition()
+                .duration(500)
+                .remove();
+
+
+            //function to make the transition possible
+            function arcTween(a) {
+                console.log("gkjdkg")
+                var interpolation = d3.interpolate({ x: a.x0s, x1: a.x1s }, a);
+                return function (t) {
+                    var b = interpolation(t);
+                    console.log("gkjdkg")
+                    a.x0s = b.x0;
+                    a.x1s = b.x1;
+                    return slices(b);
+                };
+
+
+            }
+
+
+            return sunburstObj;
+
+        } else {
+            console.log("na na na")
+            console.log(root.descendants().length)
+        }
     }
 
     return sunburstObj;
 
 }
+

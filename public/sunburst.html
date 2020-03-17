@@ -26,7 +26,7 @@
         <option></option>
         <option value="uni">uni</option>
         <option value="country">country</option>
-
+        <option value="t">t</option>
     </select>
     <div class="test" id="test" style="position:absolute; left:100px; top: 100px;">
 
@@ -38,7 +38,7 @@
          var data1 = {
             "name": "Grades", "children": [{
                 "name": "HW",
-                "children": [{ "name": "MACS", "size": 50 }, { "name": "Mech Eng", "size": 1 }, { "name": "Lang", "size": 3 }, { "name": "Business", "size": 6 }]
+                "children": [{ "name": "MACS", "children": [{ "name": "Comp Sci", "size": 1 }, { "name": "Art", "size": 2 }, { "name": "Nursing", "size": 4 }, { "name": "Film", "size": 3 }] }, { "name": "Mech Eng", "size": 1 }, { "name": "Lang", "size": 3 }, { "name": "Business", "size": 6 }]
             }, {
                 "name": "Edinburgh Uni",
                 "children": [{ "name": "Comp Sci", "size": 2 }, { "name": "Med School", "size": 5 }, {
@@ -60,8 +60,12 @@
                 "children": [{ "name": "HK", "size": 8}, { "name": "Japan", "size": 5 }, {"name": "South Korea", "size": 2}]
             }, {
                 "name": "America",
-                "children": [{ "name": "USA", "size": 1 }, { "name": "Canada", "size": 5 }, { "name": "Mexico", "size": 4 }, { "name": "Costa Rica", "size": 7 }]
+                "children": [{ "name": "USA", "size": 1 }, { "name": "Canada", "size": 5 }, { "name": "Mexico", "size": 4 } ]
             }]
+        };
+
+          var data3 = {
+            "name": "Grades", "size": 5
          };
 
         var data = data1;
@@ -72,18 +76,23 @@
         function choice(obj) {
             if (obj.value == "uni") {
                 data = data1;
-               
-                
+
+
                 sun.loadAndRenderDataset(data);
-            } else {
+            } else if (obj.value == "country") {
                 data = data2;
-                
-               sun.loadAndRenderDataset(data);
-                
+
+                sun.loadAndRenderDataset(data);
+
+            } else {
+                  data = data3;
+
+                sun.loadAndRenderDataset(data);
             }
 
         }
-
+        
+     
 
 
     </script>
