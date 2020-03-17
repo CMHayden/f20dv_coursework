@@ -1,4 +1,4 @@
-function ridwansGraph(domElement, spider) {
+function ridwansGraph(domElement) {
     let width = 960, height = 1600;
 
 	var svg = d3.select('#'+ domElement)
@@ -11,6 +11,7 @@ function ridwansGraph(domElement, spider) {
     .defer(d3.json, "data/uk.json")
     .defer(d3.csv, "data/learning-providers-plus.csv")
     .defer(d3.csv, "data/REF2014_Results.csv")
+    .defer(d3.csv, "data/sb252-figure-6.csv")
     .await(ready)
 
     var projection = d3.geoMercator()
@@ -20,7 +21,7 @@ function ridwansGraph(domElement, spider) {
     var path = d3.geoPath()
     	.projection(projection)
 
-    function ready (error, data, universities, stars) {
+    function ready (error, data, universities, stars, hesa) {
     	countries = topojson.feature(data, data.objects.subunits).features;
     	svg.selectAll(".country")
     	.data(countries)
@@ -29,25 +30,13 @@ function ridwansGraph(domElement, spider) {
     	.attr("d", path)
         .style("fill", "#D3D3D3");
 
-        for (var i = 0; i < universities.length; i++) {
-            if (universities[i]["UKPRN"] == "10008010" ||  universities[i]["UKPRN"] == "10007807" || universities[i]["UKPRN"] == "10005343") {
-                universities.splice(i, 1);
-            }
-        }
-
-        console.log(stars);
-        for (var i = 0; i < stars.length; i++) {
-            if (stars[i]["Institution code (UKPRN)"] == "10008010" ||  stars[i]["Institution code (UKPRN)"] == "10007807" || stars[i]["Institution code (UKPRN)"] == "10005343") {
-                stars.splice(i, 1);
-            }
-        }
-
     	var circle = svg.selectAll(".circle")
     	.data(universities)
     	.enter().append("circle")
-    	.attr("r", 1)
         .attr("id", function(d){return 'id' + d.UKPRN; })
+        .attr("r", 0)
     	.attr("cx", function(d){
+
     		var point = projection([d.LONGITUDE, d.LATITUDE])
     		return point[0];
     	})
@@ -56,16 +45,35 @@ function ridwansGraph(domElement, spider) {
     		return point[1];  
     	})
 
+        var hesaDict = {}
+        hesa.forEach(function(e) { 
+            hesaDict[e["UKPRN"]] = parseInt(e["Total"].replace(/,/g, ''))
+        })
+
         stars.forEach(function(d) {
             circle = d3.select('#id' + d["Institution code (UKPRN)"]); 
             circle.attr("r", function(){
-                //if (d["4*"] < 5) { return 1 } else if (d["4*"] < 10) { return 2 } else if (d["4*"] < 20) { return 3 } else if (d["4*"] < 30) { return 4 } else if (d["4*"] < 4) { return 5 } else { return 6 }
-                return 1;
+                if (hesaDict[d["Institution code (UKPRN)"]]) {
+                    if (hesaDict[d["Institution code (UKPRN)"]] < 1000) { return 1; } 
+                    else if (hesaDict[d["Institution code (UKPRN)"]] > 1000 && hesaDict[d["Institution code (UKPRN)"]] < 10000) { return 2; } 
+                    else if (hesaDict[d["Institution code (UKPRN)"]] > 10000 && hesaDict[d["Institution code (UKPRN)"]] < 20000) { return 3; } 
+                    else { return 5; };
+                }
+            }) 
+            circle.on('mousedown.log', function () {
+                console.log(d);
+            })
+        })
+        /*stars.forEach(function(d) {
+            circle = d3.select('#id' + d["Institution code (UKPRN)"]); 
+            circle.attr("r", function(){
+                if (d["Institution code (UKPRN)"])
+                if (d["4*"] < 5) { return 1 } else if (d["4*"] < 10) { return 2 } else if (d["4*"] < 20) { return 3 } else if (d["4*"] < 30) { return 4 } else if (d["4*"] < 4) { return 5 } else { return 6 }
             }) 
             circle.on('mousedown.log', function () {
                 update(d);
             })
-        })
+        })*/
 
     	/*svg.selectAll(".labels")
     	.data(universities)
