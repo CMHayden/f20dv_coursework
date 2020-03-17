@@ -6,16 +6,48 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>F20DV Coursework</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="d3/d3.v4.js"></script>
+        <script src="d3/topojson.vi.min.js"></script>
+
+        <script src="js/helperFunctions.js"></script>
+        <script src="js/scatterPlot.js"></script>
+        <script src="js/pieChart.js"></script>
+        <script src="js/ridwan.js"></script>
+
+        <script src="js/app.js"></script>
+
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+
+        <div class="graph-section" id="scatter-to-pie">
+            <div class="heading"><h1>Scatter Plot to Pie Chart</h1></div>
+            <div class="wrap"><div id="scatterPlot"></div><div id="pieChart"></div></div>
+        </div>
         
-        <script src="" async defer></script>
+        <script>
+            let data = [
+                { 'x': 2.0001, 'y': 3, 'key': 'Napier'},
+                { 'x': 4, 'y': 3, 'key': 'Heriot Watt'},
+                { 'x': 8, 'y': 3, 'key': 'H'},
+                { 'x': 4, 'y': 13, 'key': 'He'},
+                { 'x': 4, 'y': 9, 'key': 'Her'},
+                { 'x': 4, 'y': 17, 'key': ' Watt'},
+                { 'x': 2, 'y': 6, 'key': 'att'},
+                { 'x': 6, 'y': 2, 'key': 'Heatt'},
+                { 'x': 9, 'y': 9, 'key': 'Hert'},
+                { 'x': 1, 'y': 11, 'key': 'Heritt'},
+                { 'x': 5, 'y': 3, 'key': 'Heriott'},
+                //{ 'x': 2, 'y': 6, 'key': 'Heriot Watt'},
+                { 'x': 2.000007, 'y': 10, 'key': 'Ht'},
+            ]
+
+            scatter(data, "scatterPlot", "Im an X Axis", "Im a Y Axis", pie);
+
+        </script>
     </body>
 </html>
