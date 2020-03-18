@@ -3,7 +3,7 @@ function ridwansGraph(domElement, spider) {
 
 	var svg = d3.select('#'+ domElement)
 		.append("svg")
-    	.attr("width", width)
+    	.attr("width", width/2)
     	.attr("height", height/3)
     	.append("g");
 
@@ -14,7 +14,7 @@ function ridwansGraph(domElement, spider) {
     .await(ready)
 
     var projection = d3.geoMercator()
-    	.translate([width/2, height])
+    	.translate([width/3, height])
     	.scale(1150)
 
     var path = d3.geoPath()
