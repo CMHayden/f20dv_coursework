@@ -61,21 +61,24 @@ function initialiseApp(error, ref14data, ref14context , learningProviders, jsonT
 	var scot = [];
 	var ni = [];
 	var wales = [];
-	var uniTowns = [];
+	var engTowns = [];
+	var scotTowns = [];
+	var walesTowns = [];
+	var niTowns = [];
 
 	learningProviders.forEach(function(d) {
 		if (towns[d["TOWN"].toUpperCase()]) {
 			if (towns[d["TOWN"].toUpperCase()] == "England") {
-				uniTowns.push(d["TOWN"].toUpperCase());
+				engTowns.push(d["TOWN"].toUpperCase());
 				eng.push(d);
 			} else if (towns[d["TOWN"].toUpperCase()] == "Scotland") {
-				uniTowns.push(d["TOWN"].toUpperCase());
+				scotTowns.push(d["TOWN"].toUpperCase());
 				scot.push(d);
 			} else if (towns[d["TOWN"].toUpperCase()] == "Wales") {
-				uniTowns.push(d["TOWN"].toUpperCase());
+				walesTowns.push(d["TOWN"].toUpperCase());
 				wales.push(d);
 			} else if (towns[d["TOWN"].toUpperCase()] == "Northern Ireland") {
-				uniTowns.push(d["TOWN"].toUpperCase());
+				niTowns.push(d["TOWN"].toUpperCase());
 				ni.push(d)
 			} else {
 				console.log("nope");
@@ -83,8 +86,23 @@ function initialiseApp(error, ref14data, ref14context , learningProviders, jsonT
 		}
 	}) 
 
-	var data = createDataSet(eng, scot, wales, ni, uniTowns, stars);
-	tree.loadAndRenderDataset(data);
+	var json = new Object();
+	json.name = "Countries";
+	json.children = [];
+
+	var data = createDataSet(eng, "England", engTowns, stars);
+	json.children.push(data);
+
+	data = createDataSet(scot, "Scotland", scotTowns, stars);
+	json.children.push(data);
+
+	data = createDataSet(wales, "Wales", walesTowns, stars);
+	json.children.push(data);
+
+	data = createDataSet(ni, "Northern Ireland",niTowns, stars);
+	json.children.push(data);
+	console.log(JSON.stringify(json));
+	tree.loadAndRenderDataset(json);
 }		
 
 function createTree() {
@@ -107,7 +125,113 @@ function changeNodes(expandNode) {
 	}
 }
 
-function createDataSet(eng, scot, wales, ni, uniTowns, stars) {
+function createDataSet(eng, name, uniTowns, stars) {
+	var json = new Object();
+	json.name = name;
+	json.children = [];
+	var jsonHold = {};
+
+	for (var i in uniTowns) {
+		jsonHold[uniTowns[i]] = uniTowns[i];
+	}
+
+	var childNodes = {};
+	for (var k in jsonHold) {
+		if (jsonHold.hasOwnProperty(k)) {  
+			var child = new Object();
+			child.name = k.toLowerCase();
+			childNodes[child.name] = []
+			child.children = childNodes[k.toLowerCase()];
+
+			json.children.push(child);
+		}
+	}
+
+	var uniNodes = {};
+	for (var j in eng) {
+		if(childNodes[eng[j]["TOWN"].toLowerCase()]) {
+			var child = new Object();
+			child.name = eng[j]["VIEW_NAME"];
+			uniNodes[eng[j]["UKPRN"]] = [];
+			child.children = uniNodes[eng[j]["UKPRN"]];
+
+			childNodes[eng[j]["TOWN"].toLowerCase()].push(child);
+		}
+	}
+
+	var unique = {};
+	stars.forEach(function(d) {
+		//starDict[d["Institution code (UKPRN)"]] = d;
+		if (uniNodes[d["Institution code (UKPRN)"]]) {
+			if (!unique[d["Institution code (UKPRN)"]]) {
+				unique[d["Institution code (UKPRN)"]] = 1;
+
+				var child = new Object();
+				child.name = "stars";
+
+				var one = new Object();
+				var two = new Object();
+				var three = new Object();
+				var four = new Object();
+
+				one.name = "1*";
+				one.children = [];
+				two.name = "2*";
+				two.children = [];
+				three.name = "3*";
+				three.children = [];
+				four.name = "4*";
+				four.children = [];
+
+				var oneStar = new Object();
+				oneStar.name = parseInt(d["1*"]);
+
+				var twoStar = new Object();
+				twoStar.name = parseInt(d["2*"]);
+
+				var threeStar = new Object();
+				threeStar.name = parseInt(d["3*"]);
+
+				var fourStar = new Object();
+				fourStar.name = parseInt(d["4*"]);
+
+				one.children.push(oneStar);
+				two.children.push(twoStar);
+				three.children.push(threeStar);
+				four.children.push(fourStar);
+
+				oneStar.size = parseInt(d["1*"]);
+				twoStar.size = parseInt(d["2*"]);
+				threeStar.size= parseInt(d["3*"]);
+				fourStar.size = parseInt(d["4*"]);
+				child.children = [one, two, three, four];
+
+				uniNodes[d["Institution code (UKPRN)"]].push(child);
+			}
+		}
+	})
+
+	json.children.splice(10);
+	/*var unique = {}
+	for (var key in starDict) {
+
+		if (!unique[key]) {
+			unique[key] = 1;
+
+			var one = new Object();
+			child.name = "stars";
+			child.children = [starDict[key]["1*"], starDict[key]["2*"], starDict[key]["3*"], starDict[key]["4*"]];
+			console.log(child.children);
+			if (uniNodes[key]) {
+				uniNodes[key].push(child);
+			}
+		}
+	}*/
+
+	return json
+}
+
+/*function createDataSet(eng, scot, wales, ni, uniTowns, stars) {
 	var json = new Object();
 	json.name = "England";
 	json.children = [];
@@ -212,30 +336,9 @@ function createDataSet(eng, scot, wales, ni, uniTowns, stars) {
 		}
 	}*/
 
-	return json
-}
+	/*return json
+}*/
 
-/*
-ALIAS: ""
-BUILDING_NAME_NUMBER: "Woodlane Campus"
-EASTING: "180711"
-FLAT_NAME_NUMBER: ""
-GROUPS: ""
-GTR_ID: "E84FC550-A4CC-4B98-A6F9-D15A33829D83"
-HESA_ID: "0017"
-LATITUDE: "50.149168"
-LOCALITY: ""
-LONGITUDE: "-5.070901"
-NORTHING: "32196"
-POSTCODE: "TR11 4RH"
-PROVIDER_NAME: "FALMOUTH UNIVERSITY"
-SORT_NAME: "Falmouth, University College"
-STREET_NAME: "Woodlane"
-TOWN: "Falmouth"
-UKPRN: "10008640"
-VIEW_NAME: "University College Falmouth"
-WEBSITE_URL: "http://www.falmouth.ac.uk/"
-WIKIPEDIA_URL: "http://en.wikipedia.org/wiki/University_College_Falmouth"*/
 
 var dataSet = []
 var keys = []
