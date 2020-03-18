@@ -17,15 +17,14 @@ function sunburst(domEle) {
         .attr('width', width)
         .attr('height', height)
         .append('g')
-        .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');;
+        .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
     var backArr = []
 
    
 
     sunburstObj.loadAndRenderDataset = function (dataset) {
 
-        data = dataset; 
-        data1 = dataset;
+        data = dataset;      
         render(data);
         return sunburstObj;
     } 

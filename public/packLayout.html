@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>test</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <script src="d3/d3.v4.js"></script>
+    <script src="d3/topojson.vi.min.js"></script>
+    <script src="js/helperFunctions.js"></script>
+    <script src="js/packLayout.js"></script>
+</head>
+<body>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <select id="choices" onchange="choice(this);">
+        <option></option>
+        <option value="uni">uni</option>
+        <option value="country">country</option>
+        <option value="t">t</option>
+    </select>
+        <svg width="700" height="700">
+            <g></g>
+        </svg>
+    <![endif]-->
+
+    <h1>PackLayout Test</h1>
+    <select id="choices" onchange="choice(this);">
+        <option></option>
+        <option value="uni">uni</option>
+        <option value="country">country</option>
+        <option value="t">t</option>
+
+
+    </select>
+    <div class="test" id="test" style="position:absolute; left:100px; top: 100px;">
+
+    </div>
+
+    <script>
+
+
+        var data1 = {
+            "name": "Grades", "children": [{
+                "name": "HW",
+                "children": [{ "name": "MACS", "children": [{ "name": "Comp Sci", "size": 1 }, { "name": "Art", "size": 2 }, { "name": "Nursing", "size": 4 }, { "name": "Film", "size": 3 }] }, { "name": "Mech Eng", "size": 1 }, { "name": "Lang", "size": 3 }, { "name": "Business", "size": 6 }]
+            }, {
+                "name": "Edinburgh Uni",
+                "children": [{ "name": "Comp Sci", "size": 2 }, { "name": "Med School", "size": 5 }, {
+                    "name": "Art", "size": 3
+                }]
+            }, {
+                "name": "Napier",
+                "children": [{ "name": "Comp Sci", "size": 1 }, { "name": "Art", "size": 2 }, { "name": "Nursing", "size": 4 }, { "name": "Film", "size": 3 }]
+            }]
+        };
+
+
+        var data2 = {
+            "name": "Grades", "children": [{
+                "name": "EU",
+                "children": [{ "name": "UK", "size": 10 }, { "name": "France", "size": 5.0 }, { "name": "Germany", size: 2 }]
+            }, {
+                "name": "Asia",
+                "children": [{ "name": "HK", "size": 8 }, { "name": "Japan", "size": 5 }, { "name": "South Korea", "size": 2 }]
+            }, {
+                "name": "America",
+                "children": [{ "name": "USA", "size": 1 }, { "name": "Canada", "size": 5 }, { "name": "Mexico", "size": 4 }]
+            }]
+        };
+
+        /*
+         var data3 = {
+                "name": "Countries", "children": [{
+                    "name": "England",
+                    "children": [{ "name": "Bristol", "children": [{ "name": "Uni of Bristol", "size": 4 }, { "name": "Bristol vet uni", "size": 2 }, { "name": "Bristol med uni", "size": 4 }] }, { "name": "Manchester", "size": 1 }, { "name": "Liverpool",  "children": [{ "name": "Uni of Liverpool", "size": 3 }, { "name": "John Moore Uni", "size": 5 }, { "name": "Uni of tropical science", "size": 4 }] }, { "name": "London", "size": 6 }]
+                }, {
+                    "name": "Scotland",
+                    "children": [{ "name": "Edinburgh", "children": [{ "name": "Uni of Edinburgh", "size": 4 }, { "name": "Heriot Watt", "size": 6 }, { "name": "Napier", "size": 1 }, { "name": "QMU", "size": 3 }] }, { "name": "Dundee", "size": 3 }, {
+                        "name": "Glasgow", "size": 3
+                    }]
+                }, {
+                    "name": "Wales",
+                    "children": [{ "name": "Cardiff", "size": 1 }, { "name": "Swansea", "size": 2 }]
+                }]
+        };
+        */
+        /*
+          var data3 = {
+            "name": "Grades", "size": 5
+         };
+         */
+
+        var data3 = { "name": "Countries", "children": [{ "name": "England", "children": [{ "name": "falmouth", "children": [{ "name": "University College Falmouth", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 28, "size": 28 }] }, { "name": "2*", "children": [{ "name": 36, "size": 36 }] }, { "name": "3*", "children": [{ "name": 21, "size": 21 }] }, { "name": "4*", "children": [{ "name": 3, "size": 3 }] }] }] }] }, { "name": "oxford", "children": [{ "name": "University of Oxford", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 0, "size": 0 }] }, { "name": "2*", "children": [{ "name": 11, "size": 11 }] }, { "name": "3*", "children": [{ "name": 54, "size": 54 }] }, { "name": "4*", "children": [{ "name": 33, "size": 33 }] }] }] }, { "name": "Oxford Brookes University", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 0, "size": 0 }] }, { "name": "2*", "children": [{ "name": 12, "size": 12 }] }, { "name": "3*", "children": [{ "name": 69, "size": 69 }] }, { "name": "4*", "children": [{ "name": 15, "size": 15 }] }] }] }] }, { "name": "lancaster", "children": [{ "name": "University of Lancaster", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 1, "size": 1 }] }, { "name": "2*", "children": [{ "name": 14, "size": 14 }] }, { "name": "3*", "children": [{ "name": 57, "size": 57 }] }, { "name": "4*", "children": [{ "name": 26, "size": 26 }] }] }] }] }, { "name": "bath", "children": [{ "name": "Bath Spa University", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 18, "size": 18 }] }, { "name": "2*", "children": [{ "name": 36, "size": 36 }] }, { "name": "3*", "children": [{ "name": 32, "size": 32 }] }, { "name": "4*", "children": [{ "name": 8, "size": 8 }] }] }] }, { "name": "University of Bath (The)", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 1, "size": 1 }] }, { "name": "2*", "children": [{ "name": 10, "size": 10 }] }, { "name": "3*", "children": [{ "name": 53, "size": 53 }] }, { "name": "4*", "children": [{ "name": 35, "size": 35 }] }] }] }] }, { "name": "southampton", "children": [{ "name": "University of Southampton", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 2, "size": 2 }] }, { "name": "2*", "children": [{ "name": 31, "size": 31 }] }, { "name": "3*", "children": [{ "name": 46, "size": 46 }] }, { "name": "4*", "children": [{ "name": 16, "size": 16 }] }] }] }, { "name": "Southampton Solent University", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 27, "size": 27 }] }, { "name": "2*", "children": [{ "name": 40, "size": 40 }] }, { "name": "3*", "children": [{ "name": 24, "size": 24 }] }, { "name": "4*", "children": [{ "name": 0, "size": 0 }] }] }] }] }, { "name": "derby", "children": [{ "name": "University of Derby", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 11, "size": 11 }] }, { "name": "2*", "children": [{ "name": 58, "size": 58 }] }, { "name": "3*", "children": [{ "name": 26, "size": 26 }] }, { "name": "4*", "children": [{ "name": 3, "size": 3 }] }] }] }] }, { "name": "poole", "children": [{ "name": "Bournemouth University", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 7, "size": 7 }] }, { "name": "2*", "children": [{ "name": 40, "size": 40 }] }, { "name": "3*", "children": [{ "name": 33, "size": 33 }] }, { "name": "4*", "children": [{ "name": 16, "size": 16 }] }] }] }, { "name": "The Arts University College at Bournemouth", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 13, "size": 13 }] }, { "name": "2*", "children": [{ "name": 32, "size": 32 }] }, { "name": "3*", "children": [{ "name": 40, "size": 40 }] }, { "name": "4*", "children": [{ "name": 11, "size": 11 }] }] }] }] }, { "name": "ormskirk", "children": [{ "name": "Edge Hill University", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 7, "size": 7 }] }, { "name": "2*", "children": [{ "name": 43, "size": 43 }] }, { "name": "3*", "children": [{ "name": 45, "size": 45 }] }, { "name": "4*", "children": [{ "name": 3, "size": 3 }] }] }] }] }, { "name": "guildford", "children": [{ "name": "University of Surrey", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 0, "size": 0 }] }, { "name": "2*", "children": [{ "name": 6, "size": 6 }] }, { "name": "3*", "children": [{ "name": 56, "size": 56 }] }, { "name": "4*", "children": [{ "name": 36, "size": 36 }] }] }] }] }, { "name": "colchester", "children": [{ "name": "University of Essex", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 0, "size": 0 }] }, { "name": "2*", "children": [{ "name": 15, "size": 15 }] }, { "name": "3*", "children": [{ "name": 44, "size": 44 }] }, { "name": "4*", "children": [{ "name": 40, "size": 40 }] }] }] }] }] }, { "name": "Scotland", "children": [{ "name": "stirling", "children": [{ "name": "University of Stirling", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 1, "size": 1 }] }, { "name": "2*", "children": [{ "name": 11, "size": 11 }] }, { "name": "3*", "children": [{ "name": 57, "size": 57 }] }, { "name": "4*", "children": [{ "name": 30, "size": 30 }] }] }] }] }, { "name": "edinburgh", "children": [{ "name": "University of Edinburgh", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 1, "size": 1 }] }, { "name": "2*", "children": [{ "name": 15, "size": 15 }] }, { "name": "3*", "children": [{ "name": 54, "size": 54 }] }, { "name": "4*", "children": [{ "name": 27, "size": 27 }] }] }] }, { "name": "Edinburgh Napier University", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 0, "size": 0 }] }, { "name": "2*", "children": [{ "name": 24, "size": 24 }] }, { "name": "3*", "children": [{ "name": 58, "size": 58 }] }, { "name": "4*", "children": [{ "name": 14, "size": 14 }] }] }] }, { "name": "Sruc", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 2, "size": 2 }] }, { "name": "2*", "children": [{ "name": 31, "size": 31 }] }, { "name": "3*", "children": [{ "name": 47, "size": 47 }] }, { "name": "4*", "children": [{ "name": 17, "size": 17 }] }] }] }] }, { "name": "dundee", "children": [{ "name": "University of Abertay Dundee", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 2, "size": 2 }] }, { "name": "2*", "children": [{ "name": 45, "size": 45 }] }, { "name": "3*", "children": [{ "name": 45, "size": 45 }] }, { "name": "4*", "children": [{ "name": 5, "size": 5 }] }] }] }, { "name": "University of Dundee", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 2, "size": 2 }] }, { "name": "2*", "children": [{ "name": 25, "size": 25 }] }, { "name": "3*", "children": [{ "name": 60, "size": 60 }] }, { "name": "4*", "children": [{ "name": 11, "size": 11 }] }] }] }] }, { "name": "aberdeen", "children": [{ "name": "The Robert Gordon University", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 2, "size": 2 }] }, { "name": "2*", "children": [{ "name": 40, "size": 40 }] }, { "name": "3*", "children": [{ "name": 45, "size": 45 }] }, { "name": "4*", "children": [{ "name": 12, "size": 12 }] }] }] }, { "name": "University of Aberdeen", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 1, "size": 1 }] }, { "name": "2*", "children": [{ "name": 32, "size": 32 }] }, { "name": "3*", "children": [{ "name": 51, "size": 51 }] }, { "name": "4*", "children": [{ "name": 12, "size": 12 }] }] }] }] }, { "name": "inverness", "children": [{ "name": "University of the Highlands and Islands", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 2, "size": 2 }] }, { "name": "2*", "children": [{ "name": 40, "size": 40 }] }, { "name": "3*", "children": [{ "name": 45, "size": 45 }] }, { "name": "4*", "children": [{ "name": 12, "size": 12 }] }] }] }] }, { "name": "glasgow", "children": [{ "name": "University of Glasgow", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 0, "size": 0 }] }, { "name": "2*", "children": [{ "name": 23, "size": 23 }] }, { "name": "3*", "children": [{ "name": 54, "size": 54 }] }, { "name": "4*", "children": [{ "name": 21, "size": 21 }] }] }] }, { "name": "Glasgow School of Art", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 11, "size": 11 }] }, { "name": "2*", "children": [{ "name": 41, "size": 41 }] }, { "name": "3*", "children": [{ "name": 36, "size": 36 }] }, { "name": "4*", "children": [{ "name": 9, "size": 9 }] }] }] }, { "name": "Glasgow Caledonian University", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 0, "size": 0 }] }, { "name": "2*", "children": [{ "name": 15, "size": 15 }] }, { "name": "3*", "children": [{ "name": 62, "size": 62 }] }, { "name": "4*", "children": [{ "name": 19, "size": 19 }] }] }] }, { "name": "University of Strathclyde", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 1, "size": 1 }] }, { "name": "2*", "children": [{ "name": 16, "size": 16 }] }, { "name": "3*", "children": [{ "name": 58, "size": 58 }] }, { "name": "4*", "children": [{ "name": 21, "size": 21 }] }] }] }, { "name": "Royal Conservatoire of Scotland", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 9, "size": 9 }] }, { "name": "2*", "children": [{ "name": 30, "size": 30 }] }, { "name": "3*", "children": [{ "name": 37, "size": 37 }] }, { "name": "4*", "children": [{ "name": 21, "size": 21 }] }] }] }] }, { "name": "musselburgh", "children": [{ "name": "Queen Margaret University, Edinburgh", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 3, "size": 3 }] }, { "name": "2*", "children": [{ "name": 55, "size": 55 }] }, { "name": "3*", "children": [{ "name": 34, "size": 34 }] }, { "name": "4*", "children": [{ "name": 6, "size": 6 }] }] }] }] }, { "name": "paisley", "children": [{ "name": "University of the West of Scotland", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 0, "size": 0 }] }, { "name": "2*", "children": [{ "name": 29, "size": 29 }] }, { "name": "3*", "children": [{ "name": 48, "size": 48 }] }, { "name": "4*", "children": [{ "name": 16, "size": 16 }] }] }] }] }] }, { "name": "Wales", "children": [{ "name": "cardiff", "children": [{ "name": "Cardiff University", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 0, "size": 0 }] }, { "name": "2*", "children": [{ "name": 11, "size": 11 }] }, { "name": "3*", "children": [{ "name": 53, "size": 53 }] }, { "name": "4*", "children": [{ "name": 33, "size": 33 }] }] }] }, { "name": "Cardiff Metropolitan University", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 0, "size": 0 }] }, { "name": "2*", "children": [{ "name": 22, "size": 22 }] }, { "name": "3*", "children": [{ "name": 66, "size": 66 }] }, { "name": "4*", "children": [{ "name": 11, "size": 11 }] }] }] }, { "name": "Royal Welsh College of Music and Drama Limited", "children": [] }, { "name": "University of Wales Prifysgol Cymru", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 9, "size": 9 }] }, { "name": "2*", "children": [{ "name": 35, "size": 35 }] }, { "name": "3*", "children": [{ "name": 32, "size": 32 }] }, { "name": "4*", "children": [{ "name": 23, "size": 23 }] }] }] }] }, { "name": "newport", "children": [{ "name": "Harper Adams University", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 0, "size": 0 }] }, { "name": "2*", "children": [{ "name": 45, "size": 45 }] }, { "name": "3*", "children": [{ "name": 47, "size": 47 }] }, { "name": "4*", "children": [{ "name": 6, "size": 6 }] }] }] }] }, { "name": "aberystwyth", "children": [{ "name": "Prifysgol Aberystwyth", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 1, "size": 1 }] }, { "name": "2*", "children": [{ "name": 28, "size": 28 }] }, { "name": "3*", "children": [{ "name": 52, "size": 52 }] }, { "name": "4*", "children": [{ "name": 14, "size": 14 }] }] }] }] }, { "name": "wrexham", "children": [{ "name": "Glyndwr University", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 29, "size": 29 }] }, { "name": "2*", "children": [{ "name": 57, "size": 57 }] }, { "name": "3*", "children": [{ "name": 10, "size": 10 }] }, { "name": "4*", "children": [{ "name": 2, "size": 2 }] }] }] }] }, { "name": "swansea", "children": [{ "name": "Swansea University", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 0, "size": 0 }] }, { "name": "2*", "children": [{ "name": 7, "size": 7 }] }, { "name": "3*", "children": [{ "name": 51, "size": 51 }] }, { "name": "4*", "children": [{ "name": 40, "size": 40 }] }] }] }, { "name": "Swansea Metropolitan University", "children": [] }] }, { "name": "bangor", "children": [{ "name": "Bangor University", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 2, "size": 2 }] }, { "name": "2*", "children": [{ "name": 6, "size": 6 }] }, { "name": "3*", "children": [{ "name": 52, "size": 52 }] }, { "name": "4*", "children": [{ "name": 39, "size": 39 }] }] }] }] }, { "name": "pontypridd", "children": [{ "name": "University of Glamorgan / Prifysgol Morgannwg", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 0, "size": 0 }] }, { "name": "2*", "children": [{ "name": 37, "size": 37 }] }, { "name": "3*", "children": [{ "name": 37, "size": 37 }] }, { "name": "4*", "children": [{ "name": 25, "size": 25 }] }] }] }] }, { "name": "carmarthen", "children": [{ "name": "University of Wales: Trinity Saint David", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 5, "size": 5 }] }, { "name": "2*", "children": [{ "name": 89, "size": 89 }] }, { "name": "3*", "children": [{ "name": 5, "size": 5 }] }, { "name": "4*", "children": [{ "name": 0, "size": 0 }] }] }] }] }] }, { "name": "Northern Ireland", "children": [{ "name": "coleraine", "children": [{ "name": "University of Ulster", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 3, "size": 3 }] }, { "name": "2*", "children": [{ "name": 15, "size": 15 }] }, { "name": "3*", "children": [{ "name": 62, "size": 62 }] }, { "name": "4*", "children": [{ "name": 17, "size": 17 }] }] }] }] }, { "name": "newcastle", "children": [{ "name": "University of Keele", "children": [{ "name": "stars", "children": [{ "name": "1*", "children": [{ "name": 0, "size": 0 }] }, { "name": "2*", "children": [{ "name": 13, "size": 13 }] }, { "name": "3*", "children": [{ "name": 64, "size": 64 }] }, { "name": "4*", "children": [{ "name": 21, "size": 21 }] }] }] }] }] }] }
+
+
+        
+        var data = data1;
+
+
+        pack = packLayout("test");
+
+        function choice(obj) {
+            if (obj.value == "uni") {
+                data = data1;
+
+
+                pack.loadAndRenderDataset(data);
+            } else if (obj.value == "country") {
+                data = data2;
+
+                pack.loadAndRenderDataset(data);
+
+            } else {
+                data = data3;
+
+                pack.loadAndRenderDataset(data);
+            }
+
+        }
+        
+
+
+
+        /*
+        var color = d3.scaleOrdinal(d3.schemeCategory20)
+        var packLayout = d3.pack()
+            .size([700, 700]);
+
+        var rootNode = d3.hierarchy(data)
+
+        rootNode.sum(function (d) {
+            return d.size;
+        });
+
+        packLayout(rootNode);
+
+        var nodes = d3.select("svg g")
+            .selectAll('g')
+            .data(rootNode.descendants())
+            .enter()
+            .append('g')
+            .attr('transform', function (d) { return 'translate(' + [d.x, d.y] + ')' })
+
+        nodes
+            .append('circle')
+            .attr('r', function (d) { return d.r; })
+            .style("fill", function (d) { return color(d.data.name); })
+
+        nodes
+            .append('text')
+            .text(function (d) {
+                return d.data.name;
+            })
+
+
+*/
+    </script>
+</body>
+</html>
