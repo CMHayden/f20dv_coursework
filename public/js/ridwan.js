@@ -4,7 +4,7 @@ function ridwansGraph(domElement, spider) {
 	var svg = d3.select('#'+ domElement)
 		.append("svg")
     	.attr("width", width)
-    	.attr("height", height)
+    	.attr("height", height/3)
     	.append("g");
 
     d3.queue()
