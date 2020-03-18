@@ -30,18 +30,17 @@ function ridwansGraph(domElement, spider) {
         .style("fill", "#D3D3D3");
 
         for (var i = 0; i < universities.length; i++) {
-            if (universities[i]["UKPRN"] == "10008010" ||  universities[i]["UKPRN"] == "10007807" || universities[i]["UKPRN"] == "10005343") {
+            if (universities[i]["UKPRN"] == "10008026" || universities[i]["UKPRN"] == "10008010" ||  universities[i]["UKPRN"] == "10007807" || universities[i]["UKPRN"] == "10005343") {
                 universities.splice(i, 1);
             }
         }
 
         console.log(stars);
         for (var i = 0; i < stars.length; i++) {
-            if (stars[i]["Institution code (UKPRN)"] == "10008010" ||  stars[i]["Institution code (UKPRN)"] == "10007807" || stars[i]["Institution code (UKPRN)"] == "10005343") {
+            if (stars[i]["Institution code (UKPRN)"] == "10008026" || stars[i]["Institution code (UKPRN)"] == "10008010" ||  stars[i]["Institution code (UKPRN)"] == "10007807" || stars[i]["Institution code (UKPRN)"] == "10005343") {
                 stars.splice(i, 1);
             }
         }
-
     	var circle = svg.selectAll(".circle")
     	.data(universities)
     	.enter().append("circle")
@@ -63,6 +62,7 @@ function ridwansGraph(domElement, spider) {
                 return 1;
             }) 
             circle.on('mousedown.log', function () {
+                console.log(d);
                 update(d);
             })
         })
