@@ -8,8 +8,8 @@ function packLayout(domEle)
     var root;
     var data;
     var margin = { top: 20, right: 160, bottom: 35, left: 100 };
-    var radius = Math.min(width, height) / 2
     var color = d3.scaleOrdinal(d3.schemeCategory20)
+    var previousNode;
     var backArr = [];
 
     packLayoutObj.loadAndRenderDataset = function (dataset) {
@@ -51,7 +51,7 @@ function packLayout(domEle)
         packFormat(root)
         packFormat.padding(10)
 
-        root.each(d => d.current = d)
+        
         //sets previous node to root to start
         previousNode = root
     }
