@@ -114,13 +114,14 @@ function sunburst(domEle) {
             data = d.data;
             previousNode = d;
 
-        }
-        
-       
-     
+        }    
 
 
     }
+
+
+
+
     function GUP() {
 
         if (root.descendants().length > 1) {
@@ -184,7 +185,7 @@ function sunburst(domEle) {
                     return d.data.name;
                 });
 
-
+            /*
             //displays the data
             var updateSelection = selection
                 .attr("d", d => slices(d.current))
@@ -229,7 +230,7 @@ function sunburst(domEle) {
                     return d.data.name;
                 });
 
-
+*/
 
             var exitSelection = selection.exit()
                 .classed("exitSelection", true)
@@ -244,7 +245,7 @@ function sunburst(domEle) {
             return sunburstObj;
 
         } else {
-            //if it's the clicked node has no children it doesn't allow to go deeper
+            //if the clicked node has no children it doesn't allow to go deeper
         }
     }
 

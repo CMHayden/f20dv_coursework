@@ -16,11 +16,12 @@ function getTicks(jsonData) {
     return ticks;
 }
 
+//getting labels for non hierarchical stacked bar chart
 function getLegend(jsonData)
 {    
     var features = [];
     var temp = [];
-    console.log(jsonData) 
+   // console.log(jsonData) 
     for (var d in jsonData[0]) {
         temp.push(d);      
     }      
@@ -28,11 +29,40 @@ function getLegend(jsonData)
 
     for (var i = 1; i < temp.length; i++) {
         features.push(temp[i])
-        console.log(temp[i])
+       // console.log(temp[i])
     }
 
     return features;
 
+}
+
+//getting labels for hierarchical stacked bar chart
+function getLabels(tree) {
+    var features = [];
+    var temp = [];
+   // console.log(tree)
+   // console.log(tree[0].data.children) 
+    
+    for (var d in tree[0].data.children) {
+        temp.push(tree[0].data.children[d]["name"]);
+       // console.log(tree[0].data.children[d]["name"])
+    }
+    
+
+    for (var i = 0; i < temp.length; i++) {
+        features.push(temp[i])
+     //   console.log(temp[i])
+    }
+
+    return features;
+
+}
+
+function createJson(tree) {
+    var data = [];
+
+
+    return data;
 }
 
 function getMax(jsonData) {
