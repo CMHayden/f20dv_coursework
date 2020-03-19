@@ -216,13 +216,12 @@ function packLayout(domEle)
 
     function draw() {
 
-        // d3.selectAll("text").remove();
-        // d3.selectAll("g").selectAll("circle").remove();
+        d3.selectAll("text").remove();
+        d3.selectAll("g").selectAll("circle").remove();
 
         var selection = pack.selectAll('circle')
             .data(root.descendants()) //array of all the nodes
-
-        //console.log(root.descendants())
+      
 
         var enterSelection = selection
             .enter().append('g')
@@ -240,16 +239,7 @@ function packLayout(domEle)
             .attr("dy", function(d){return d.y})
             .text(function(d){return d.data.name})
        
-        // pack.selectAll('circle')
-        //     .data(root.descendants())
-        //     .append('text')
-        //     .attr('y', function(d){ return d.r*.25; })
-        //     .attr('class', 'packLayoutLabel')
-        //     .style('font-size', function(d){ return d.r*.4})            
-        //     .text(function (d) {
-        //         console.log(d.data.name);
-        //         return d.data.name;
-        //     })       
+            
               
 
         return packLayoutObj;
