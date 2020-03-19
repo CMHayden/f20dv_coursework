@@ -42,12 +42,7 @@ function sunburst(domEle) {
 
  
    
-    const x = d3.scaleLinear()
-        .range([0, 2 * Math.PI])
-    
-
-
-    const slices = d3.arc()
+       const slices = d3.arc()
         .startAngle(d => xScale(d.x0))
         .endAngle(d => xScale(d.x1))
         .innerRadius(d =>  d.y0)
