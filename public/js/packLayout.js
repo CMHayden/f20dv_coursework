@@ -214,6 +214,28 @@ function packLayout(domEle)
 
     }
 
+    //tooltip div
+    var tooltip = d3.select("#" + domEle)
+        .append('div')        
+        .attr('class', 'tooltip')              
+        .style("position", "absolute")
+        .style("visibility", "hidden");
+
+    //mouseOver for tooltip
+    function mouseOver() {
+        tooltip.transition()
+            .duration(500)
+            .style("visibility", "visible");
+    }
+
+    //mouseOut for tooltip
+    function mouseOut() {
+        tooltip.transition()
+            .duration(500)
+            .style("visibility", "hidden");
+    }
+
+
     function draw() {
 
         d3.selectAll("text").remove();
@@ -232,13 +254,15 @@ function packLayout(domEle)
             .attr('r', function (d) { return d.r; })          
             .style("fill", function (d) { return color(d.data.name); })
             .on('click', clicked)
-
+ 
         enterSelection
-            .append("text")
-            .attr("dx", function(d){return d.x})
-            .attr("dy", function(d){return d.y})
-            .text(function(d){return d.data.name})
-       
+            .on("mouseover", mouseOver)
+            .on("mousemove", function (d) {
+                tooltip.html(d.data.name)                       
+                    .style("left", (d3.event.pageX - 34) + "px")
+                    .style("top", (d3.event.pageY - 12) + "px");
+            })
+            .on("mouseout", mouseOut)
             
               
 

@@ -70,8 +70,7 @@ function sunburst(domEle) {
     //tooltip div
     var tooltip = d3.select("#" + domEle)
         .append('div')
-        .attr('class', 'label')
-        .style("background", "lightblue")
+        .attr('class', 'tooltip')        
         .style("position", "absolute")
         .style("visibility", "hidden");
 
@@ -153,7 +152,7 @@ function sunburst(domEle) {
             enterSelection
                 .on("mouseover", mouseOver)
                 .on("mousemove", function (d) {
-                    tooltip.html(d.data.size)
+                    tooltip.html(d.value)
                         .style("left", (d3.event.pageX - 34) + "px")
                         .style("top", (d3.event.pageY - 12) + "px");
                 })

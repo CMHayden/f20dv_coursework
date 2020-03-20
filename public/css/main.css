@@ -53,4 +53,14 @@ line {
   margin-left: 10%;
   padding-top: 55px;
 }
+
+.tooltip {
+    background: lightblue;
+    padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    border-radius: 12px
+    
+}
 /*# sourceMappingURL=main.css.map */

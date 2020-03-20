@@ -11,7 +11,7 @@
     <title>test</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="css/main.css">
     <script src="d3/d3.v4.js"></script>
     <script src="d3/topojson.vi.min.js"></script>
     <script src="js/helperFunctions.js"></script>
@@ -128,40 +128,6 @@
         
 
 
-
-        /*
-        var color = d3.scaleOrdinal(d3.schemeCategory20)
-        var packLayout = d3.pack()
-            .size([700, 700]);
-
-        var rootNode = d3.hierarchy(data)
-
-        rootNode.sum(function (d) {
-            return d.size;
-        });
-
-        packLayout(rootNode);
-
-        var nodes = d3.select("svg g")
-            .selectAll('g')
-            .data(rootNode.descendants())
-            .enter()
-            .append('g')
-            .attr('transform', function (d) { return 'translate(' + [d.x, d.y] + ')' })
-
-        nodes
-            .append('circle')
-            .attr('r', function (d) { return d.r; })
-            .style("fill", function (d) { return color(d.data.name); })
-
-        nodes
-            .append('text')
-            .text(function (d) {
-                return d.data.name;
-            })
-
-
-*/
     </script>
 </body>
 </html>
