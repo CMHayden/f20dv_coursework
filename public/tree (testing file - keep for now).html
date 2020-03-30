@@ -22,13 +22,13 @@
 	<meta charset="utf-8">
 	<title>bidirectional interaction</title>
 	<script type="text/javascript" src="d3/d3.v4.js"></script>
-	<script src="js/ref14model_v002.js"></script> 
-	<script src="js/similarityMatrix_d3v4_v001.js"></script> 
-	<script src="js/agglomerative_v001.js"></script> 
+	<meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="js/tree_v001.js"></script> 
 	<script src="js/helperFunctions.js"></script>
     <script src="js/packLayout.js"></script>
     <script src="js/sunburst.js"></script>
+    <link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="mikeCSS/general.css"/>
 	<link rel="stylesheet" type="text/css" href="mikeCSS/simMatrix-v001.css"/>
 	<link rel="stylesheet" type="text/css" href="mikeCSS/table-v001.css"/>
@@ -43,8 +43,8 @@
 "use strict"
 
 var tree = tree('#treeDiv');
-var pack = packLayout("packDiv");
 var sun = sunburst("sunburstDiv");
+var pack = packLayout("packDiv", tree, sun);
 
 //=============== READ DATA FILES ================================
 

@@ -132,7 +132,7 @@
  * (should be uncommentable with ctrl+forwad slash when highlighted to make life easy)
  * CMHayden
  */
-function packLayout(domEle)
+function packLayout(domEle, tree, sunburst)
 {
 
     var packLayoutObj = {};
@@ -146,11 +146,15 @@ function packLayout(domEle)
     var previousNode;
     var backArr = [];
 
-    packLayoutObj.loadAndRenderDataset = function (dataset) {
+    packLayoutObj.loadAndRenderDataset = function (dataset, bool) {
 
         data = dataset;
        
         render(data);
+        if(bool) {
+            tree.loadAndRenderDataset(data);
+            sunburst.loadAndRenderDataset(data);
+        }
         return packLayoutObj;
     } 
 
@@ -197,7 +201,7 @@ function packLayout(domEle)
         if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
 
 
-            render(backArr[backArr.length - 1]);
+            packLayoutObj.loadAndRenderDataset(backArr[backArr.length - 1], true);
             data = backArr[backArr.length - 1];
             backArr.splice(backArr.length - 1, 1);
 
@@ -205,7 +209,7 @@ function packLayout(domEle)
         } else {
 
             backArr.push(data);
-            render(d.data);
+            packLayoutObj.loadAndRenderDataset(d.data, true);
             data = d.data;
             previousNode = d;
 
@@ -259,8 +263,8 @@ function packLayout(domEle)
             .on("mouseover", mouseOver)
             .on("mousemove", function (d) {
                 tooltip.html(d.data.name)                       
-                    .style("left", (d3.event.pageX - 34) + "px")
-                    .style("top", (d3.event.pageY - 12) + "px");
+                    .style("left", (d3.event.pageX - 100) + "px")
+                    .style("top", (d3.event.pageY - 50) + "px");
             })
             .on("mouseout", mouseOut)
             

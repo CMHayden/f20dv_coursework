@@ -152,10 +152,9 @@ function sunburst(domEle) {
             enterSelection
                 .on("mouseover", mouseOver)
                 .on("mousemove", function (d) {
-                    console.log(d);
                     tooltip.html(d.data["name"])
-                        .style("left", (d3.event.pageX - 34) + "px")
-                        .style("top", (d3.event.pageY - 12) + "px");
+                        .style("left", (d3.event.pageX - 100) + "px")
+                        .style("top", (d3.event.pageY - 50) + "px");
                 })
                 .on("mouseout", mouseOut)
 
