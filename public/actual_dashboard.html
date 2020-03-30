@@ -17,7 +17,8 @@
         <script src="js/helperFunctions.js"></script>
         <script src="js/scatterPlot.js"></script>
         <script src="js/pieChart.js"></script>
-        <script src="js/ridwan.js"></script>
+        <script src="js/mapWithPopulation.js.js"></script>
+        <script src="js/spiderChart.js"></script>
 
         <script src="js/app.js"></script>
 
@@ -27,6 +28,21 @@
         <div class="graph-section" id="scatter-to-pie">
             <div class="heading"><h1>Scatter Plot to Pie Chart</h1></div>
             <div class="wrap"><div id="scatterPlot"></div><div id="pieChart"></div></div>
+        </div>
+
+        <div class="graph-section" id="map-to-spider">
+            <div class="heading"><h1>UK Map to Spider Chart</h1></div>
+            <div class="wrap"><div id="map"></div><div id="spider"></div></div>
+        </div>
+
+        <div class="graph-section" id="tree-to-sunburst-to-packlayout">
+            <div class="heading"><h1>Tree to Sunburst to Pack Layout</h1></div>
+            <div class="wrap"><div id="tree"></div><div id="sunburst"></div><div id="pack"></div></div>
+        </div>
+
+        <div class="graph-section" id="agglomerative-clustering">
+            <div class="heading"><h1>Agglomerative</h1></div>
+            <div class="wrap"><div id="agglomerative"></div></div>
         </div>
         
         <script>
@@ -48,6 +64,7 @@
 
             scatter(data, "scatterPlot", "Im an X Axis", "Im a Y Axis", pie);
 
+            
         </script>
     </body>
 </html>
