@@ -26,6 +26,9 @@
 	<script src="js/similarityMatrix_d3v4_v001.js"></script> 
 	<script src="js/agglomerative_v001.js"></script> 
 	<script src="js/tree_v001.js"></script> 
+	<script src="js/helperFunctions.js"></script>
+    <script src="js/packLayout.js"></script>
+    <script src="js/sunburst.js"></script>
 	<link rel="stylesheet" type="text/css" href="mikeCSS/general.css"/>
 	<link rel="stylesheet" type="text/css" href="mikeCSS/simMatrix-v001.css"/>
 	<link rel="stylesheet" type="text/css" href="mikeCSS/table-v001.css"/>
@@ -33,11 +36,16 @@
 
 <body>
 <div id=treeDiv></div>	
+<div id=sunburstDiv></div>	
+<div id=packDiv></div>	
 
 <script type="text/javascript">
 "use strict"
 
 var tree = tree('#treeDiv');
+var pack = packLayout("packDiv");
+var sun = sunburst("sunburstDiv");
+
 //=============== READ DATA FILES ================================
 
 
@@ -101,8 +109,9 @@ function initialiseApp(error, ref14data, ref14context , learningProviders, jsonT
 
 	data = createDataSet(ni, "Northern Ireland",niTowns, stars);
 	json.children.push(data);
-	console.log(JSON.stringify(json));
+	pack.loadAndRenderDataset(json);
 	tree.loadAndRenderDataset(json);
+	sun.loadAndRenderDataset(json);
 }		
 
 function createTree() {

@@ -120,8 +120,8 @@ function sunburst(domEle) {
         if (root.descendants().length > 1) {
 
 
-            d3.selectAll("text").remove();
-            d3.selectAll("g").selectAll("path").remove();
+            d3.select("#" + domEle).selectAll("text").remove();
+            d3.select("#" + domEle).selectAll("g").selectAll("path").remove();
 
 
 
@@ -152,7 +152,8 @@ function sunburst(domEle) {
             enterSelection
                 .on("mouseover", mouseOver)
                 .on("mousemove", function (d) {
-                    tooltip.html(d.value)
+                    console.log(d);
+                    tooltip.html(d.data["name"])
                         .style("left", (d3.event.pageX - 34) + "px")
                         .style("top", (d3.event.pageY - 12) + "px");
                 })

@@ -238,8 +238,8 @@ function packLayout(domEle)
 
     function draw() {
 
-        d3.selectAll("text").remove();
-        d3.selectAll("g").selectAll("circle").remove();
+        d3.select("#" + domEle).selectAll("text").remove();
+        d3.select("#" + domEle).selectAll("g").selectAll("circle").remove();
 
         var selection = pack.selectAll('circle')
             .data(root.descendants()) //array of all the nodes
