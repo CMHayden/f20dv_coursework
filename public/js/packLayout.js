@@ -136,7 +136,8 @@ function packLayout(domEle, tree, sunburst)
 {
 
     var packLayoutObj = {};
-
+    var tree;
+    var sunburst;
     var width = 700;
     var height = 800;
     var root;
@@ -158,7 +159,10 @@ function packLayout(domEle, tree, sunburst)
         return packLayoutObj;
     } 
 
-   
+   packLayoutObj.setGraphs = function (tree2, sun) {
+        tree = tree2;
+        sunburst = sun;
+    } 
 
 
     var pack = d3.select("#" + domEle)

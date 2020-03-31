@@ -89,7 +89,7 @@
 ---------------------------------------------------------------------- */
 var hierarchyGraph; //The graph of objects used to represent the hierachy
 
-function originalTree(targetDOMelement) { 
+function tree(targetDOMelement) { 
 	//Here we use a function declaration to imitate a 'class' definition
 	//
 	//Invoking the function will return an object (treeObject)
@@ -105,7 +105,8 @@ function originalTree(targetDOMelement) {
 
 	//Delare the main object that will be returned to caller
 	var treeObject = {};
-	
+	var pack;
+	var sun;
 	
 	
 	
@@ -125,14 +126,24 @@ function originalTree(targetDOMelement) {
 		selectors.forEach(s => grp.selectAll(s).classed(cssClassName, trueFalse))
 		return treeObject; //for method chaining
 	}
-		
-	treeObject.loadAndRenderDataset = function (jsonHierarchy) {
+
+	treeObject.setGraphs = function (pack2, sun2) {
+        pack = pack2;
+        sun = sun2;
+    } 
+
+	treeObject.loadAndRenderDataset = function (jsonHierarchy, bool) {
 		//Loads and renders a standard (format 1) d3 JSON hierarchy in "d3Hierarchy" or "name-children" format
 		
 		datasetAsJsonD3Hierarchy=jsonHierarchy;
 		//Transform into list of nodes into d3 hierarchy object
 		hierarchyGraph = d3.hierarchy(datasetAsJsonD3Hierarchy);
 		addTreeXYdataAndRender(hierarchyGraph);
+
+		if(bool) {
+            pack.loadAndRenderDataset(jsonHierarchy);
+            sun.loadAndRenderDataset(jsonHierarchy);
+        }
 		return treeObject; //for method chaining
 	} 
 
@@ -197,27 +208,37 @@ function originalTree(targetDOMelement) {
 //	var hierarchyGraph; //The graph of objects used to represent the hierachy
 	var clickedNode; //This is the 'clicked' node in a collapse or uncollapse animation
 	var listOfNodes; //To be rendered
-
-
+	var backArr = [];
+	var data;
+	var previousNode;
 	//=================== PRIVATE FUNCTIONS ====================================
 
 	var nodeLabelIfNoKey = function(){return "No name set"};
 	var appendClickFunction = function(){console.log ("No click fn appended")};
 
-	var clickFunction = function (clickedNode,i){
+	var clickFunction = function (d,i){
 
-		if (clickedNode.children) {
-			hideChildren(clickedNode)
+		if (d.children) {
+			//hideChildren(clickedNode)
+
+			treeObject.loadAndRenderDataset(backArr[backArr.length - 1], true);
+            data = backArr[backArr.length - 1];
+            backArr.splice(backArr.length - 1, 1);  
 		}
 		else {
 			//Reveal children
-			revealChildren(clickedNode);
+			//revealChildren(clickedNode);
 			
 			//Store the position of the clicked node 
 			//so that we can use it as the starting position 
 			//for the revealed children in the GUP Node Enter Selection
-			clickedNode.xAtEndPreviousGUPrun = clickedNode.x; 
-			clickedNode.yAtEndPreviousGUPrun = clickedNode.y;	
+			//clickedNode.xAtEndPreviousGUPrun = clickedNode.x; 
+			//clickedNode.yAtEndPreviousGUPrun = clickedNode.y;	
+
+			backArr.push(data);            
+            treeObject.loadAndRenderDataset(d.data, true);
+            data = d.data;
+            previousNode = d;
 		}
 		
 		//Now calculate new x,y positions for all visible nodes and render in GUP

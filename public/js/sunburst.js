@@ -7,6 +7,8 @@ function sunburst(domEle) {
 
     var width = 960;
     var height = 700;
+    var tree;
+    var pack;
     var radius = Math.min(width, height) / 2;
     var color = d3.scaleOrdinal(d3.schemeCategory20)
     var data;  
@@ -22,14 +24,21 @@ function sunburst(domEle) {
 
    
 
-    sunburstObj.loadAndRenderDataset = function (dataset) {
+    sunburstObj.loadAndRenderDataset = function (dataset, bool) {
 
         data = dataset;      
         render(data);
+        if(bool) {
+            tree.loadAndRenderDataset(data);
+            pack.loadAndRenderDataset(data);
+        }
         return sunburstObj;
     } 
 
- 
+ sunburstObj.setGraphs = function (tree2, pack2) {
+        tree = tree2;
+        pack = pack2;
+    } 
     function render(dataUsed) {
         dataProcessor(dataUsed);
         GUP();
@@ -95,7 +104,7 @@ function sunburst(domEle) {
         if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
             
            
-            render(backArr[backArr.length - 1]);
+            sunburstObj.loadAndRenderDataset(backArr[backArr.length - 1], true);
             data = backArr[backArr.length - 1];
             backArr.splice(backArr.length - 1, 1);            
         
@@ -103,7 +112,7 @@ function sunburst(domEle) {
         } else {
 
             backArr.push(data);            
-            render(d.data);
+            sunburstObj.loadAndRenderDataset(d.data, true);
             data = d.data;
             previousNode = d;
 
