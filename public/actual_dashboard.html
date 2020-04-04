@@ -46,23 +46,23 @@
         </div>
         
         <script>
-            let data = [
-                { 'x': 2.0001, 'y': 3, 'key': 'Napier'},
-                { 'x': 4, 'y': 3, 'key': 'Heriot Watt'},
-                { 'x': 8, 'y': 3, 'key': 'H'},
-                { 'x': 4, 'y': 13, 'key': 'He'},
-                { 'x': 4, 'y': 9, 'key': 'Her'},
-                { 'x': 4, 'y': 17, 'key': ' Watt'},
-                { 'x': 2, 'y': 6, 'key': 'att'},
-                { 'x': 6, 'y': 2, 'key': 'Heatt'},
-                { 'x': 9, 'y': 9, 'key': 'Hert'},
-                { 'x': 1, 'y': 11, 'key': 'Heritt'},
-                { 'x': 5, 'y': 3, 'key': 'Heriott'},
-                //{ 'x': 2, 'y': 6, 'key': 'Heriot Watt'},
-                { 'x': 2.000007, 'y': 10, 'key': 'Ht'},
-            ]
+            d3.queue()
+                .defer(d3.csv, "data/topics/REF2014T30TopicOrder.csv")
+                .defer(d3.csv, "data/290183_REF_Contextual_table_1314_0.csv")
+                .defer(d3.csv, "data/learning-providers-plus.csv")
+                .defer(d3.json, "data/topics/REF2014T30Python.json")
+                .defer(d3.csv, "data/Towns_List.csv")
+                .defer(d3.csv, "data/REF2014_Results.csv")
+                .await(initialiseApp)
 
-            scatter(data, "scatterPlot", "Im an X Axis", "Im a Y Axis", pie);
+            var data = [];
+
+            function initialiseApp(error, ref14data, ref14context , universities, jsonTopicData, townList, stars){
+                universities.forEach(function(d) {
+                    data.push({'x' : d["LONGITUDE"], 'y': d["LATITUDE"], 'key': d["PROVIDER_NAME"]})
+                })
+                scatter(data, "scatterPlot", "Longitude", "Latitude", pie);
+            }
 
             
         </script>
