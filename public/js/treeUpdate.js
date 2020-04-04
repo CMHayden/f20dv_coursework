@@ -132,18 +132,31 @@ function tree(targetDOMelement) {
         sun = sun2;
     } 
 
-	treeObject.loadAndRenderDataset = function (jsonHierarchy, bool) {
+	treeObject.loadAndRenderDataset = function (jsonHierarchy, bool, d, removeBool) {
 		//Loads and renders a standard (format 1) d3 JSON hierarchy in "d3Hierarchy" or "name-children" format
-		
+		if (d) {
+            if(removeBool) {
+                data = backArr[backArr.length - 1];
+                backArr.splice(backArr.length - 1, 1);  
+            } else {
+                backArr.push(data);
+                data = d.data;
+                previousNode = d;
+            }
+        }
+
 		datasetAsJsonD3Hierarchy=jsonHierarchy;
 		//Transform into list of nodes into d3 hierarchy object
 		hierarchyGraph = d3.hierarchy(datasetAsJsonD3Hierarchy);
 		addTreeXYdataAndRender(hierarchyGraph);
 
+		data = jsonHierarchy;
+
 		if(bool) {
-            pack.loadAndRenderDataset(jsonHierarchy);
-            sun.loadAndRenderDataset(jsonHierarchy);
+            pack.loadAndRenderDataset(jsonHierarchy, false, d, removeBool);
+            sun.loadAndRenderDataset(jsonHierarchy, false, d, removeBool);
         }
+
 		return treeObject; //for method chaining
 	} 
 
@@ -217,15 +230,13 @@ function tree(targetDOMelement) {
 	var appendClickFunction = function(){console.log ("No click fn appended")};
 
 	var clickFunction = function (d,i){
-
-		if (d.children) {
+		if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
 			//hideChildren(clickedNode)
 
-			treeObject.loadAndRenderDataset(backArr[backArr.length - 1], true);
+			treeObject.loadAndRenderDataset(backArr[backArr.length - 1], true, d, true);
             data = backArr[backArr.length - 1];
             backArr.splice(backArr.length - 1, 1);  
-		}
-		else {
+		} else {
 			//Reveal children
 			//revealChildren(clickedNode);
 			
@@ -236,9 +247,10 @@ function tree(targetDOMelement) {
 			//clickedNode.yAtEndPreviousGUPrun = clickedNode.y;	
 
 			backArr.push(data);            
-            treeObject.loadAndRenderDataset(d.data, true);
+            treeObject.loadAndRenderDataset(d.data, true, d, false);
             data = d.data;
             previousNode = d;
+            console.log("y");
 		}
 		
 		//Now calculate new x,y positions for all visible nodes and render in GUP
@@ -246,7 +258,7 @@ function tree(targetDOMelement) {
 		
 		//Now do anything else (e.g. interactions as specified in the pbulic 
 		//method appendClickFunction()
-		appendClickFunction(clickedNode,i );
+		//appendClickFunction(clickedNode,i );
 	}
 	
 	function hideChildren(node) {
@@ -319,7 +331,7 @@ function tree(targetDOMelement) {
 
 		//Add (x,y) positions of all visible nodes and render
 		calculateXYpositionsAndRender(hierarchyGraph, clickedNode);
-
+		previousNode = rootNode;
 	}
 	
 	function calculateXYpositionsAndRender(hierarchyGraph, clickedNode){

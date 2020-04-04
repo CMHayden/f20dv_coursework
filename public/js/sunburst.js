@@ -24,13 +24,23 @@ function sunburst(domEle) {
 
    
 
-    sunburstObj.loadAndRenderDataset = function (dataset, bool) {
+    sunburstObj.loadAndRenderDataset = function (dataset, bool, d, removeBool) {
+        if (d) {
+            if(removeBool) {
+                data = backArr[backArr.length - 1];
+                backArr.splice(backArr.length - 1, 1);  
+            } else {
+                backArr.push(data);
+                data = d.data;
+                previousNode = d;
+            }
+        }
 
         data = dataset;      
         render(data);
         if(bool) {
-            tree.loadAndRenderDataset(data);
-            pack.loadAndRenderDataset(data);
+            tree.loadAndRenderDataset(data, false, d, removeBool);
+            pack.loadAndRenderDataset(data, false, d, removeBool);
         }
         return sunburstObj;
     } 
@@ -104,7 +114,7 @@ function sunburst(domEle) {
         if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
             
            
-            sunburstObj.loadAndRenderDataset(backArr[backArr.length - 1], true);
+            sunburstObj.loadAndRenderDataset(backArr[backArr.length - 1], true, d, true);
             data = backArr[backArr.length - 1];
             backArr.splice(backArr.length - 1, 1);            
         
@@ -112,7 +122,7 @@ function sunburst(domEle) {
         } else {
 
             backArr.push(data);            
-            sunburstObj.loadAndRenderDataset(d.data, true);
+            sunburstObj.loadAndRenderDataset(d.data, true, d, false);
             data = d.data;
             previousNode = d;
 

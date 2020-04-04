@@ -147,14 +147,25 @@ function packLayout(domEle, tree, sunburst)
     var previousNode;
     var backArr = [];
 
-    packLayoutObj.loadAndRenderDataset = function (dataset, bool) {
+    packLayoutObj.loadAndRenderDataset = function (dataset, bool, d, removeBool) {
+
+        if (d) {
+            if(removeBool) {
+                data = backArr[backArr.length - 1];
+                backArr.splice(backArr.length - 1, 1);  
+            } else {
+                backArr.push(data);
+                data = d.data;
+                previousNode = d;
+            }
+        }
 
         data = dataset;
        
         render(data);
         if(bool) {
-            tree.loadAndRenderDataset(data);
-            sunburst.loadAndRenderDataset(data);
+            tree.loadAndRenderDataset(data, false, d, removeBool);
+            sunburst.loadAndRenderDataset(data, false, d, removeBool);
         }
         return packLayoutObj;
     } 
@@ -205,7 +216,7 @@ function packLayout(domEle, tree, sunburst)
         if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
 
 
-            packLayoutObj.loadAndRenderDataset(backArr[backArr.length - 1], true);
+            packLayoutObj.loadAndRenderDataset(backArr[backArr.length - 1], true, d, true);
             data = backArr[backArr.length - 1];
             backArr.splice(backArr.length - 1, 1);
 
@@ -213,7 +224,7 @@ function packLayout(domEle, tree, sunburst)
         } else {
 
             backArr.push(data);
-            packLayoutObj.loadAndRenderDataset(d.data, true);
+            packLayoutObj.loadAndRenderDataset(d.data, true, d, false);
             data = d.data;
             previousNode = d;
 
