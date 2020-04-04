@@ -59,7 +59,9 @@
 
             function initialiseApp(error, ref14data, ref14context , universities, jsonTopicData, townList, stars){
                 universities.forEach(function(d) {
-                    data.push({'x' : d["LONGITUDE"], 'y': d["LATITUDE"], 'key': d["PROVIDER_NAME"]})
+                    if ( d["PROVIDER_NAME"] != "QUEEN'S UNIVERSITY OF BELFAST" && d["PROVIDER_NAME"] != "ST MARY'S UNIVERSITY COLLEGE" && d["PROVIDER_NAME"] != "UNIVERSITY OF ULSTER" && d["PROVIDER_NAME"] != "STRANMILLIS UNIVERSITY COLLEGE" ) {
+                        data.push({'x' : d["LONGITUDE"], 'y': d["LATITUDE"], 'key': d["PROVIDER_NAME"]})
+                    }
                 })
                 scatter(data, "scatterPlot", "Longitude", "Latitude", pie);
             }
