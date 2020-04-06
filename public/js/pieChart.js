@@ -38,7 +38,9 @@ function pie(domEle) {
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
-            .attr("transform", "translate(" + radius + "," + radius + ")");
+            .attr("transform", "translate(" + (radius + margin.left) + "," + radius + ")")
+            .attr('class', 'pieChartStyle'); 
+            
 
 
         //putting the data into slices
