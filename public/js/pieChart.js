@@ -2,7 +2,7 @@ function pie(domEle) {
     
     var pieChartObj = {};
     var data;
-    var margin = { top: 20, right: 160, bottom: 35, left: 100 };
+    var margin = { top: 20, right: 160, bottom: 35, left: 160 };
     var width = 300;
     var height = 300;
 
@@ -33,6 +33,7 @@ function pie(domEle) {
     
     function GUP()
     {
+    	d3.select("#" + domEle).selectAll("text").remove();
         pieChart
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -74,7 +75,7 @@ function pie(domEle) {
             })
             .attr("text-anchor", "middle")
             .text(function (d) {
-                return d.data.key + " code: " + d.data.x;
+                return d.data.key;
             });
 
         var mergeSelection = enterSelection.merge(selection)
