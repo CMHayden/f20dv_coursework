@@ -56,14 +56,23 @@
                 .await(initialiseApp)
 
             var data = [];
+            var dict = {};
 
             function initialiseApp(error, ref14data, ref14context , universities, jsonTopicData, townList, stars){
+            	stars.forEach(function(d) {
+            		dict[d["Institution code (UKPRN)"]] = d["4*"]
+        		})
+
                 universities.forEach(function(d) {
                     if ( d["PROVIDER_NAME"] != "QUEEN'S UNIVERSITY OF BELFAST" && d["PROVIDER_NAME"] != "ST MARY'S UNIVERSITY COLLEGE" && d["PROVIDER_NAME"] != "UNIVERSITY OF ULSTER" && d["PROVIDER_NAME"] != "STRANMILLIS UNIVERSITY COLLEGE" ) {
-                        data.push({'x' : d["LONGITUDE"], 'y': d["LATITUDE"], 'key': d["PROVIDER_NAME"]})
+                    	if (dict[d["UKPRN"]]) {
+                        	data.push({'x' : d["LATITUDE"], 'y': dict[d["UKPRN"]], 'key': d["PROVIDER_NAME"]})
+                    	}
                     }
                 })
-                scatter(data, "scatterPlot", "Longitude", "Latitude", pie);
+                
+
+                scatter(data, "scatterPlot", "Latitude", "4* Ratings", pie);
             }
 
             
