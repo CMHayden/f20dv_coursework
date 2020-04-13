@@ -1,5 +1,3 @@
-Group members should discuss and develop their  development strategy, 
-
 # Roles
 
 Altough we all worked together and all worked on everything, the main focus for all of us were:
