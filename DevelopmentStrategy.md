@@ -1,22 +1,20 @@
-Group members should discuss and develop their  development strategy, 
-
 # Roles
 
 Altough we all worked together and all worked on everything, the main focus for all of us were:
 
 **Ridwan Mukhtar** RM109
 
-    * Data and data models.
+* Data and data models.
 
-    * Primary point of contact.
+* Primary point of contact.
 
 **Mark Schmieg** MS147
 
-    * Creation of the cluster graphs.
+* Creation of the cluster graphs.
 
 **Callum M Hayden** CMH1
 
-    * Creation of custom graphs.
+* Creation of custom graphs.
 
 # Development Stategy
 
