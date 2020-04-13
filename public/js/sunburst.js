@@ -120,11 +120,14 @@ function sunburst(domEle) {
         
 
         } else {
-
-            backArr.push(data);            
-            sunburstObj.loadAndRenderDataset(d.data, true, d, false);
-            data = d.data;
-            previousNode = d;
+            if (typeof d.data.valid == "undefined") {
+                backArr.push(data);            
+                sunburstObj.loadAndRenderDataset(d.data, true, d, false);
+                data = d.data;
+                previousNode = d;
+            } else {
+                console.log("stop")
+            }
 
         }    
 

@@ -244,7 +244,7 @@ function scatter(data, domElement, titleX, titleY, displayChart) {
 
     console.log(maxX);
     console.log(maxY)
-    const xScale = d3.scaleLinear().domain([0, maxX + 1]).range([0, plotAreaWidth]);
+    const xScale = d3.scaleLinear().domain([50, maxX + 1]).range([0, plotAreaWidth]);
     const yScale = d3.scaleLinear().domain([0, maxY + 1]).range([plotAreaHeight, 0]);
 
     // select the root container where the chart will be added

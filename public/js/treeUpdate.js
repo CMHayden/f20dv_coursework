@@ -133,31 +133,31 @@ function tree(targetDOMelement) {
     } 
 
 	treeObject.loadAndRenderDataset = function (jsonHierarchy, bool, d, removeBool) {
-		//Loads and renders a standard (format 1) d3 JSON hierarchy in "d3Hierarchy" or "name-children" format
-		if (d) {
-            if(removeBool) {
-                data = backArr[backArr.length - 1];
-                backArr.splice(backArr.length - 1, 1);  
-            } else {
-                backArr.push(data);
-                data = d.data;
-                previousNode = d;
-            }
-        }
+			//Loads and renders a standard (format 1) d3 JSON hierarchy in "d3Hierarchy" or "name-children" format
+			if (d) {
+            	if(removeBool) {
+                	data = backArr[backArr.length - 1];
+                	backArr.splice(backArr.length - 1, 1);  
+            	} else {
+                	backArr.push(data);
+                	data = d.data;
+                	previousNode = d;
+            	}
+        	}
 
-		datasetAsJsonD3Hierarchy=jsonHierarchy;
-		//Transform into list of nodes into d3 hierarchy object
-		hierarchyGraph = d3.hierarchy(datasetAsJsonD3Hierarchy);
-		addTreeXYdataAndRender(hierarchyGraph);
+			datasetAsJsonD3Hierarchy=jsonHierarchy;
+			//Transform into list of nodes into d3 hierarchy object
+			hierarchyGraph = d3.hierarchy(datasetAsJsonD3Hierarchy);
+			addTreeXYdataAndRender(hierarchyGraph);
 
-		data = jsonHierarchy;
+			data = jsonHierarchy;
 
-		if(bool) {
-            pack.loadAndRenderDataset(jsonHierarchy, false, d, removeBool);
-            sun.loadAndRenderDataset(jsonHierarchy, false, d, removeBool);
-        }
+			if(bool) {
+            	pack.loadAndRenderDataset(jsonHierarchy, false, d, removeBool);
+            	sun.loadAndRenderDataset(jsonHierarchy, false, d, removeBool);
+        	}
 
-		return treeObject; //for method chaining
+			return treeObject; //for method chaining
 	} 
 
 	treeObject.loadAndRenderNestDataset = function (nestFormatHierarchy, rootName) {
@@ -232,25 +232,28 @@ function tree(targetDOMelement) {
 	var clickFunction = function (d,i){
 		if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
 			//hideChildren(clickedNode)
-
+			revealChildren(d);
 			treeObject.loadAndRenderDataset(backArr[backArr.length - 1], true, d, true);
             data = backArr[backArr.length - 1];
             backArr.splice(backArr.length - 1, 1);  
 		} else {
 			//Reveal children
-			//revealChildren(clickedNode);
+			revealChildren(d);
 			
 			//Store the position of the clicked node 
 			//so that we can use it as the starting position 
 			//for the revealed children in the GUP Node Enter Selection
 			//clickedNode.xAtEndPreviousGUPrun = clickedNode.x; 
 			//clickedNode.yAtEndPreviousGUPrun = clickedNode.y;	
-
-			backArr.push(data);            
-            treeObject.loadAndRenderDataset(d.data, true, d, false);
-            data = d.data;
-            previousNode = d;
-            console.log("y");
+			console.log(d);
+			if (typeof d.data.valid == "undefined") {
+				backArr.push(data);            
+            	treeObject.loadAndRenderDataset(d.data, true, d, false);
+            	data = d.data;
+            	previousNode = d;
+            } else {
+            	console.log("stop");
+            }
 		}
 		
 		//Now calculate new x,y positions for all visible nodes and render in GUP
@@ -269,9 +272,9 @@ function tree(targetDOMelement) {
 	}
 	
 	function revealChildren(node) {
+		console.log(node)
 		if (node._children) { 		
 			node.children = node._children;
-			node._children = null;
 		}
 	}
 	

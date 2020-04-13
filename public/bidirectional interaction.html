@@ -194,6 +194,10 @@ function createDataSet(eng, name, uniTowns, stars) {
 				three.children = [];
 				four.name = "4*";
 				four.children = [];
+				one.valid = 1;
+				two.valid = 1;
+				three.valid = 1;
+				four.valid = 1;
 
 				var oneStar = new Object();
 				oneStar.name = parseInt(d["1*"]);
@@ -216,6 +220,11 @@ function createDataSet(eng, name, uniTowns, stars) {
 				twoStar.size = parseInt(d["2*"]);
 				threeStar.size= parseInt(d["3*"]);
 				fourStar.size = parseInt(d["4*"]);
+
+				oneStar.valid = 1;
+				twoStar.valid = 1;
+				threeStar.valid = 1;
+				fourStar.valid = 1;
 				child.children = [one, two, three, four];
 
 				uniNodes[d["Institution code (UKPRN)"]].push(child);

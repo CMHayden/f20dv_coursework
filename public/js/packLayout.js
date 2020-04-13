@@ -222,11 +222,14 @@ function packLayout(domEle, tree, sunburst)
 
 
         } else {
-
-            backArr.push(data);
-            packLayoutObj.loadAndRenderDataset(d.data, true, d, false);
-            data = d.data;
-            previousNode = d;
+            if (typeof d.data.valid == "undefined") {
+                backArr.push(data);
+                packLayoutObj.loadAndRenderDataset(d.data, true, d, false);
+                data = d.data;
+                previousNode = d;
+            } else {
+                console.log("stop");
+            }
 
         }
 
