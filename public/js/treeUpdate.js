@@ -230,35 +230,35 @@ function tree(targetDOMelement) {
 	var appendClickFunction = function(){console.log ("No click fn appended")};
 
 	var clickFunction = function (d,i){
-		if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
-			//hideChildren(clickedNode)
-			revealChildren(d);
-			treeObject.loadAndRenderDataset(backArr[backArr.length - 1], true, d, true);
-            data = backArr[backArr.length - 1];
-            backArr.splice(backArr.length - 1, 1);  
-		} else {
-			//Reveal children
-			revealChildren(d);
+		if (d.data["name"] != "Countries") {
+			if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
+				//hideChildren(clickedNode)
+				revealChildren(d);
+				treeObject.loadAndRenderDataset(backArr[backArr.length - 1], true, d, true);
+            	data = backArr[backArr.length - 1];
+            	backArr.splice(backArr.length - 1, 1);  
+			} else {
+				//Reveal children
+				revealChildren(d);
 			
-			//Store the position of the clicked node 
-			//so that we can use it as the starting position 
-			//for the revealed children in the GUP Node Enter Selection
-			//clickedNode.xAtEndPreviousGUPrun = clickedNode.x; 
-			//clickedNode.yAtEndPreviousGUPrun = clickedNode.y;	
-			console.log(d);
-			if (typeof d.data.valid == "undefined") {
-				backArr.push(data);            
-            	treeObject.loadAndRenderDataset(d.data, true, d, false);
-            	data = d.data;
-            	previousNode = d;
-            } else {
-            	console.log("stop");
-            }
+				//Store the position of the clicked node 
+				//so that we can use it as the starting position 
+				//for the revealed children in the GUP Node Enter Selection
+				//clickedNode.xAtEndPreviousGUPrun = clickedNode.x; 
+				//clickedNode.yAtEndPreviousGUPrun = clickedNode.y;	
+				console.log(d);
+				if (typeof d.data.valid == "undefined") {
+					backArr.push(data);            
+            		treeObject.loadAndRenderDataset(d.data, true, d, false);
+            		data = d.data;
+            		previousNode = d;
+            	} else {
+            		console.log("stop");
+            	}
+			}
+			//Now calculate new x,y positions for all visible nodes and render in GUP
+			calculateXYpositionsAndRender(hierarchyGraph, clickedNode);
 		}
-		
-		//Now calculate new x,y positions for all visible nodes and render in GUP
-		calculateXYpositionsAndRender(hierarchyGraph, clickedNode);
-		
 		//Now do anything else (e.g. interactions as specified in the pbulic 
 		//method appendClickFunction()
 		//appendClickFunction(clickedNode,i );

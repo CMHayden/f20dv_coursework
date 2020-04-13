@@ -111,27 +111,28 @@ function sunburst(domEle) {
     function clicked(d) {
         
         //checking to see if the middle item is has the same name as the previous item clicked, if so then it means that the middle was clicked 
-        if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
+        if (d.data["name"] != "Countries") {
+
+            if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
             
            
-            sunburstObj.loadAndRenderDataset(backArr[backArr.length - 1], true, d, true);
-            data = backArr[backArr.length - 1];
-            backArr.splice(backArr.length - 1, 1);            
+                sunburstObj.loadAndRenderDataset(backArr[backArr.length - 1], true, d, true);
+                data = backArr[backArr.length - 1];
+                backArr.splice(backArr.length - 1, 1);            
         
 
-        } else {
-            if (typeof d.data.valid == "undefined") {
-                backArr.push(data);            
-                sunburstObj.loadAndRenderDataset(d.data, true, d, false);
-                data = d.data;
-                previousNode = d;
             } else {
-                console.log("stop")
-            }
+                if (typeof d.data.valid == "undefined") {
+                    backArr.push(data);            
+                    sunburstObj.loadAndRenderDataset(d.data, true, d, false);
+                    data = d.data;
+                    previousNode = d;
+                } else {
+                    console.log("stop")
+                }
 
-        }    
-
-
+            }    
+        }
     }
 
 

@@ -211,29 +211,23 @@ function packLayout(domEle, tree, sunburst)
 
     //click function
     function clicked(d) {
-
-        //checking to see if the parent circle pressed has the same name as the previous item clicked, if so then it means that the parent circle was clicked 
-        if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
-
-
-            packLayoutObj.loadAndRenderDataset(backArr[backArr.length - 1], true, d, true);
-            data = backArr[backArr.length - 1];
-            backArr.splice(backArr.length - 1, 1);
-
-
-        } else {
-            if (typeof d.data.valid == "undefined") {
-                backArr.push(data);
-                packLayoutObj.loadAndRenderDataset(d.data, true, d, false);
-                data = d.data;
-                previousNode = d;
+        if (d.data["name"] != "Countries") {
+            //checking to see if the parent circle pressed has the same name as the previous item clicked, if so then it means that the parent circle was clicked 
+            if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
+                packLayoutObj.loadAndRenderDataset(backArr[backArr.length - 1], true, d, true);
+                data = backArr[backArr.length - 1];
+                backArr.splice(backArr.length - 1, 1);
             } else {
-                console.log("stop");
+                if (typeof d.data.valid == "undefined") {
+                    backArr.push(data);
+                    packLayoutObj.loadAndRenderDataset(d.data, true, d, false);
+                    data = d.data;
+                    previousNode = d;
+                } else {
+                    console.log("stop");
+                }
             }
-
         }
-
-
     }
 
     //tooltip div

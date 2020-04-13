@@ -178,10 +178,10 @@ function createDataSet(eng, name, uniTowns, stars) {
 			if (!unique[d["Institution code (UKPRN)"]]) {
 				unique[d["Institution code (UKPRN)"]] = 1;
 
-				var child = new Object();
-				child.name = "stars";
+				//var child = new Object();
+				//child.name = "stars";
 
-				var one = new Object();
+				/*var one = new Object();
 				var two = new Object();
 				var three = new Object();
 				var four = new Object();
@@ -197,24 +197,24 @@ function createDataSet(eng, name, uniTowns, stars) {
 				one.valid = 1;
 				two.valid = 1;
 				three.valid = 1;
-				four.valid = 1;
+				four.valid = 1;*/
 
 				var oneStar = new Object();
-				oneStar.name = parseInt(d["1*"]);
+				oneStar.name = "  1*: " + parseInt(d["1*"]);
 
 				var twoStar = new Object();
-				twoStar.name = parseInt(d["2*"]);
+				twoStar.name = "  2*: " + parseInt(d["2*"]);
 
 				var threeStar = new Object();
-				threeStar.name = parseInt(d["3*"]);
+				threeStar.name = "  3*: " + parseInt(d["3*"]);
 
 				var fourStar = new Object();
-				fourStar.name = parseInt(d["4*"]);
+				fourStar.name = "  4*: " + parseInt(d["4*"]);
 
-				one.children.push(oneStar);
-				two.children.push(twoStar);
-				three.children.push(threeStar);
-				four.children.push(fourStar);
+				//one.children.push(oneStar);
+				//two.children.push(twoStar);
+				//three.children.push(threeStar);
+				//four.children.push(fourStar);
 
 				oneStar.size = parseInt(d["1*"]);
 				twoStar.size = parseInt(d["2*"]);
@@ -225,9 +225,12 @@ function createDataSet(eng, name, uniTowns, stars) {
 				twoStar.valid = 1;
 				threeStar.valid = 1;
 				fourStar.valid = 1;
-				child.children = [one, two, three, four];
+				//child.children = [one, two, three, four];
 
-				uniNodes[d["Institution code (UKPRN)"]].push(child);
+				uniNodes[d["Institution code (UKPRN)"]].push(oneStar);
+				uniNodes[d["Institution code (UKPRN)"]].push(twoStar);
+				uniNodes[d["Institution code (UKPRN)"]].push(threeStar);
+				uniNodes[d["Institution code (UKPRN)"]].push(fourStar);
 			}
 		}
 	})

@@ -66,7 +66,7 @@
                 universities.forEach(function(d) {
                     if ( d["PROVIDER_NAME"] != "QUEEN'S UNIVERSITY OF BELFAST" && d["PROVIDER_NAME"] != "ST MARY'S UNIVERSITY COLLEGE" && d["PROVIDER_NAME"] != "UNIVERSITY OF ULSTER" && d["PROVIDER_NAME"] != "STRANMILLIS UNIVERSITY COLLEGE" ) {
                     	if (dict[d["UKPRN"]]) {
-                        	data.push({'x' : d["LATITUDE"], 'y': dict[d["UKPRN"]], 'key': d["UKPRN"]})
+                        	data.push({'x' : d["LATITUDE"], 'y': dict[d["UKPRN"]], 'key': d["UKPRN"] + " [4*:" + dict[d["UKPRN"]] + "]"})
                     	}
                     }
                 })
