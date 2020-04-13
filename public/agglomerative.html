@@ -156,12 +156,17 @@ function changeNodes(expandNode) {
 	}
 }
 function createDataSet() {
+	var bool = true;
+	var head = null;
 	for (var i = dataSet.length - 1; i > -1; i--) { 
 		var obj2 = convertData(dataSet[i])
   		obj[obj2.name.toString()] = obj2;
-	} 
 
-	var head = obj["node_58"];
+  		if (bool) {
+  			head = obj[obj2.name.toString()];
+  			bool = false;
+  		}
+	} 
 
 	var current = head;
 	changeNodes(current)
