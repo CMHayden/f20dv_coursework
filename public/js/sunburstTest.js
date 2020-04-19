@@ -164,9 +164,17 @@ function sunburstH(domEle) {
                     if (id !== undefined) {
                         if(d["data"]["name"].toLowerCase() == id["PROVIDER_NAME"].toLowerCase()) {
                             return color((d.children ? d : d.parent).data.name);
-                        } else {
-                            return "#f95d6a"
                         }
+
+                        console.log(d["parent"]);
+                        if (d["parent"] != undefined) {
+                            console.log(d["parent"]["data"]["name"]);
+                            if (d["parent"]["data"]["name"].toLowerCase() == id["PROVIDER_NAME"].toLowerCase()) {
+                                return color((d.children ? d : d.parent).data.name);
+                            }
+                        }
+                        
+                        return "#f95d6a"
                     } else {
                         return color((d.children ? d : d.parent).data.name);
                     }})
