@@ -120,13 +120,6 @@ function stackedNon (domEle)
         var selection = stackedBarChart.selectAll(".layer")
             .data(layers)
 
-        var exitSelection = selection.exit()
-            .classed("exitSelection", true)
-            .transition()
-            .duration(500)
-            .remove();
-
-
         var enterSelection = selection
             .enter().append("g")
             .attr("class", "layer")
@@ -162,7 +155,11 @@ function stackedNon (domEle)
                 .attr("height", function (d) { return yScale(d[0]) - yScale(d[1]); })
                 .attr("width", xScale.bandwidth());
     
-    
+        selection.exit()
+            .classed("exitSelection", true)
+            .transition()
+            .duration(500)
+            .remove();
 
         return stackedBarChartObj;
     }
