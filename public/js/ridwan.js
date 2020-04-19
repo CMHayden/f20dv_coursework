@@ -15,11 +15,11 @@ function ridwansGraph(domElement, graph, isSun) {
     	.append("g");
 
     d3.queue()
-    .defer(d3.json, "data/uk.json")
-    .defer(d3.csv, "data/learning-providers-plus.csv")
-    .defer(d3.csv, "data/REF2014_Results.csv")
-    .defer(d3.csv, "data/sb252-figure-6.csv")
-    .await(ready)
+        .defer(d3.json, "data/uk.json")
+        .defer(d3.csv, "data/learning-providers-plus.csv")
+        .defer(d3.csv, "data/REF2014_Results.csv")
+        .defer(d3.csv, "data/sb252-figure-6.csv")
+        .await(ready)
 
     var projection = d3.geoMercator()
     	.translate([width/3, height])
@@ -73,6 +73,7 @@ function ridwansGraph(domElement, graph, isSun) {
                 stars.splice(i, 1);
             }
         }
+
     	var circle = svg.selectAll(".circle")
     	.data(universities)
     	.enter().append("circle")
@@ -81,7 +82,6 @@ function ridwansGraph(domElement, graph, isSun) {
     	.attr("cx", function(d){
             if (isSun) {
                 if (dict[d["PROVIDER_NAME"].toLowerCase()] == 1) {
-                    //console.log("hey");
                     var point = projection([d.LONGITUDE, d.LATITUDE])
                     return point[0]
                 }
@@ -134,25 +134,6 @@ function ridwansGraph(domElement, graph, isSun) {
                 highlight(d, d["PROVIDER_NAME"]);
             })
         })
-
-
-    	/*svg.selectAll(".labels")
-    	.data(universities)
-    	.enter().append("text")
-    	.attr("class", "label")
-    	.attr("x", function(d){
-    		var point = projection([d.LONGITUDE, d.LATITUDE])
-    		return point[0];
-    	})
-    	.attr("y", function(d){
-    		var point = projection([d.LONGITUDE, d.LATITUDE])
-    		return point[1];
-    	})
-    	.text(function(d) {
-    		return d.VIEW_NAME
-    	})
-    	.attr("dx", 10)
-    	.attr("dy", 5)*/
 
         function update(data) {
             var spiderData = {'1 Star': parseInt(data["1*"]), '2 Stars': parseInt(data["2*"]), '3 Stars': parseInt(data["3*"]), '4 Stars': parseInt(data["4*"]), '5 Stars': 10};
