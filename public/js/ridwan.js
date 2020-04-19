@@ -81,9 +81,9 @@ function ridwansGraph(domElement, graph, isSun) {
     	.attr("cx", function(d){
             if (isSun) {
                 if (dict[d["PROVIDER_NAME"].toLowerCase()] == 1) {
-                    console.log("hey");
+                    //console.log("hey");
                     var point = projection([d.LONGITUDE, d.LATITUDE])
-                    return point [0]
+                    return point[0]
                 }
             } else {
     		  var point = projection([d.LONGITUDE, d.LATITUDE])
@@ -94,7 +94,7 @@ function ridwansGraph(domElement, graph, isSun) {
     		if (isSun) {
                 if (dict[d["PROVIDER_NAME"].toLowerCase()] == 1) {
                     var point = projection([d.LONGITUDE, d.LATITUDE])
-                    return point [1]
+                    return point[1]
                 }
             } else {
               var point = projection([d.LONGITUDE, d.LATITUDE])
@@ -111,8 +111,13 @@ function ridwansGraph(domElement, graph, isSun) {
             circle = d3.select('#id' + d["Institution code (UKPRN)"]); 
             circle.attr("r", function(){
                 if (isSun) {
-                    return 3;
+                    if (dict[d["Institution name"].toLowerCase()] == 1) {
+                        return 3
+                    } else {
+                        return 0;
+                    }
                 }
+                
                 if (hesaDict[d["Institution code (UKPRN)"]]) {
                     if (hesaDict[d["Institution code (UKPRN)"]] < 1000) { return 1; } 
                     else if (hesaDict[d["Institution code (UKPRN)"]] > 1000 && hesaDict[d["Institution code (UKPRN)"]] < 10000) { return 2; } 
@@ -121,9 +126,11 @@ function ridwansGraph(domElement, graph, isSun) {
                 }
             }) 
             circle.on('mousedown.log', function () {
+                console.log(d);
                 update(d);
             })
             circle.on('mouseover', function(d){
+                console.log(d);
                 highlight(d, d["PROVIDER_NAME"]);
             })
         })
