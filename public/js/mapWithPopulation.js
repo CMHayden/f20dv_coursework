@@ -1,4 +1,4 @@
-function ridwansGraph(domElement) {
+function mapPop(domElement) {
     /*
         data taken from: https://www.hesa.ac.uk/news/17-01-2019/sb252-higher-education-student-statistics/location.
         license for it is: Creative Commons Attribution 4.0 International Licence
