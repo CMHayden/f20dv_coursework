@@ -97,8 +97,6 @@
 			</div>
 		</div>	
         <script>
-
-		//stackedBar chart code start
 		var data1 = [
 					{ 'key': 'HW', '1 star': 3, '2 star': 2, '3 star': 6, '4 star': 11 },
 					{ 'key': 'Napier', '1 star': 6, '2 star': 3, '3 star': 3, '4 star': 3 },
@@ -112,24 +110,21 @@
 					{ 'key': 'Bristol', '1 star': 1, '2 star': 2, '3 star': 4, '4 star': 4, '5 star': 3, '6 star': 0 },
 					{ 'key': 'Aberdeen', '1 star': 9, '2 star': 3,'3 star': 0, '4 star': 0, '5 star': 0, '6 star': 2 },
 					];
+
 			var data = data1;
             stackedBarChartObject = stackedNon("stackedBarChart")
 			stackedBarChartObject.loadAndRenderDataset(data)
+
 			function choice(obj) {
 				if (obj.value == "uni") {
 					data = data1;
-
 					stackedBarChartObject.loadAndRenderDataset(data)
 				} else {
 					data = data2;
-
 					stackedBarChartObject.loadAndRenderDataset(data)
 
 				}
-
 			}
-
-		//stacked bar chart code end
 
             d3.queue()
                 .defer(d3.csv, "data/topics/REF2014T30TopicOrder.csv")
@@ -144,6 +139,7 @@
             var dict = {};
             var map = null;
             var spider = null;
+
             function initialiseApp(error, ref14data, ref14context , universities, jsonTopicData, townList, stars){
             	stars.forEach(function(d) {
             		dict[d["Institution code (UKPRN)"]] = d["4*"]
@@ -156,7 +152,6 @@
                     	}
                     }
                 })
-                
 
                 scatter(data, "scatterPlot", "Latitude", "4* Ratings", pie);
 
@@ -166,358 +161,207 @@
             	map = ridwansGraph("map", spider, false)
             	spider.loadAndRenderDataset(spiderData[0])
             }
-
-            
         </script>
 
         <script type="text/javascript">
-"use strict"
+			"use strict"
 
-var tree = tree('#tree');
-var sun = sunburst("sunburst");
-var sun2 = sunburstH("sunburstHighlight");
-var pack = packLayout("pack");
-pack.setGraphs(tree, sun);
-sun.setGraphs(tree, pack);
-tree.setGraphs(pack, sun);
-var map2 = ridwansGraph("mapHighlight", sun2, true, 1)
+			var tree = tree('#tree');
+			var sun = sunburst("sunburst");
+			var sun2 = sunburstH("sunburstHighlight");
+			var pack = packLayout("pack");
 
-d3.queue()
-	.defer(d3.csv, "data/topics/REF2014T30TopicOrder.csv")
-	.defer(d3.csv, "data/290183_REF_Contextual_table_1314_0.csv")
-	.defer(d3.csv, "data/learning-providers-plus.csv")
-	.defer(d3.json, "data/topics/REF2014T30Python.json")
-	.defer(d3.csv, "data/Towns_List.csv")
-	.defer(d3.csv, "data/REF2014_Results.csv")
-	.await(test)
+			pack.setGraphs(tree, sun);
+			sun.setGraphs(tree, pack);
+			tree.setGraphs(pack, sun);
+			var map2 = ridwansGraph("mapHighlight", sun2, true, 1)
 
-function test(error, ref14data, ref14context , learningProviders, jsonTopicData, townList, stars){
-	var towns = {};
-	townList.forEach(function(d) {
-		towns[d["Town"].toUpperCase()] = [d["Country"]];
-	})
+			d3.queue()
+				.defer(d3.csv, "data/topics/REF2014T30TopicOrder.csv")
+				.defer(d3.csv, "data/290183_REF_Contextual_table_1314_0.csv")
+				.defer(d3.csv, "data/learning-providers-plus.csv")
+				.defer(d3.json, "data/topics/REF2014T30Python.json")
+				.defer(d3.csv, "data/Towns_List.csv")
+				.defer(d3.csv, "data/REF2014_Results.csv")
+				.await(test)
 
-	var treeData  = {};
-	var eng = [];
-	var scot = [];
-	var ni = [];
-	var wales = [];
-	var engTowns = [];
-	var scotTowns = [];
-	var walesTowns = [];
-	var niTowns = [];
+			function test(error, ref14data, ref14context , learningProviders, jsonTopicData, townList, stars){
+				var towns = {};
 
-	learningProviders.forEach(function(d) {
-		if (towns[d["TOWN"].toUpperCase()]) {
-			if (towns[d["TOWN"].toUpperCase()] == "England") {
-				engTowns.push(d["TOWN"].toUpperCase());
-				eng.push(d);
-			} else if (towns[d["TOWN"].toUpperCase()] == "Scotland") {
-				scotTowns.push(d["TOWN"].toUpperCase());
-				scot.push(d);
-			} else if (towns[d["TOWN"].toUpperCase()] == "Wales") {
-				walesTowns.push(d["TOWN"].toUpperCase());
-				wales.push(d);
-			} else if (towns[d["TOWN"].toUpperCase()] == "Northern Ireland") {
-				niTowns.push(d["TOWN"].toUpperCase());
-				ni.push(d)
-			} else {
-				console.log("nope");
+				townList.forEach(function(d) {
+					towns[d["Town"].toUpperCase()] = [d["Country"]];
+				})
+
+				var treeData  = {};
+				var eng = [];
+				var scot = [];
+				var ni = [];
+				var wales = [];
+				var engTowns = [];
+				var scotTowns = [];
+				var walesTowns = [];
+				var niTowns = [];
+
+				learningProviders.forEach(function(d) {
+					if (towns[d["TOWN"].toUpperCase()]) {
+						if (towns[d["TOWN"].toUpperCase()] == "England") {
+							engTowns.push(d["TOWN"].toUpperCase());
+							eng.push(d);
+						} else if (towns[d["TOWN"].toUpperCase()] == "Scotland") {
+							scotTowns.push(d["TOWN"].toUpperCase());
+							scot.push(d);
+						} else if (towns[d["TOWN"].toUpperCase()] == "Wales") {
+							walesTowns.push(d["TOWN"].toUpperCase());
+							wales.push(d);
+						} else if (towns[d["TOWN"].toUpperCase()] == "Northern Ireland") {
+							niTowns.push(d["TOWN"].toUpperCase());
+							ni.push(d)
+						} else {
+							console.log("nope");
+						}
+					}
+				}) 
+
+				var json = new Object();
+				json.name = "Countries";
+				json.children = [];
+
+				var data = createDataSet(eng, "England", engTowns, stars);
+				json.children.push(data);
+
+				data = createDataSet(scot, "Scotland", scotTowns, stars);
+				json.children.push(data);
+
+				data = createDataSet(wales, "Wales", walesTowns, stars);
+				json.children.push(data);
+
+				data = createDataSet(ni, "Northern Ireland",niTowns, stars);
+				json.children.push(data);
+
+				pack.loadAndRenderDataset(json);
+				tree.loadAndRenderDataset(json);
+				sun.loadAndRenderDataset(json);
+				sun2.loadAndRenderDataset(json);
+				map2.setData(json);
+			}		
+
+			function createTree() {
+				var data = createDataSet();
+				tree.loadAndRenderDataset(data);
 			}
-		}
-	}) 
 
-	var json = new Object();
-	json.name = "Countries";
-	json.children = [];
+			var obj = {};
+			var jsonTree = {}
 
-	var data = createDataSet(eng, "England", engTowns, stars);
-	json.children.push(data);
+			function changeNodes(expandNode) {
+				if(expandNode.children[0].name.substring(0,4) == "node") {
+					expandNode.children[0] = obj[expandNode.children[0].name];
+					changeNodes(expandNode.children[0])
+				}
 
-	data = createDataSet(scot, "Scotland", scotTowns, stars);
-	json.children.push(data);
-
-	data = createDataSet(wales, "Wales", walesTowns, stars);
-	json.children.push(data);
-
-	data = createDataSet(ni, "Northern Ireland",niTowns, stars);
-	json.children.push(data);
-	pack.loadAndRenderDataset(json);
-	tree.loadAndRenderDataset(json);
-	sun.loadAndRenderDataset(json);
-	sun2.loadAndRenderDataset(json);
-	map2.setData(json);
-}		
-
-function createTree() {
-	var data = createDataSet();
-	tree.loadAndRenderDataset(data);
-}
-
-var obj = {};
-var jsonTree = {}
-
-function changeNodes(expandNode) {
-	if(expandNode.children[0].name.substring(0,4) == "node") {
-		expandNode.children[0] = obj[expandNode.children[0].name];
-		changeNodes(expandNode.children[0])
-	}
-
-	if(expandNode.children[1].name.substring(0,4) == "node") {
-		expandNode.children[1] = obj[expandNode.children[1].name];
-		changeNodes(expandNode.children[1])
-	}
-}
-
-function createDataSet(eng, name, uniTowns, stars) {
-	var json = new Object();
-	json.name = name;
-	json.children = [];
-	var jsonHold = {};
-
-	for (var i in uniTowns) {
-		jsonHold[uniTowns[i]] = uniTowns[i];
-	}
-
-	var childNodes = {};
-	for (var k in jsonHold) {
-		if (jsonHold.hasOwnProperty(k)) {  
-			var child = new Object();
-			child.name = k.toLowerCase();
-			childNodes[child.name] = []
-			child.children = childNodes[k.toLowerCase()];
-
-			json.children.push(child);
-		}
-	}
-
-	var uniNodes = {};
-	for (var j in eng) {
-		if(childNodes[eng[j]["TOWN"].toLowerCase()]) {
-			var child = new Object();
-			child.name = eng[j]["VIEW_NAME"];
-			uniNodes[eng[j]["UKPRN"]] = [];
-			child.children = uniNodes[eng[j]["UKPRN"]];
-
-			childNodes[eng[j]["TOWN"].toLowerCase()].push(child);
-		}
-	}
-
-	var unique = {};
-	stars.forEach(function(d) {
-		//starDict[d["Institution code (UKPRN)"]] = d;
-		if (uniNodes[d["Institution code (UKPRN)"]]) {
-			if (!unique[d["Institution code (UKPRN)"]]) {
-				unique[d["Institution code (UKPRN)"]] = 1;
-
-				//var child = new Object();
-				//child.name = "stars";
-
-				/*var one = new Object();
-				var two = new Object();
-				var three = new Object();
-				var four = new Object();
-
-				one.name = "1*";
-				one.children = [];
-				two.name = "2*";
-				two.children = [];
-				three.name = "3*";
-				three.children = [];
-				four.name = "4*";
-				four.children = [];
-				one.valid = 1;
-				two.valid = 1;
-				three.valid = 1;
-				four.valid = 1;*/
-
-				var oneStar = new Object();
-				oneStar.name = "  1*: " + parseInt(d["1*"]);
-
-				var twoStar = new Object();
-				twoStar.name = "  2*: " + parseInt(d["2*"]);
-
-				var threeStar = new Object();
-				threeStar.name = "  3*: " + parseInt(d["3*"]);
-
-				var fourStar = new Object();
-				fourStar.name = "  4*: " + parseInt(d["4*"]);
-
-				//one.children.push(oneStar);
-				//two.children.push(twoStar);
-				//three.children.push(threeStar);
-				//four.children.push(fourStar);
-
-				oneStar.size = parseInt(d["1*"]);
-				twoStar.size = parseInt(d["2*"]);
-				threeStar.size= parseInt(d["3*"]);
-				fourStar.size = parseInt(d["4*"]);
-
-				oneStar.valid = 1;
-				twoStar.valid = 1;
-				threeStar.valid = 1;
-				fourStar.valid = 1;
-				//child.children = [one, two, three, four];
-
-				uniNodes[d["Institution code (UKPRN)"]].push(oneStar);
-				uniNodes[d["Institution code (UKPRN)"]].push(twoStar);
-				uniNodes[d["Institution code (UKPRN)"]].push(threeStar);
-				uniNodes[d["Institution code (UKPRN)"]].push(fourStar);
+				if(expandNode.children[1].name.substring(0,4) == "node") {
+					expandNode.children[1] = obj[expandNode.children[1].name];
+					changeNodes(expandNode.children[1])
+				}
 			}
-		}
-	})
 
-	json.children.splice(4);
-	/*var unique = {}
-	for (var key in starDict) {
+			function createDataSet(eng, name, uniTowns, stars) {
+				var json = new Object();
+				json.name = name;
+				json.children = [];
+				var jsonHold = {};
 
-		if (!unique[key]) {
-			unique[key] = 1;
+				for (var i in uniTowns) {
+					jsonHold[uniTowns[i]] = uniTowns[i];
+				}
 
-			var one = new Object();
-			child.name = "stars";
-			child.children = [starDict[key]["1*"], starDict[key]["2*"], starDict[key]["3*"], starDict[key]["4*"]];
-			console.log(child.children);
-			if (uniNodes[key]) {
-				uniNodes[key].push(child);
+				var childNodes = {};
+
+				for (var k in jsonHold) {
+					if (jsonHold.hasOwnProperty(k)) {  
+						var child = new Object();
+						child.name = k.toLowerCase();
+						childNodes[child.name] = []
+						child.children = childNodes[k.toLowerCase()];
+
+						json.children.push(child);
+					}
+				}
+
+				var uniNodes = {};
+				for (var j in eng) {
+					if(childNodes[eng[j]["TOWN"].toLowerCase()]) {
+						var child = new Object();
+						child.name = eng[j]["VIEW_NAME"];
+						uniNodes[eng[j]["UKPRN"]] = [];
+						child.children = uniNodes[eng[j]["UKPRN"]];
+
+						childNodes[eng[j]["TOWN"].toLowerCase()].push(child);
+					}
+				}
+
+				var unique = {};
+
+				stars.forEach(function(d) {
+					if (uniNodes[d["Institution code (UKPRN)"]]) {
+						if (!unique[d["Institution code (UKPRN)"]]) {
+							unique[d["Institution code (UKPRN)"]] = 1;
+
+							var oneStar = new Object();
+							oneStar.name = "  1*: " + parseInt(d["1*"]);
+
+							var twoStar = new Object();
+							twoStar.name = "  2*: " + parseInt(d["2*"]);
+
+							var threeStar = new Object();
+							threeStar.name = "  3*: " + parseInt(d["3*"]);
+
+							var fourStar = new Object();
+							fourStar.name = "  4*: " + parseInt(d["4*"]);
+
+							oneStar.size = parseInt(d["1*"]);
+							twoStar.size = parseInt(d["2*"]);
+							threeStar.size= parseInt(d["3*"]);
+							fourStar.size = parseInt(d["4*"]);
+
+							oneStar.valid = 1;
+							twoStar.valid = 1;
+							threeStar.valid = 1;
+							fourStar.valid = 1;
+
+							uniNodes[d["Institution code (UKPRN)"]].push(oneStar);
+							uniNodes[d["Institution code (UKPRN)"]].push(twoStar);
+							uniNodes[d["Institution code (UKPRN)"]].push(threeStar);
+							uniNodes[d["Institution code (UKPRN)"]].push(fourStar);
+						}
+					}
+				})
+
+				json.children.splice(4);
+				return json
 			}
-		}
-	}*/
-	return json
-}
 
-/*function createDataSet(eng, scot, wales, ni, uniTowns, stars) {
-	var json = new Object();
-	json.name = "England";
-	json.children = [];
-	var jsonHold = {};
+			var dataSet = []
+			var keys = []
 
-	for (var i in uniTowns) {
-		jsonHold[uniTowns[i]] = uniTowns[i];
-	}
+			function convertData(d){
+				var json = new Object();
+				json.name = d.nodeIndex;
+				json.children = []
 
-	var childNodes = {};
-	for (var k in jsonHold) {
-		if (jsonHold.hasOwnProperty(k)) {  
-			var child = new Object();
-			child.name = k.toLowerCase();
-			childNodes[child.name] = []
-			child.children = childNodes[k.toLowerCase()];
+				var child1 = new Object();
+				child1.name = d.similarity.xCat;
+				child1.size = d.children[0];
 
-			json.children.push(child);
-		}
-	}
+				var child2 = new Object();
+				child2.name = d.similarity.yCat;
+				child2.size = d.children[1];
 
-	var uniNodes = {};
-	for (var j in eng) {
-		if(childNodes[eng[j]["TOWN"].toLowerCase()]) {
-			var child = new Object();
-			child.name = eng[j]["VIEW_NAME"];
-			uniNodes[eng[j]["UKPRN"]] = [];
-			child.children = uniNodes[eng[j]["UKPRN"]];
+				json.children.push(child1);
+				json.children.push(child2);
 
-			childNodes[eng[j]["TOWN"].toLowerCase()].push(child);
-		}
-	}
-
-	var unique = {};
-	stars.forEach(function(d) {
-		//starDict[d["Institution code (UKPRN)"]] = d;
-		if (uniNodes[d["Institution code (UKPRN)"]]) {
-			if (!unique[d["Institution code (UKPRN)"]]) {
-				unique[d["Institution code (UKPRN)"]] = 1;
-
-				var child = new Object();
-				child.name = "stars";
-
-				var one = new Object();
-				var two = new Object();
-				var three = new Object();
-				var four = new Object();
-
-				one.name = "1*";
-				one.children = [];
-				two.name = "2*";
-				two.children = [];
-				three.name = "3*";
-				three.children = [];
-				four.name = "4*";
-				four.children = [];
-
-				var oneStar = new Object();
-				oneStar.name = parseInt(d["1*"]);
-
-				var twoStar = new Object();
-				twoStar.name = parseInt(d["2*"]);
-
-				var threeStar = new Object();
-				threeStar.name = parseInt(d["3*"]);
-
-				var fourStar = new Object();
-				fourStar.name = parseInt(d["4*"]);
-
-				one.children.push(oneStar);
-				two.children.push(twoStar);
-				three.children.push(threeStar);
-				four.children.push(fourStar);
-
-				oneStar.size = parseInt(d["1*"]);
-				twoStar.size = parseInt(d["2*"]);
-				threeStar.size= parseInt(d["3*"]);
-				fourStar.size = parseInt(d["4*"]);
-				child.children = [one, two, three, four];
-
-				uniNodes[d["Institution code (UKPRN)"]].push(child);
+				return json
 			}
-		}
-	})
-
-		json.children.splice(10);
-		console.log(JSON.stringify(json));
-
-	/*var unique = {}
-	for (var key in starDict) {
-
-		if (!unique[key]) {
-			unique[key] = 1;
-
-			var one = new Object();
-			child.name = "stars";
-			child.children = [starDict[key]["1*"], starDict[key]["2*"], starDict[key]["3*"], starDict[key]["4*"]];
-			console.log(child.children);
-			if (uniNodes[key]) {
-				uniNodes[key].push(child);
-			}
-		}
-	}*/
-
-	/*return json
-}*/
-
-
-var dataSet = []
-var keys = []
-
-function convertData(d){
-	var json = new Object();
-	json.name = d.nodeIndex;
-	json.children = []
-
-	var child1 = new Object();
-	child1.name = d.similarity.xCat;
-	child1.size = d.children[0];
-
-	var child2 = new Object();
-	child2.name = d.similarity.yCat;
-	child2.size = d.children[1];
-
-	json.children.push(child1);
-	json.children.push(child2);
-
-	return json
-}
-
-	
-</script>
+		</script>
     </body>
 </html>
