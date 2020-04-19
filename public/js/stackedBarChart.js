@@ -85,7 +85,7 @@ function stackedNon (domEle)
             .enter().append("g")
             .attr("class", "layer")
             .style("fill", function (d, i) { return color(i); })
-            .on('click', clicked)
+            
 
         enterSelection.selectAll("rect")
             .data(function (d) { return d; })
