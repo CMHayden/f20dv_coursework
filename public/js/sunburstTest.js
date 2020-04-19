@@ -210,52 +210,7 @@ function sunburstH(domEle) {
                     return d.data.name;
                 });
 
-            /*
-            //displays the data
-            var updateSelection = selection
-                .attr("d", d => slices(d.current))
-                .attr("display", function (d) { return d.depth == 0 })
-                .style('stroke', '#fff')
-                .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
-                .on('click', clicked)
-
-
-
-            updateSelection
-                .on("mouseover", mouseOver)
-                .on("mousemove", function (d) {
-                    tooltip.html(d.data.size)
-                        .style("left", (d3.event.pageX - 34) + "px")
-                        .style("top", (d3.event.pageY - 12) + "px");
-                })
-                .on("mouseout", mouseOut)
-
-
-            updateSelection.selectAll("path")
-                .transition()
-                .duration(1000)
-                .delay(1000)
-                .tween("data", d => {
-                    const i = d3.interpolate(d.x0, d.x1);
-                    return t => d.x0 = i(t);
-                })
-
            
-
-            //adds text to sunburst
-            burst.selectAll("slice")
-                .transition()
-                .duration(500)
-                .delay(500)
-                .attr("transform", function (d) {
-                    return "translate(" + slices.centroid(d) + ")";
-                })
-                .attr("text-anchor", "middle")
-                .text(function (d) {
-                    return d.data.name;
-                });
-
-*/
 
             var exitSelection = selection.exit()
                 .classed("exitSelection", true)
