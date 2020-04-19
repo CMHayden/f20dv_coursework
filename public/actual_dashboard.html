@@ -133,7 +133,8 @@
 
             var data = [];
             var dict = {};
-
+            var map = null;
+            var spider = null;
             function initialiseApp(error, ref14data, ref14context , universities, jsonTopicData, townList, stars){
             	stars.forEach(function(d) {
             		dict[d["Institution code (UKPRN)"]] = d["4*"]
@@ -152,8 +153,8 @@
 
                 var spiderData = [{'1 Star': 2, '2 Stars': 8, '3 Stars': 2, '4 Stars': 9, '5 Stars': 4}];
 
-            	var spider = spiderChart("spider")
-            	var map = ridwansGraph("map", spider)
+            	spider = spiderChart("spider")
+            	map = ridwansGraph("map", spider, false)
             	spider.loadAndRenderDataset(spiderData[0])
             }
 
@@ -167,12 +168,10 @@ var tree = tree('#tree');
 var sun = sunburst("sunburst");
 var sun2 = sunburstH("sunburstHighlight");
 var pack = packLayout("pack");
-var map2 = null;
 pack.setGraphs(tree, sun);
 sun.setGraphs(tree, pack);
 tree.setGraphs(pack, sun);
-//=============== READ DATA FILES ================================
-
+var map2 = ridwansGraph("mapHighlight", sun2, true)
 
 d3.queue()
 	.defer(d3.csv, "data/topics/REF2014T30TopicOrder.csv")
@@ -181,9 +180,9 @@ d3.queue()
 	.defer(d3.json, "data/topics/REF2014T30Python.json")
 	.defer(d3.csv, "data/Towns_List.csv")
 	.defer(d3.csv, "data/REF2014_Results.csv")
-	.await(initialiseApp)
+	.await(test)
 
-function initialiseApp(error, ref14data, ref14context , learningProviders, jsonTopicData, townList, stars){
+function test(error, ref14data, ref14context , learningProviders, jsonTopicData, townList, stars){
 	var towns = {};
 	townList.forEach(function(d) {
 		towns[d["Town"].toUpperCase()] = [d["Country"]];
@@ -238,7 +237,7 @@ function initialiseApp(error, ref14data, ref14context , learningProviders, jsonT
 	tree.loadAndRenderDataset(json);
 	sun.loadAndRenderDataset(json);
 	sun2.loadAndRenderDataset(json);
-	map2 = ridwansGraph("mapHighlight", sun2, true, json)
+	map2.setData(json);
 }		
 
 function createTree() {

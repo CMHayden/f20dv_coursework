@@ -162,9 +162,7 @@ function sunburstH(domEle) {
                 .style('stroke', '#fff')
                 .style("fill", function (d) { 
                     if (id !== undefined) {
-                        console.log(id);
                         if(d["data"]["name"].toLowerCase() == id["PROVIDER_NAME"].toLowerCase()) {
-                            console.log("here");
                             return color((d.children ? d : d.parent).data.name);
                         } else {
                             return "#f95d6a"

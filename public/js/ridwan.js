@@ -1,4 +1,11 @@
-function ridwansGraph(domElement, graph, isSun, jsonTree) {
+function ridwansGraph(domElement, graph, isSun) {
+    var map = {};
+    var jsonTree;
+
+    map.setData = function(data) {
+        jsonTree = data;
+    }
+
     let width = 960, height = 1600;
 
 	var svg = d3.select('#'+ domElement)
@@ -99,6 +106,7 @@ function ridwansGraph(domElement, graph, isSun, jsonTree) {
 
         function update(data) {
             var spiderData = {'1 Star': parseInt(data["1*"]), '2 Stars': parseInt(data["2*"]), '3 Stars': parseInt(data["3*"]), '4 Stars': parseInt(data["4*"]), '5 Stars': 10};
+            console.log("data");
             graph.loadAndRenderDataset(spiderData);
         };
 
@@ -108,4 +116,5 @@ function ridwansGraph(domElement, graph, isSun, jsonTree) {
             }
         };
     }
+    return map;
 }
