@@ -114,8 +114,6 @@ function sunburstH(domEle) {
         if (d.data["name"] != "Countries") {
 
             if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
-            
-           
                 sunburstObj.loadAndRenderDataset(backArr[backArr.length - 1], true, d, true);
                 data = backArr[backArr.length - 1];
                 backArr.splice(backArr.length - 1, 1);            

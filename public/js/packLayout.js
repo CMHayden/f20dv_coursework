@@ -147,25 +147,27 @@ function packLayout(domEle, tree, sunburst)
     var previousNode;
     var backArr = [];
 
-    packLayoutObj.loadAndRenderDataset = function (dataset, bool, d, removeBool) {
+    packLayoutObj.loadAndRenderDataset = function (dataset, bool, d, removeBool, removeFromOut) {
 
         if (d) {
-            if(removeBool) {
-                data = backArr[backArr.length - 1];
-                backArr.splice(backArr.length - 1, 1);  
-            } else {
-                backArr.push(data);
-                data = d.data;
-                previousNode = d;
+                if (removeFromOut) {
+                    if(removeBool) {
+                        data = backArr[backArr.length - 1];
+                        backArr.splice(backArr.length - 1, 1);  
+                    } else {
+                        backArr.push(data);
+                        data = d.data;
+                        previousNode = d;
+                    }
+                }
             }
-        }
 
         data = dataset;
        
         render(data);
         if(bool) {
-            tree.loadAndRenderDataset(data, false, d, removeBool);
-            sunburst.loadAndRenderDataset(data, false, d, removeBool);
+            tree.loadAndRenderDataset(data, false, d, removeBool, true);
+            sunburst.loadAndRenderDataset(data, false, d, removeBool, true);
         }
         return packLayoutObj;
     } 
@@ -214,13 +216,15 @@ function packLayout(domEle, tree, sunburst)
         if (d.data["name"] != "Countries") {
             //checking to see if the parent circle pressed has the same name as the previous item clicked, if so then it means that the parent circle was clicked 
             if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
-                packLayoutObj.loadAndRenderDataset(backArr[backArr.length - 1], true, d, true);
+                console.log("true");
+                packLayoutObj.loadAndRenderDataset(backArr[backArr.length - 1], true, d, true, false);
                 data = backArr[backArr.length - 1];
                 backArr.splice(backArr.length - 1, 1);
             } else {
                 if (typeof d.data.valid == "undefined") {
+                    console.log("false");
                     backArr.push(data);
-                    packLayoutObj.loadAndRenderDataset(d.data, true, d, false);
+                    packLayoutObj.loadAndRenderDataset(d.data, true, d, false, false);
                     data = d.data;
                     previousNode = d;
                 } else {
