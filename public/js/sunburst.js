@@ -24,23 +24,25 @@ function sunburst(domEle) {
 
    
 
-    sunburstObj.loadAndRenderDataset = function (dataset, bool, d, removeBool) {
+    sunburstObj.loadAndRenderDataset = function (dataset, bool, d, removeBool, removeFromOut) {
         if (d) {
-            if(removeBool) {
-                data = backArr[backArr.length - 1];
-                backArr.splice(backArr.length - 1, 1);  
-            } else {
-                backArr.push(data);
-                data = d.data;
-                previousNode = d;
+                if (removeFromOut) {
+                    if(removeBool) {
+                        data = backArr[backArr.length - 1];
+                        backArr.splice(backArr.length - 1, 1);  
+                    } else {
+                        backArr.push(data);
+                        data = d.data;
+                        previousNode = d;
+                    }
+                }
             }
-        }
 
         data = dataset;      
         render(data);
         if(bool) {
-            tree.loadAndRenderDataset(data, false, d, removeBool);
-            pack.loadAndRenderDataset(data, false, d, removeBool);
+            tree.loadAndRenderDataset(data, false, d, removeBool, true);
+            pack.loadAndRenderDataset(data, false, d, removeBool, true);
         }
         return sunburstObj;
     } 
@@ -115,8 +117,8 @@ function sunburst(domEle) {
 
             if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
             
-           
-                sunburstObj.loadAndRenderDataset(backArr[backArr.length - 1], true, d, true);
+                console.log("true");
+                sunburstObj.loadAndRenderDataset(backArr[backArr.length - 1], true, d, true, false);
                 data = backArr[backArr.length - 1];
                 backArr.splice(backArr.length - 1, 1);            
         
@@ -124,7 +126,7 @@ function sunburst(domEle) {
             } else {
                 if (typeof d.data.valid == "undefined") {
                     backArr.push(data);            
-                    sunburstObj.loadAndRenderDataset(d.data, true, d, false);
+                    sunburstObj.loadAndRenderDataset(d.data, true, d, false, false);
                     data = d.data;
                     previousNode = d;
                 } else {

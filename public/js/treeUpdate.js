@@ -132,16 +132,18 @@ function tree(targetDOMelement) {
         sun = sun2;
     } 
 
-	treeObject.loadAndRenderDataset = function (jsonHierarchy, bool, d, removeBool) {
+	treeObject.loadAndRenderDataset = function (jsonHierarchy, bool, d, removeBool, removeFromOut) {
 			//Loads and renders a standard (format 1) d3 JSON hierarchy in "d3Hierarchy" or "name-children" format
 			if (d) {
-            	if(removeBool) {
-                	data = backArr[backArr.length - 1];
-                	backArr.splice(backArr.length - 1, 1);  
-            	} else {
-                	backArr.push(data);
-                	data = d.data;
-                	previousNode = d;
+				if (removeFromOut) {
+            		if(removeBool) {
+                		data = backArr[backArr.length - 1];
+                		backArr.splice(backArr.length - 1, 1);  
+            		} else {
+                		backArr.push(data);
+                		data = d.data;
+                		previousNode = d;
+            		}
             	}
         	}
 
@@ -153,8 +155,8 @@ function tree(targetDOMelement) {
 			data = jsonHierarchy;
 
 			if(bool) {
-            	pack.loadAndRenderDataset(jsonHierarchy, false, d, removeBool);
-            	sun.loadAndRenderDataset(jsonHierarchy, false, d, removeBool);
+            	pack.loadAndRenderDataset(jsonHierarchy, false, d, removeBool, true, true);
+            	sun.loadAndRenderDataset(jsonHierarchy, false, d, removeBool, true, true);
         	}
 
 			return treeObject; //for method chaining
@@ -234,7 +236,7 @@ function tree(targetDOMelement) {
 			if (previousNode.data["name"].localeCompare(d.data["name"]) == 0) {
 				//hideChildren(clickedNode)
 				revealChildren(d);
-				treeObject.loadAndRenderDataset(backArr[backArr.length - 1], true, d, true);
+				treeObject.loadAndRenderDataset(backArr[backArr.length - 1], true, d, true, false);
             	data = backArr[backArr.length - 1];
             	backArr.splice(backArr.length - 1, 1);  
 			} else {
@@ -249,7 +251,7 @@ function tree(targetDOMelement) {
 				console.log(d);
 				if (typeof d.data.valid == "undefined") {
 					backArr.push(data);            
-            		treeObject.loadAndRenderDataset(d.data, true, d, false);
+            		treeObject.loadAndRenderDataset(d.data, true, d, false, false);
             		data = d.data;
             		previousNode = d;
             	} else {
