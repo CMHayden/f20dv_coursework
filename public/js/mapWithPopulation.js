@@ -40,7 +40,6 @@ function mapPop(domElement) {
         .attr("id", function(d){return 'id' + d.UKPRN; })
         .attr("r", 0)
     	.attr("cx", function(d){
-
     		var point = projection([d.LONGITUDE, d.LATITUDE])
     		return point[0];
     	})
@@ -68,35 +67,7 @@ function mapPop(domElement) {
                 console.log(d);
             })
         })
-        /*stars.forEach(function(d) {
-            circle = d3.select('#id' + d["Institution code (UKPRN)"]); 
-            circle.attr("r", function(){
-                if (d["Institution code (UKPRN)"])
-                if (d["4*"] < 5) { return 1 } else if (d["4*"] < 10) { return 2 } else if (d["4*"] < 20) { return 3 } else if (d["4*"] < 30) { return 4 } else if (d["4*"] < 4) { return 5 } else { return 6 }
-            }) 
-            circle.on('mousedown.log', function () {
-                update(d);
-            })
-        })*/
-
-    	/*svg.selectAll(".labels")
-    	.data(universities)
-    	.enter().append("text")
-    	.attr("class", "label")
-    	.attr("x", function(d){
-    		var point = projection([d.LONGITUDE, d.LATITUDE])
-    		return point[0];
-    	})
-    	.attr("y", function(d){
-    		var point = projection([d.LONGITUDE, d.LATITUDE])
-    		return point[1];
-    	})
-    	.text(function(d) {
-    		return d.VIEW_NAME
-    	})
-    	.attr("dx", 10)
-    	.attr("dy", 5)*/
-
+        
         function update(data) {
             var spiderData = {'1 Star': parseInt(data["1*"]), '2 Stars': parseInt(data["2*"]), '3 Stars': parseInt(data["3*"]), '4 Stars': parseInt(data["4*"]), '5 Stars': 10};
             spider.loadAndRenderDataset(spiderData);
