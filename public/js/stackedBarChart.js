@@ -53,10 +53,10 @@ function stackedNon (domEle)
 
     function draw()
     {
-        d3.selectAll("g").selectAll("text").remove();
-        d3.selectAll("tick").remove();
-        d3.selectAll("line").remove();
-        d3.selectAll("text").remove();
+        d3.selectAll("stacked").selectAll("g").selectAll("text").remove();
+        d3.selectAll("stacked").selectAll("tick").remove();
+        d3.selectAll("stacked").selectAll("line").remove();
+        d3.selectAll("stacked").selectAll("text").remove();
 
         xScale = d3.scaleBand().range([0, width]).padding(0.1),
         yScale = d3.scaleLinear().range([height, 0]),
@@ -64,6 +64,7 @@ function stackedNon (domEle)
         stackedBarChart
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
+            .append("stacked")
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
