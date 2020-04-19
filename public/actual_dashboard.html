@@ -82,7 +82,6 @@
 		<div class="graph-section" id="stackedBarChart-display">
 			<div class="heading"><h1>Stacked Bar Chart</h1></div>
 			<select id="choices" onchange="choice(this);">
-				<option></option>
 				<option value="uni">uni</option>
 				<option value="uni2">uni2</option>
 			</select>
@@ -106,8 +105,9 @@
 					{ 'key': 'Bristol', '1 star': 1, '2 star': 2, '3 star': 4, '4 star': 4, '5 star': 3, '6 star': 0 },
 					{ 'key': 'Aberdeen', '1 star': 9, '2 star': 3,'3 star': 0, '4 star': 0, '5 star': 0, '6 star': 2 },
 					];
-			var data;
-			stackedBarChartObject = stackedNon("stackedBarChart")
+			var data = data1;
+            stackedBarChartObject = stackedNon("stackedBarChart")
+			stackedBarChartObject.loadAndRenderDataset(data)
 			function choice(obj) {
 				if (obj.value == "uni") {
 					data = data1;
