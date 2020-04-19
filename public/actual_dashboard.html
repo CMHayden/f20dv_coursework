@@ -171,7 +171,7 @@ var pack = packLayout("pack");
 pack.setGraphs(tree, sun);
 sun.setGraphs(tree, pack);
 tree.setGraphs(pack, sun);
-var map2 = ridwansGraph("mapHighlight", sun2, true)
+var map2 = ridwansGraph("mapHighlight", sun2, true, 1)
 
 d3.queue()
 	.defer(d3.csv, "data/topics/REF2014T30TopicOrder.csv")

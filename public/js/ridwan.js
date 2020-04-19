@@ -29,6 +29,31 @@ function ridwansGraph(domElement, graph, isSun) {
     	.projection(projection)
 
     function ready (error, data, universities, stars, hesa) {
+        var dict = {'edinburgh napier university': 1,
+          'sruc': 1,
+          'university of abertay dundee' : 1,
+          'university of dundee' : 1,
+          'the robert gordon university' : 1,
+          'university of aberdeen' : 1,
+          'cardiff university' : 1,
+          'cardiff metropolitan university' : 1,
+          'royal welsh college of music and drama limited' : 1, 
+          'university of wales prifysgol cymru' : 1,
+          'harper adams university' : 1, 
+          'prifysgol aberystwyth' : 1,
+          'glyndwr university' : 1,
+          'university of ulster' : 1,
+          'university of keele' : 1, 
+          'university college falmouth' : 1,
+          'university of oxford' : 1,
+          'oxford brookes university' : 1,
+          'university of lancaster' : 1,
+          'bath spa university' : 1,
+          'university of bath (The)' : 1,
+          'university of stirling' : 1,
+          'university of edinburgh' : 1,
+          'edinburgh napier university' : 1,
+      }
     	countries = topojson.feature(data, data.objects.subunits).features;
     	svg.selectAll(".country")
     	.data(countries)
@@ -54,12 +79,28 @@ function ridwansGraph(domElement, graph, isSun) {
     	.attr("r", 1)
         .attr("id", function(d){return 'id' + d.UKPRN; })
     	.attr("cx", function(d){
-    		var point = projection([d.LONGITUDE, d.LATITUDE])
-    		return point[0];
-    	})
+            if (isSun) {
+                if (dict[d["PROVIDER_NAME"].toLowerCase()] == 1) {
+                    console.log("hey");
+                    var point = projection([d.LONGITUDE, d.LATITUDE])
+                    return point [0]
+                }
+            } else {
+    		  var point = projection([d.LONGITUDE, d.LATITUDE])
+    		  return point[0];
+    	   }
+        })
     	.attr("cy", function(d){
-    		var point = projection([d.LONGITUDE, d.LATITUDE])
-    		return point[1];  
+    		if (isSun) {
+                if (dict[d["PROVIDER_NAME"].toLowerCase()] == 1) {
+                    console.log("hey");
+                    var point = projection([d.LONGITUDE, d.LATITUDE])
+                    return point [1]
+                }
+            } else {
+              var point = projection([d.LONGITUDE, d.LATITUDE])
+              return point[1];
+           } 
     	})
 
         var hesaDict = {}
@@ -71,7 +112,7 @@ function ridwansGraph(domElement, graph, isSun) {
             circle = d3.select('#id' + d["Institution code (UKPRN)"]); 
             circle.attr("r", function(){
                 if (isSun) {
-                    return 2;
+                    return 3;
                 }
                 if (hesaDict[d["Institution code (UKPRN)"]]) {
                     if (hesaDict[d["Institution code (UKPRN)"]] < 1000) { return 1; } 
