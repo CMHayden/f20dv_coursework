@@ -167,8 +167,6 @@ function scatter(data, domElement, titleX, titleY, displayChart) {
 
         var data = nodes;
 
-        pie.loadAndRenderDataset(data);
-
-        
+        pie.loadAndRenderDataset(data);        
 }}
 
