@@ -1,4 +1,4 @@
-function ridwansGraph(domElement, spider) {
+function ridwansGraph(domElement, graph, isSun, jsonTree) {
     let width = 960, height = 1600;
 
 	var svg = d3.select('#'+ domElement)
@@ -36,7 +36,6 @@ function ridwansGraph(domElement, spider) {
             }
         }
 
-        console.log(stars);
         for (var i = 0; i < stars.length; i++) {
             if (stars[i]["Institution code (UKPRN)"] == "10008026" || stars[i]["Institution code (UKPRN)"] == "10008010" ||  stars[i]["Institution code (UKPRN)"] == "10007807" || stars[i]["Institution code (UKPRN)"] == "10005343") {
                 stars.splice(i, 1);
@@ -72,8 +71,10 @@ function ridwansGraph(domElement, spider) {
                 }
             }) 
             circle.on('mousedown.log', function () {
-                console.log(d);
                 update(d);
+            })
+            circle.on('mouseover', function(d){
+                highlight(d, d["PROVIDER_NAME"]);
             })
         })
 
@@ -98,7 +99,13 @@ function ridwansGraph(domElement, spider) {
 
         function update(data) {
             var spiderData = {'1 Star': parseInt(data["1*"]), '2 Stars': parseInt(data["2*"]), '3 Stars': parseInt(data["3*"]), '4 Stars': parseInt(data["4*"]), '5 Stars': 10};
-            spider.loadAndRenderDataset(spiderData);
+            graph.loadAndRenderDataset(spiderData);
+        };
+
+        function highlight(id) {
+            if(isSun) {
+                graph.loadAndRenderDataset(jsonTree, null, null, null, id);
+            }
         };
     }
 }
