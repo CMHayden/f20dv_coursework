@@ -12,7 +12,6 @@ function pie(domEle) {
     //create the radius of the pie
     var radius = Math.min(width, height) / 2
     
-
     //creates the slices 
     var path = d3.arc()
         .outerRadius(radius)
@@ -21,7 +20,6 @@ function pie(domEle) {
     //link the svg to #pieChart
     var pieChart = d3.select("#" + domEle).append("svg")
 
-    
     pieChartObj.loadAndRenderDataset = function (dataset)
     {
         data = dataset;
@@ -29,8 +27,6 @@ function pie(domEle) {
         return pieChartObj;
     }
 
-
-    
     function GUP()
     {
     	d3.select("#" + domEle).selectAll("text").remove();
@@ -40,15 +36,11 @@ function pie(domEle) {
             .append("g")
             .attr("transform", "translate(" + (radius + margin.left) + "," + radius + ")")
             .attr('class', 'pieChartStyle'); 
-            
-
 
         //putting the data into slices
         var sliceMaker = d3.pie().value(function (d) {
-            console.log(d.y);
             return d.y;
         });
-
 
         var selection = pieChart.select("g").selectAll("slice")
             .data(sliceMaker(data))
@@ -63,9 +55,7 @@ function pie(domEle) {
             .attr("fill", function (d) {
                 return colours(d.data.key);
             });
-          
-            
-            
+                     
         //adding text to the slices in the middle of the slices
         pieChart.select("g").selectAll("slice")
             .data(sliceMaker(data))
@@ -96,13 +86,10 @@ function pie(domEle) {
             return function (t) { return path(interpolation(t)); };
         }
 
-              
-
         return pieChartObj;
     }
 
     return pieChartObj;
-
 }
 
 
