@@ -166,9 +166,7 @@ function sunburstH(domEle) {
                             return color((d.children ? d : d.parent).data.name);
                         }
 
-                        console.log(d["parent"]);
                         if (d["parent"] != undefined) {
-                            console.log(d["parent"]["data"]["name"]);
                             if (d["parent"]["data"]["name"].toLowerCase() == id["PROVIDER_NAME"].toLowerCase()) {
                                 return color((d.children ? d : d.parent).data.name);
                             }

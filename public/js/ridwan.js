@@ -70,6 +70,9 @@ function ridwansGraph(domElement, graph, isSun) {
         stars.forEach(function(d) {
             circle = d3.select('#id' + d["Institution code (UKPRN)"]); 
             circle.attr("r", function(){
+                if (isSun) {
+                    return 2;
+                }
                 if (hesaDict[d["Institution code (UKPRN)"]]) {
                     if (hesaDict[d["Institution code (UKPRN)"]] < 1000) { return 1; } 
                     else if (hesaDict[d["Institution code (UKPRN)"]] > 1000 && hesaDict[d["Institution code (UKPRN)"]] < 10000) { return 2; } 
@@ -106,7 +109,6 @@ function ridwansGraph(domElement, graph, isSun) {
 
         function update(data) {
             var spiderData = {'1 Star': parseInt(data["1*"]), '2 Stars': parseInt(data["2*"]), '3 Stars': parseInt(data["3*"]), '4 Stars': parseInt(data["4*"]), '5 Stars': 10};
-            console.log("data");
             graph.loadAndRenderDataset(spiderData);
         };
 
