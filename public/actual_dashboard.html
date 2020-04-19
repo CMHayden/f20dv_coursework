@@ -3,7 +3,10 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<!-- LINK TO HESA DATA: https://www.hesa.ac.uk/news/17-01-2019/sb252-higher-education-student-statistics/location -->
+<!-- LINK TO HESA DATA: https://www.hesa.ac.uk/news/17-01-2019/sb252-higher-education-student-statistics/location 
+	
+
+-->
 <<<<<<< HEAD
     <head>
         <meta charset="utf-8">
@@ -53,30 +56,35 @@
 					   	<script src="js/stackedBarChart.js"></script>
 					   	<script src="js/app.js"></script>
 
-					   </head>
+		 </head>
     <body>
 
         <div class="graph-section" id="scatter-to-pie">
             <div class="heading"><h1>Scatter Plot to Pie Chart</h1></div>
+            <p> This interaction works by having the user draw a rectangle and anything within this area is displayed on a pie chart. The pie chart contains the UKPRN number and the associated 4* rating of that institution. The rectangle is movable and can be resized by redrawing the rectangle. </p>
             <div class="wrap"><div id="scatterPlot"></div><div id="pieChart"></div></div>
         </div>
 
         <div class="graph-section" id="map-to-spider">
             <div class="heading"><h1>UK Map to Spider Chart</h1></div>
+            <p> The map circles are resized based on a CSV file obtained from https://www.hesa.ac.uk/news/17-01-2019/sb252-higher-education-student-statistics/location. The sizes are adjusted based on student population. Clicking on a circle places the data onto the spider chart and the axes are updated accordingly.  </p>
             <div class="wrap"><div id="map"></div><div id="spider"></div></div>
         </div>
 
         <div class="graph-section" id="tree-to-sunburst-to-packlayout">
             <div class="heading"><h1>Tree to Sunburst to Pack Layout</h1></div>
+            <p> This is a bidirectional interaction where clicking a point on any of the 3 graphs updates all of the graphs. </p>
             <div class="wrap"><div id="tree"></div><div id="sunburst"></div></div><div class="wrap"></div><div id="pack"></div></div>
         </div>
 
         <div class="graph-section" id="agglomerative-clustering">
             <div class="heading"><h1>Agglomerative</h1></div>
+            <p> The agglomerative interaction works by doing steps 1 to 4 fully and then clicking the "create a tree" button to see the topic to topic similarities in a heirarchical format </p>
             <div class="wrap"><div id="agglomerative"></div></div>
         </div>
         <div class="graph-section" id="other-graphs">
-            <div class="heading"><h1>Other Graphs</h1></div>
+            <div class="heading"><h1>Map to Sunburst Layout</h1></div>
+            <p> This interaction works by placing your mouse over a datapoint on the map and the relevant sections of the sunburst are highlighted </p>
 			<div class="wrap"><div id="mapHighlight"><div id="sunburstHighlight"></div></div></div>           
 		</div>
 		<div class="graph-section" id="stackedBarChart-display">
