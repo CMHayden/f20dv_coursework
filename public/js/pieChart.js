@@ -45,7 +45,8 @@ function pie(domEle) {
 
         //putting the data into slices
         var sliceMaker = d3.pie().value(function (d) {
-            return d.x;
+            console.log(d.y);
+            return d.y;
         });
 
 
