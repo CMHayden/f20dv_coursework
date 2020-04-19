@@ -11,6 +11,7 @@ function ridwansGraph(domElement, spider) {
     .defer(d3.json, "data/uk.json")
     .defer(d3.csv, "data/learning-providers-plus.csv")
     .defer(d3.csv, "data/REF2014_Results.csv")
+    .defer(d3.csv, "data/sb252-figure-6.csv")
     .await(ready)
 
     var projection = d3.geoMercator()
@@ -20,7 +21,7 @@ function ridwansGraph(domElement, spider) {
     var path = d3.geoPath()
     	.projection(projection)
 
-    function ready (error, data, universities, stars) {
+    function ready (error, data, universities, stars, hesa) {
     	countries = topojson.feature(data, data.objects.subunits).features;
     	svg.selectAll(".country")
     	.data(countries)
@@ -55,17 +56,27 @@ function ridwansGraph(domElement, spider) {
     		return point[1];  
     	})
 
+        var hesaDict = {}
+        hesa.forEach(function(e) { 
+            hesaDict[e["UKPRN"]] = parseInt(e["Total"].replace(/,/g, ''))
+        })
+
         stars.forEach(function(d) {
             circle = d3.select('#id' + d["Institution code (UKPRN)"]); 
             circle.attr("r", function(){
-                //if (d["4*"] < 5) { return 1 } else if (d["4*"] < 10) { return 2 } else if (d["4*"] < 20) { return 3 } else if (d["4*"] < 30) { return 4 } else if (d["4*"] < 4) { return 5 } else { return 6 }
-                return 1;
+                if (hesaDict[d["Institution code (UKPRN)"]]) {
+                    if (hesaDict[d["Institution code (UKPRN)"]] < 1000) { return 1; } 
+                    else if (hesaDict[d["Institution code (UKPRN)"]] > 1000 && hesaDict[d["Institution code (UKPRN)"]] < 10000) { return 2; } 
+                    else if (hesaDict[d["Institution code (UKPRN)"]] > 10000 && hesaDict[d["Institution code (UKPRN)"]] < 20000) { return 3; } 
+                    else { return 5; };
+                }
             }) 
             circle.on('mousedown.log', function () {
                 console.log(d);
                 update(d);
             })
         })
+
 
     	/*svg.selectAll(".labels")
     	.data(universities)
