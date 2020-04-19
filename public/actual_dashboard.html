@@ -1,32 +1,32 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>F20DV Coursework</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/main.css">
+					   <head>
+					   	<meta charset="utf-8">
+					   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+					   	<title>F20DV Coursework</title>
+					   	<meta name="description" content="">
+					   	<meta name="viewport" content="width=device-width, initial-scale=1">
+					   	<link rel="stylesheet" href="css/main.css">
 
-        <script src="d3/d3.v4.js"></script>
-        <script src="d3/topojson.vi.min.js"></script>
+					   	<script src="d3/d3.v4.js"></script>
+					   	<script src="d3/topojson.vi.min.js"></script>
 
-        <script src="js/helperFunctions.js"></script>
-        <script src="js/scatterPlot.js"></script>
-        <script src="js/pieChart.js"></script>
-        <script src="js/mapWithPopulation.js.js"></script>
-        <script src="js/spiderChart.js"></script>
-        <script src="js/ridwan.js"></script>
-        <script src="js/treeUpdate.js"></script> 
-    	<script src="js/packLayout.js"></script>
-    	<script src="js/sunburst.js"></script>
+					   	<script src="js/helperFunctions.js"></script>
+					   	<script src="js/scatterPlot.js"></script>
+					   	<script src="js/pieChart.js"></script>
+					   	<script src="js/mapWithPopulation.js.js"></script>
+					   	<script src="js/spiderChart.js"></script>
+					   	<script src="js/ridwan.js"></script>
+					   	<script src="js/treeUpdate.js"></script>
+					   	<script src="js/packLayout.js"></script>
+					   	<script src="js/sunburst.js"></script>
+					   	<script src="js/stackedBarChart.js"></script>
+					   	<script src="js/app.js"></script>
 
-        <script src="js/app.js"></script>
-
-    </head>
+					   </head>
     <body>
 
         <div class="graph-section" id="scatter-to-pie">
@@ -50,11 +50,53 @@
         </div>
         <div class="graph-section" id="map-to-spider">
             <div class="heading"><h1>Other Graphs</h1></div>
-            <div class="wrap"><div id="mapHighlight"><div id="sunburstHighlight"></div></div>
-            <div class="wrap"><div id="stackedBarChart"></div></div>
-        </div>
-        
+			<div class="wrap"><div id="mapHighlight"><div id="sunburstHighlight"></div></div></div>           
+		</div>
+		<div class="graph-section" id="stackedBarChart-display">
+			<div class="heading"><h1>Stacked Bar Chart</h1></div>
+			<div class="wrap">
+				<div id="stackedBarChart">
+					<select id="choices" onchange="choice(this);">
+						<option></option>
+						<option value="uni">uni</option>
+						<option value="uni2">uni2</option>
+					</select>
+				</div>
+			</div>
+		</div>	
         <script>
+
+		//stackedBar chart code start
+		var data1 = [
+					{ 'key': 'HW', '1 star': 3, '2 star': 2, '3 star': 6, '4 star': 11 },
+					{ 'key': 'Napier', '1 star': 6, '2 star': 3, '3 star': 3, '4 star': 3 },
+					{ 'key': 'Clyde', '1 star': 2, '2 star': 5, '3 star': 2, '4 star': 6},
+					{ 'key': 'Glasgow', '1 star': 1, '2 star': 3, '3 star': 2, '4 star': 4},
+					];
+
+			var data2 = [
+					{ 'key': 'EdiUni', '1 star': 20, '2 star': 6, '3 star': 1, '4 star': 2, '5 star': 9 },
+					{ 'key': 'Dundee Uni', '1 star': 1, '2 star': 2, '3 star': 3, '4 star': 7 },
+					{ 'key': 'Bristol', '1 star': 1, '2 star': 2, '3 star': 4, '4 star': 4, '5 star': 3 },
+					{ 'key': 'Aberdeen', '1 star': 9, '2 star': 3, '6 star': 2 },
+					];
+			var data;
+			stackedBarChartObject = stackedNon("stackedBarChart")
+			function choice(obj) {
+				if (obj.value == "uni") {
+					data = data1;
+
+					stackedBarChartObject.loadAndRenderDataset(data)
+				} else {
+					data = data2;
+
+					stackedBarChartObject.loadAndRenderDataset(data)
+
+				}
+
+			}
+		//stacked bar chart code end
+
             d3.queue()
                 .defer(d3.csv, "data/topics/REF2014T30TopicOrder.csv")
                 .defer(d3.csv, "data/290183_REF_Contextual_table_1314_0.csv")
@@ -439,6 +481,7 @@ function convertData(d){
 	return json
 }
 
+	
 </script>
     </body>
 </html>
