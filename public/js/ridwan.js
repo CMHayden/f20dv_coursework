@@ -126,11 +126,9 @@ function ridwansGraph(domElement, graph, isSun) {
                 }
             }) 
             circle.on('mousedown.log', function () {
-                console.log(d);
                 update(d);
             })
             circle.on('mouseover', function(d){
-                console.log(d);
                 highlight(d, d["PROVIDER_NAME"]);
             })
         })
