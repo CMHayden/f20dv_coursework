@@ -19,10 +19,6 @@ function stackedNon (domEle)
         data = dataset;
         stackKey = getLegend(data);
 
-        for (var i in stackKey.length) {
-            console.log(stackKey[i])
-        }
-
         render();
         return stackedBarChartObj;
     } 
