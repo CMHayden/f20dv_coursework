@@ -47,22 +47,90 @@ line {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 #scatter-to-pie #pieChart {
   margin-left: 10%;
   padding-top: 55px;
-
 }
 
-.tooltip {
-    background: lightblue;
-    padding-top: 10px;
-    padding-right: 20px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    border-radius: 12px
-    
+#map-to-spider {
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
+#map-to-spider h1 {
+  font-family: 'Montserrat';
+  text-align: center;
+  line-height: 100px;
+  color: #4292c6;
+}
+
+#map-to-spider .wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#map-to-spider #spider {
+  margin-left: 10%;
+  margin-top: 110px;
+}
+
+#tree-to-sunburst-to-packlayout {
+  width: 90%;
+}
+
+#tree-to-sunburst-to-packlayout h1 {
+  font-family: 'Montserrat';
+  text-align: center;
+  line-height: 100px;
+  color: #4292c6;
+}
+
+#tree-to-sunburst-to-packlayout .wrap {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#agglomerative-clustering {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+#agglomerative-clustering h1 {
+  font-family: 'Montserrat';
+  text-align: center;
+  line-height: 100px;
+  color: #4292c6;
+}
+
+#other-graphs {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+#other-graphs h1 {
+  font-family: 'Montserrat';
+  text-align: center;
+  line-height: 100px;
+  color: #4292c6;
+}
 /*# sourceMappingURL=main.css.map */
