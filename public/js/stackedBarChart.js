@@ -1,29 +1,7 @@
 
 function stackedNon (domEle)
-{   /*add to app.js??
-    var stackedModel = modelConstructor();
-    var dataModel;
-
-    d3.queue()
-        .defer(d3.csv, "data/REF2014_Results.csv")
-        .defer(d3.csv, "data/learning-providers-plus.csv")
-        .defer(d3.csv, "data/uk-towns.csv")  // from https://github.com/bwghughes/badbatch
-        .defer(d3.csv, "data/Towns_List (1).csv")
-        .await(dataDisplay)
-
-*/
-
-    function dataDisplay(error, universities, towns, countries, countries2) {
-
-        stackedModel.processData(universities, towns, countries, countries2);
-        dataModel = stackedModel.model().json;
-        console.log("datamodel")
-        //console.log(dataModel.json)
-
-    }
-        
+{   
     var stackedBarChartObj = {};
-
     var data;
     var stackKey;
     var layers;
@@ -38,18 +16,16 @@ function stackedNon (domEle)
 
     stackedBarChartObj.loadAndRenderDataset = function (dataset)
     {
-       
         data = dataset;
         stackKey = getLegend(data);
+
         for (var i in stackKey.length) {
             console.log(stackKey[i])
         }
+
         render();
         return stackedBarChartObj;
     } 
-
-
-   
 
     function draw()
     {
@@ -72,9 +48,7 @@ function stackedNon (domEle)
             .order(d3.stackOrderNone)
             .offset(d3.stackOffsetNone);
 
-        layers = stack(data);
-       console.log(stackKey)
-       
+        layers = stack(data);       
         
         data.sort(function (a, b) { return b.total - a.total; });
 
@@ -104,16 +78,7 @@ function stackedNon (domEle)
             .attr("class", "axis axis--y")
             .attr("transform", "translate(0,0)")
             .call(yAxis);        
- 
-    
-
     }
-
-    //click function
-    function clicked(d) {
-        console.log(d)
-    }
-
 
     function GUP()
     {
@@ -126,7 +91,6 @@ function stackedNon (domEle)
             .style("fill", function (d, i) { return color(i); })
             .on('click', clicked)
 
-
         enterSelection.selectAll("rect")
             .data(function (d) { return d; })
             .enter().append("rect")
@@ -137,10 +101,7 @@ function stackedNon (domEle)
             .attr("y", function (d) { return yScale(d[1]); })
             .attr("height", function (d) { return yScale(d[0]) - yScale(d[1]); })
             .attr("width", xScale.bandwidth());
-              
 
-       
-      
         var updateSelection = selection        
             .attr("class", "layer")
             .style("fill", function (d, i) { return color(i); });
@@ -168,12 +129,8 @@ function stackedNon (domEle)
     function render()
     {
         draw();
-        GUP();
-       
+        GUP(); 
     }
 
     return stackedBarChartObj;
-
-    
-   
 }
