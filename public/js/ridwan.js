@@ -93,7 +93,6 @@ function ridwansGraph(domElement, graph, isSun) {
     	.attr("cy", function(d){
     		if (isSun) {
                 if (dict[d["PROVIDER_NAME"].toLowerCase()] == 1) {
-                    console.log("hey");
                     var point = projection([d.LONGITUDE, d.LATITUDE])
                     return point [1]
                 }
