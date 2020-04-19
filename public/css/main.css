@@ -90,8 +90,7 @@ line {
 }
 
 #tree-to-sunburst-to-packlayout {
-  padding-left: 5%;
-  padding-right: 5%;
+  width: 90%;
 }
 
 #tree-to-sunburst-to-packlayout h1 {
@@ -99,6 +98,16 @@ line {
   text-align: center;
   line-height: 100px;
   color: #4292c6;
+}
+
+#tree-to-sunburst-to-packlayout .wrap {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 #agglomerative-clustering {
