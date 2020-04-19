@@ -88,4 +88,40 @@ line {
   margin-left: 10%;
   margin-top: 110px;
 }
+
+#tree-to-sunburst-to-packlayout {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+#tree-to-sunburst-to-packlayout h1 {
+  font-family: 'Montserrat';
+  text-align: center;
+  line-height: 100px;
+  color: #4292c6;
+}
+
+#agglomerative-clustering {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+#agglomerative-clustering h1 {
+  font-family: 'Montserrat';
+  text-align: center;
+  line-height: 100px;
+  color: #4292c6;
+}
+
+#other-graphs {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+#other-graphs h1 {
+  font-family: 'Montserrat';
+  text-align: center;
+  line-height: 100px;
+  color: #4292c6;
+}
 /*# sourceMappingURL=main.css.map */

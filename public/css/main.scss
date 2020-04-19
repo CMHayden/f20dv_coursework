@@ -210,5 +210,42 @@ line {
         margin-left: 10%;
         margin-top: 110px;
     }
+}
+
+#tree-to-sunburst-to-packlayout {
+    padding-left: 5%;
+    padding-right: 5%;
     
+    h1{
+        font-family: 'Montserrat';
+        text-align: center;
+        line-height: 100px;
+        color: $highlight;
+    }
+    .wrap {
+    }
+}
+
+#agglomerative-clustering {
+    padding-left: 5%;
+    padding-right: 5%;
+    
+    h1{
+        font-family: 'Montserrat';
+        text-align: center;
+        line-height: 100px;
+        color: $highlight;
+    }
+}
+
+#other-graphs {
+    padding-left: 5%;
+    padding-right: 5%;
+    
+    h1{
+        font-family: 'Montserrat';
+        text-align: center;
+        line-height: 100px;
+        color: $highlight;
+    }
 }
