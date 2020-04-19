@@ -47,22 +47,45 @@ line {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 #scatter-to-pie #pieChart {
   margin-left: 10%;
   padding-top: 55px;
-
 }
 
-.tooltip {
-    background: lightblue;
-    padding-top: 10px;
-    padding-right: 20px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    border-radius: 12px
-    
+#map-to-spider {
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
+#map-to-spider h1 {
+  font-family: 'Montserrat';
+  text-align: center;
+  line-height: 100px;
+  color: #4292c6;
+}
+
+#map-to-spider .wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#map-to-spider #spider {
+  margin-left: 10%;
+  margin-top: 110px;
+}
 /*# sourceMappingURL=main.css.map */
