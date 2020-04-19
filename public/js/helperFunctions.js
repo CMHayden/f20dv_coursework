@@ -12,7 +12,6 @@ function getTicks(jsonData) {
     for(var i=1 ; i<=5 ; i++){
         ticks.push(Math.floor((max / 5) * i) + 1)
     }
-
     return ticks;
 }
 
@@ -21,11 +20,10 @@ function getLegend(jsonData)
 {    
     var features = [];
     var temp = [];
-   // console.log(jsonData) 
+
     for (var d in jsonData[0]) {
         temp.push(d);      
-    }      
-    
+    }       
 
     for (var i = 1; i < temp.length; i++) {
         features.push(temp[i])
@@ -33,35 +31,26 @@ function getLegend(jsonData)
     }
 
     return features;
-
 }
 
 //getting labels for hierarchical stacked bar chart
 function getLabels(tree) {
     var features = [];
     var temp = [];
-   // console.log(tree)
-   // console.log(tree[0].data.children) 
     
     for (var d in tree[0].data.children) {
         temp.push(tree[0].data.children[d]["name"]);
-       // console.log(tree[0].data.children[d]["name"])
     }
     
-
     for (var i = 0; i < temp.length; i++) {
         features.push(temp[i])
-     //   console.log(temp[i])
     }
 
     return features;
-
 }
 
 function createJson(tree) {
     var data = [];
-
-
     return data;
 }
 
