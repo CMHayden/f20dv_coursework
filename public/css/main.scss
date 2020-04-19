@@ -153,7 +153,8 @@ body {
     background-color: $bg-section;
     margin-right: 5%;
     margin-left: 5%;
-    margin-top: 45px;    
+    margin-top: 45px; 
+    margin-bottom:25px;   
 }
 
 .tick, .domain {
@@ -249,5 +250,23 @@ line {
         text-align: center;
         line-height: 100px;
         color: $highlight;
+    }
+}
+
+#stackedBarChart-display {
+    padding-left: 5%;
+    padding-right: 5%;
+    
+    h1{
+        font-family: 'Montserrat';
+        text-align: center;
+        line-height: 100px;
+        color: $highlight;
+    }
+
+    .wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }

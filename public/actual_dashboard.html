@@ -54,14 +54,13 @@
 		</div>
 		<div class="graph-section" id="stackedBarChart-display">
 			<div class="heading"><h1>Stacked Bar Chart</h1></div>
+			<select id="choices" onchange="choice(this);">
+				<option></option>
+				<option value="uni">uni</option>
+				<option value="uni2">uni2</option>
+			</select>
 			<div class="wrap">
-				<div id="stackedBarChart">
-					<select id="choices" onchange="choice(this);">
-						<option></option>
-						<option value="uni">uni</option>
-						<option value="uni2">uni2</option>
-					</select>
-				</div>
+				<div id="stackedBarChart"></div>
 			</div>
 		</div>	
         <script>
