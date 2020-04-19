@@ -149,6 +149,19 @@ body {
     background-color: $bg;
 }
 
+p, a{
+    color: $highlight;
+    text-align: center;
+    font-size: large;
+}
+
+p{
+    margin-bottom: 75px;
+    margin-left: 400px;
+    margin-right: 400px;
+}
+
+
 .graph-section {
     background-color: $bg-section;
     margin-right: 5%;
@@ -250,6 +263,11 @@ line {
         text-align: center;
         line-height: 100px;
         color: $highlight;
+    }
+    .wrap {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
     }
 }
 

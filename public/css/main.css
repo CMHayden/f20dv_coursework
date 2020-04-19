@@ -9,6 +9,18 @@ body {
   background-color: #1b2139;
 }
 
+p, a {
+  color: #4292c6;
+  text-align: center;
+  font-size: large;
+}
+
+p {
+  margin-bottom: 75px;
+  margin-left: 400px;
+  margin-right: 400px;
+}
+
 .graph-section {
   background-color: #252a45;
   margin-right: 5%;
@@ -135,6 +147,16 @@ line {
   color: #4292c6;
 }
 
+#other-graphs .wrap {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 #stackedBarChart-display {
   padding-left: 5%;
   padding-right: 5%;
@@ -158,14 +180,4 @@ line {
       -ms-flex-pack: center;
           justify-content: center;
 }
-
-.tooltip {
-    background: lightblue;
-    padding-top: 10px;
-    padding-right: 20px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    border-radius: 12px
-}
-
 /*# sourceMappingURL=main.css.map */
