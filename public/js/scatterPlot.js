@@ -28,6 +28,11 @@ function scatter(data, domElement, titleX, titleY, displayChart) {
 
     var maxX = 0;
     var maxY = 0;
+    var minX = 10000;
+
+    data.forEach(d=> {
+        if(d.x < minX) { minX=d.x}
+    });
 
     data.forEach(d => {
         if(d.x > maxX) { maxX = d.x}
@@ -39,7 +44,7 @@ function scatter(data, domElement, titleX, titleY, displayChart) {
 
     console.log(maxX);
     console.log(maxY)
-    const xScale = d3.scaleLinear().domain([50, maxX + 1]).range([0, plotAreaWidth]);
+    const xScale = d3.scaleLinear().domain([minx, maxX + 1]).range([0, plotAreaWidth]);
     const yScale = d3.scaleLinear().domain([0, maxY + 1]).range([plotAreaHeight, 0]);
 
     // select the root container where the chart will be added
