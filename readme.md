@@ -36,14 +36,7 @@ This is a group student project to produce an interactive internet application f
 
 * This should be documented in the project’s DevelopmentStrategy.md file which must be included in the project’s remote repository.
 
-
 * It is recommended that the MVP pattern be used.
-
-## CI/CD
-
-Currently this repository is hosted on [f20dv.site](https://www.f20dv.site "Page where public folder is shown to the world"), and is updated with every change to the repository. Meaning that everytime there is anything pushed to this repository, the website will update. This is helpful to ensure we can test on different platforms, and check eachothers work even from our phones, tablets, or other computers without having to clone the repository.
-
-This is done by mirroring the gitlab repository to github (cmhayden/f20dv_coursework). Whenever a commit is made in this repository, it gets copied to the repository on github. Once this happens, and github recieves the updated repository, it then tells a second github account that it has the up to date version. This repository is CMHayden/f20dv_live. When this recieves an update, it triggers a buddy pipeline. The buddy pipeline can be used to create unit tests, a feature we may look to implement, but currently only sends a get request to laravel forge which in turn pulls the new code from the repository and deploys it as a static page on our live URL.
 
 ## Requirements
 
@@ -67,8 +60,8 @@ You may use other publicly available data, but you must clearly identify the sou
 | R4     | Use of D3 transitions to highlight new (entering) data | 2 |   ✓   |
 | R5     | Use of D3 transitions to highlight updating data  | 2 |   ✓   |
 | R6     | Use of D3 transitions to highlight exiting data | 3 |   ✓   |
-| R7     | Use of cross-layout brushing in which moussing over a data point in one chart highlights associated data in another chart | 2 |   X   |
-| R8     | Use of cross-layout brushing in which moussing over one data point in one chart highlights multiple associated data points in another chart. Note: you must use a different combination of layouts than the ones provided in lab examples. | 3 |   X   |
+| R7     | Use of cross-layout brushing in which moussing over a data point in one chart highlights associated data in another chart | 2 |   ✓   |
+| R8     | Use of cross-layout brushing in which moussing over one data point in one chart highlights multiple associated data points in another chart. Note: you must use a different combination of layouts than the ones provided in lab examples. | 3 |   ✓   |
 | R9     | Significant use of data (> 100 data items) not provided by the course | 2 |   ✓   |
 | R10    | Use of a scatter plot, a stacked barchart or, a linechart | 4 |   ✓   |
 | R11    | Use of bidirectional interaction between three charts | 3 |    ✓   |
@@ -88,8 +81,6 @@ You may use other publicly available data, but you must clearly identify the sou
 
 This document will be provided in addition to the Requirements Assessment Document. It will provide evidence that each of the requirements marked as ‘achieved’, has indeed, been achieved. It will comprise one section for each of requirements G1,G2 and R1 to R22 inclusive. The evidence for G1 will comprise the project’s commit history (including commit messages). The evidence for G2, R1 to R22 will comprise screen shots of your application (or GitLab) marked up with highlighting, arrows and narrative sufficient to make it clear that the corresponding requirement has been met. If insufficient evidence is provided in this document, the corresponding requirement will be changed to notachieved. If insufficient evidence is provided during a requested project demo, the corresponding requirement will be changed to not-achieved. A proforma will be supplied for this document together instructions for capturing the Git history. Both must be used to generate and present the evidence required here.
 
-Evidence goes here:
-
 ###  Individual Reflective Document
 
 The document cannot exceed one and a half sides of A4 written in 11pt Arial type font with no less than 1.08 line spacing. Section headings should be numbered and be in 14pt Arial type font.
@@ -101,13 +92,3 @@ This document should reflect on the use of design patterns presented in the cour
 * The section heading should be the name of the pattern being discussed.
 
 Each section should summarise the pattern’s perceived advantages and disadvantages both as it was used in the project, and as it might be used to improve the project
-
-# TODOS:
-
-## Re-add the Stacked bar chart
-
-Add the stacked bar chart back to the main dashboard. This will serve as the last updating axis.
-
-## R7, R8
-
-Change opacity to highlight things.
