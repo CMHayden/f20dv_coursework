@@ -13,6 +13,7 @@ p, a {
   color: #4292c6;
   text-align: center;
   font-size: large;
+  font-family: 'Nunito';
 }
 
 p {
@@ -179,5 +180,14 @@ line {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.tooltip {
+  background: lightblue;
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  border-radius: 12px;
 }
 /*# sourceMappingURL=main.css.map */
