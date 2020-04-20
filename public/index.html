@@ -22,7 +22,7 @@
 		<script src="js/scatterPlot.js"></script>
 		<script src="js/pieChart.js"></script>
 		<script src="js/spiderChart.js"></script>
-		<script src="js/ridwan.js"></script>
+		<script src="js/map.js"></script>
 		<script src="js/treeUpdate.js"></script>
 		<script src="js/packLayout.js"></script>
 		<script src="js/sunburst.js"></script>
@@ -133,7 +133,7 @@
                 var spiderData = [{'1 Star': 2, '2 Stars': 8, '3 Stars': 2, '4 Stars': 9, '5 Stars': 4}];
 
             	spider = spiderChart("spider")
-            	map = ridwansGraph("map", spider, false)
+            	map = mapGraph("map", spider, false)
             	spider.loadAndRenderDataset(spiderData[0])
             }
         </script>
@@ -149,7 +149,7 @@
 			pack.setGraphs(tree, sun);
 			sun.setGraphs(tree, pack);
 			tree.setGraphs(pack, sun);
-			var map2 = ridwansGraph("mapHighlight", sun2, true, 1)
+			var map2 = mapGraph("mapHighlight", sun2, true, 1)
 
 			d3.queue()
 				.defer(d3.csv, "data/topics/REF2014T30TopicOrder.csv")

@@ -97,7 +97,6 @@ function spiderChart(domElement) {
 
     function getPathCoordinates(data_point){
         let coordinates = [];
-        console.log("inside helper function")
         for (var i = 0; i < features.length; i++){
             let ft_name = features[i];
             let angle = (Math.PI / 2) + (2 * Math.PI * i / features.length);

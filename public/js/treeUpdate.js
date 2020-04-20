@@ -248,7 +248,6 @@ function tree(targetDOMelement) {
 				//for the revealed children in the GUP Node Enter Selection
 				//clickedNode.xAtEndPreviousGUPrun = clickedNode.x; 
 				//clickedNode.yAtEndPreviousGUPrun = clickedNode.y;	
-				console.log(d);
 				if (typeof d.data.valid == "undefined") {
 					backArr.push(data);            
             		treeObject.loadAndRenderDataset(d.data, true, d, false, false);
@@ -274,7 +273,6 @@ function tree(targetDOMelement) {
 	}
 	
 	function revealChildren(node) {
-		console.log(node)
 		if (node._children) { 		
 			node.children = node._children;
 		}

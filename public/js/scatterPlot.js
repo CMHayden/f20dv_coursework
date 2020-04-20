@@ -37,8 +37,6 @@ function scatter(data, domElement, titleX, titleY, displayChart) {
         if(d.y > maxY) { maxY = d.y}
     })
 
-    console.log(maxX);
-    console.log(maxY)
     const xScale = d3.scaleLinear().domain([50, maxX + 1]).range([0, plotAreaWidth]);
     const yScale = d3.scaleLinear().domain([0, maxY + 1]).range([plotAreaHeight, 0]);
 
@@ -161,7 +159,6 @@ function scatter(data, domElement, titleX, titleY, displayChart) {
     function CoolFunctionBro(nodes) {
         
         nodes.forEach(node => {
-            console.log(node);
             
         });
 

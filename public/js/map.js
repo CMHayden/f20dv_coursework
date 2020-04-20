@@ -1,4 +1,4 @@
-function ridwansGraph(domElement, graph, isSun) {
+function mapGraph(domElement, graph, isSun) {
     var map = {};
     var jsonTree;
 
